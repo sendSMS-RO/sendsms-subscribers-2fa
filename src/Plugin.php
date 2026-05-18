@@ -7,6 +7,7 @@
 
 namespace SendSMS\Dashboard;
 
+use SendSMS\Dashboard\Admin;
 use SendSMS\Dashboard\Api;
 use SendSMS\Dashboard\Storage;
 use SendSMS\Dashboard\Support;
@@ -163,5 +164,9 @@ final class Plugin {
 
 		$codes     = new Support\VerificationCode();
 		$this->api = new Api\Client( $this->history, $this->settings, $codes );
+
+		if ( is_admin() ) {
+			( new Admin\Notices() )->register();
+		}
 	}
 }
