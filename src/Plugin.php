@@ -7,7 +7,9 @@
 
 namespace SendSMS\Dashboard;
 
+use SendSMS\Dashboard\Api;
 use SendSMS\Dashboard\Storage;
+use SendSMS\Dashboard\Support;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -60,6 +62,13 @@ final class Plugin {
 	 * @var Storage\IpRepository|null
 	 */
 	private $ips = null;
+
+	/**
+	 * Sendsms.ro API client.
+	 *
+	 * @var Api\Client|null
+	 */
+	private $api = null;
 
 	/**
 	 * Prevent direct construction.
@@ -115,6 +124,15 @@ final class Plugin {
 	}
 
 	/**
+	 * API client accessor.
+	 *
+	 * @return Api\Client
+	 */
+	public function api(): Api\Client {
+		return $this->api;
+	}
+
+	/**
 	 * Register all hooks. Idempotent.
 	 *
 	 * @return void
@@ -142,5 +160,8 @@ final class Plugin {
 		$this->history     = new Storage\HistoryRepository();
 		$this->subscribers = new Storage\SubscriberRepository();
 		$this->ips         = new Storage\IpRepository();
+
+		$codes     = new Support\VerificationCode();
+		$this->api = new Api\Client( $this->history, $this->settings, $codes );
 	}
 }
