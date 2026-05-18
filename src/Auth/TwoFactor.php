@@ -211,6 +211,7 @@ final class TwoFactor {
 		if ( '' === $phone ) {
 			// No phone on file yet — enter enrollment mode.
 			$this->pending->store( $token, $pending );
+			LoginForm::set_token_cookie( $token );
 			return new \WP_Error(
 				'sendsms_dashboard_2fa_enroll_required',
 				__( 'Add your phone number to complete sign-in.', 'sendsms-dashboard' ),
@@ -222,6 +223,7 @@ final class TwoFactor {
 		$pending['phone_hash']  = sha1( $phone );
 		$pending['last_sms_at'] = time();
 		$this->pending->store( $token, $pending );
+		LoginForm::set_token_cookie( $token );
 
 		$body = $this->settings->get_esc( '2fa_verification_message', __( 'Your verification code: {code}', 'sendsms-dashboard' ) );
 		$this->api->message_send( false, false, $phone, $body, 'code', '_2fa' );
@@ -260,6 +262,7 @@ final class TwoFactor {
 	private function continue_flow( string $token ) {
 		$pending = $this->pending->get( $token );
 		if ( null === $pending ) {
+			LoginForm::clear_token_cookie();
 			return new \WP_Error(
 				'sendsms_dashboard_2fa_expired',
 				__( 'Your login session expired. Please sign in again.', 'sendsms-dashboard' )
@@ -269,6 +272,7 @@ final class TwoFactor {
 		$user = get_user_by( 'id', (int) $pending['user_id'] );
 		if ( ! ( $user instanceof \WP_User ) ) {
 			$this->pending->delete( $token );
+			LoginForm::clear_token_cookie();
 			return new \WP_Error(
 				'sendsms_dashboard_2fa_invalid_user',
 				__( 'User no longer exists.', 'sendsms-dashboard' )
@@ -344,6 +348,7 @@ final class TwoFactor {
 		$phone = UserPhone::resolve( $user->ID, $this->settings );
 		if ( '' === $phone ) {
 			$this->pending->delete( $token );
+			LoginForm::clear_token_cookie();
 			return new \WP_Error(
 				'sendsms_dashboard_2fa_invalid_user',
 				__( 'Phone number not found.', 'sendsms-dashboard' )
@@ -355,6 +360,7 @@ final class TwoFactor {
 			$pending['attempts'] = (int) ( $pending['attempts'] ?? 0 ) + 1;
 			if ( $pending['attempts'] >= 5 ) {
 				$this->pending->delete( $token );
+				LoginForm::clear_token_cookie();
 				return new \WP_Error(
 					'sendsms_dashboard_2fa_locked',
 					__( 'Too many wrong codes. Please sign in again.', 'sendsms-dashboard' )
@@ -370,6 +376,7 @@ final class TwoFactor {
 
 		// Successful verification — delete the transient and return the user.
 		$this->pending->delete( $token );
+		LoginForm::clear_token_cookie();
 		return $user;
 	}
 }

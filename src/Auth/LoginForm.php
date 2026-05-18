@@ -97,6 +97,17 @@ final class LoginForm {
 
 		$needs_phone = empty( $pending['phone_hash'] );
 
+		// Hide the standard username/password rows + the Lost Your Password link;
+		// the user is mid-2FA and shouldn't have to re-type their credentials.
+		echo '<style>'
+			. '.user-pass-wrap,.user-login-wrap,.forgetmenot,.submit{display:none!important;}'
+			. 'p#nav,p#backtoblog{margin-top:24px;}'
+			. '</style>';
+		echo '<script>document.addEventListener("DOMContentLoaded",function(){'
+			. 'var f=document.getElementById("loginform");if(!f)return;'
+			. 'f.querySelectorAll("p.user-login-wrap,p.user-pass-wrap,p.forgetmenot,p.submit").forEach(function(n){n.style.display="none";});'
+			. '});</script>';
+
 		echo '<input type="hidden" name="sendsms_2fa_token" value="' . esc_attr( $token ) . '" />';
 
 		if ( $needs_phone ) {
@@ -117,6 +128,12 @@ final class LoginForm {
 			);
 			echo '<p><a href="' . $resend_url . '">' . esc_html__( 'Resend code', 'sendsms-dashboard' ) . '</a></p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- already escaped by esc_url() above
 		}
+
+		// Submit row (the original .submit row is hidden by the style block above so we need our own).
+		echo '<p class="sendsms-dashboard-2fa-submit submit">';
+		echo '<button type="submit" name="wp-submit" class="button button-primary button-large" style="float:right;">';
+		echo esc_html( $needs_phone ? __( 'Send code', 'sendsms-dashboard' ) : __( 'Verify', 'sendsms-dashboard' ) );
+		echo '</button></p>';
 	}
 
 	/**
@@ -231,6 +248,62 @@ final class LoginForm {
 		if ( isset( $_GET['sendsms_2fa_token'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- GET param used only for form continuation, no state change
 			return sanitize_text_field( wp_unslash( $_GET['sendsms_2fa_token'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
+		if ( isset( $_COOKIE[ self::TOKEN_COOKIE ] ) ) {
+			return sanitize_text_field( wp_unslash( $_COOKIE[ self::TOKEN_COOKIE ] ) );
+		}
 		return '';
+	}
+
+	/**
+	 * Cookie name used to forward the pending-2FA token from the begin-flow
+	 * request to the subsequent login-form render.
+	 */
+	public const TOKEN_COOKIE = 'sendsms_dashboard_2fa_token';
+
+	/**
+	 * Set the pending-2FA token cookie.
+	 *
+	 * Called by {@see \SendSMS\Dashboard\Auth\TwoFactor} when a fresh token is
+	 * issued so that {@see token_from_request()} can pick it up on the form
+	 * re-render (WordPress does not forward WP_Error data into $_REQUEST).
+	 *
+	 * @param string $token Fresh pending-login token.
+	 * @return void
+	 */
+	public static function set_token_cookie( string $token ): void {
+		setcookie(
+			self::TOKEN_COOKIE,
+			$token,
+			array(
+				'expires'  => time() + 300,
+				'path'     => COOKIEPATH ? COOKIEPATH : '/',
+				'domain'   => COOKIE_DOMAIN,
+				'secure'   => is_ssl(),
+				'httponly' => true,
+				'samesite' => 'Lax',
+			)
+		);
+		$_COOKIE[ self::TOKEN_COOKIE ] = $token;
+	}
+
+	/**
+	 * Clear the pending-2FA token cookie.
+	 *
+	 * @return void
+	 */
+	public static function clear_token_cookie(): void {
+		setcookie(
+			self::TOKEN_COOKIE,
+			'',
+			array(
+				'expires'  => time() - 3600,
+				'path'     => COOKIEPATH ? COOKIEPATH : '/',
+				'domain'   => COOKIE_DOMAIN,
+				'secure'   => is_ssl(),
+				'httponly' => true,
+				'samesite' => 'Lax',
+			)
+		);
+		unset( $_COOKIE[ self::TOKEN_COOKIE ] );
 	}
 }
