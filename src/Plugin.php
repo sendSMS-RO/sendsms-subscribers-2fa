@@ -41,6 +41,27 @@ final class Plugin {
 	private $settings = null;
 
 	/**
+	 * History repository.
+	 *
+	 * @var Storage\HistoryRepository|null
+	 */
+	private $history = null;
+
+	/**
+	 * Subscriber repository.
+	 *
+	 * @var Storage\SubscriberRepository|null
+	 */
+	private $subscribers = null;
+
+	/**
+	 * IP repository.
+	 *
+	 * @var Storage\IpRepository|null
+	 */
+	private $ips = null;
+
+	/**
 	 * Prevent direct construction.
 	 */
 	private function __construct() {}
@@ -67,6 +88,33 @@ final class Plugin {
 	}
 
 	/**
+	 * History repository accessor.
+	 *
+	 * @return Storage\HistoryRepository
+	 */
+	public function history(): Storage\HistoryRepository {
+		return $this->history;
+	}
+
+	/**
+	 * Subscriber repository accessor.
+	 *
+	 * @return Storage\SubscriberRepository
+	 */
+	public function subscribers(): Storage\SubscriberRepository {
+		return $this->subscribers;
+	}
+
+	/**
+	 * IP repository accessor.
+	 *
+	 * @return Storage\IpRepository
+	 */
+	public function ips(): Storage\IpRepository {
+		return $this->ips;
+	}
+
+	/**
 	 * Register all hooks. Idempotent.
 	 *
 	 * @return void
@@ -90,6 +138,9 @@ final class Plugin {
 
 		Install::maybe_upgrade();
 
-		$this->settings = new Storage\Settings();
+		$this->settings    = new Storage\Settings();
+		$this->history     = new Storage\HistoryRepository();
+		$this->subscribers = new Storage\SubscriberRepository();
+		$this->ips         = new Storage\IpRepository();
 	}
 }
