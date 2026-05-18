@@ -183,7 +183,6 @@ final class Plugin {
 		if ( (bool) $this->settings->get( 'add_phone_field', false ) ) {
 			$pending = new Auth\PendingLogin();
 			( new Auth\UserPhoneField( $this->settings ) )->register();
-			( new Auth\LoginForm( $pending ) )->register();
 			( new Auth\TwoFactor( $this->settings, $this->api, $codes, $this->ips, $pending ) )->register();
 		}
 
