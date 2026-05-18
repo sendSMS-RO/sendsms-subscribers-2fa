@@ -172,6 +172,7 @@ final class Plugin {
 			( new Ajax\TestSendHandler( $this->api ) )->register();
 			( new Ajax\MassSendHandler( $this->settings, $this->subscribers, $this->api ) )->register();
 			( new Ajax\SubscriberCrudHandler( $this->settings, $this->subscribers ) )->register();
+			( new Ajax\ContactSyncHandler( $this->settings, $this->subscribers, $this->api ) )->register();
 		}
 	}
 }
