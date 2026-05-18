@@ -175,12 +175,15 @@ final class Menu {
 	}
 
 	/**
-	 * Render the History page placeholder.
+	 * Render the SMS History page.
+	 *
+	 * Delegates to {@see Pages\HistoryPage} which owns the WP_List_Table
+	 * subclass and all data-fetching logic.
 	 *
 	 * @return void
 	 */
 	public function render_history(): void {
-		$this->coming_soon( __( 'History', 'sendsms-dashboard' ) );
+		( new Pages\HistoryPage() )->render();
 	}
 
 	/**
