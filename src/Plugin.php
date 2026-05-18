@@ -8,6 +8,7 @@
 namespace SendSMS\Dashboard;
 
 use SendSMS\Dashboard\Admin;
+use SendSMS\Dashboard\Ajax;
 use SendSMS\Dashboard\Api;
 use SendSMS\Dashboard\Storage;
 use SendSMS\Dashboard\Support;
@@ -168,6 +169,7 @@ final class Plugin {
 		if ( is_admin() ) {
 			( new Admin\Notices() )->register();
 			( new Admin\Menu( $this->settings ) )->register();
+			( new Ajax\TestSendHandler( $this->api ) )->register();
 		}
 	}
 }
