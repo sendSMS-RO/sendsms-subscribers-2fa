@@ -166,12 +166,16 @@ final class Menu {
 	}
 
 	/**
-	 * Render the Send a test SMS page placeholder.
+	 * Render the Send a test SMS page.
+	 *
+	 * Delegates to {@see Pages\TestSendPage} which renders the phone number,
+	 * message, gdpr, and short-URL fields submitted via fetch() to the
+	 * `sendsms_dashboard_test_send` AJAX action.
 	 *
 	 * @return void
 	 */
 	public function render_test(): void {
-		$this->coming_soon( __( 'Send a test SMS', 'sendsms-dashboard' ) );
+		( new Pages\TestSendPage() )->render();
 	}
 
 	/**
@@ -199,12 +203,17 @@ final class Menu {
 	}
 
 	/**
-	 * Render the SMS sending page placeholder.
+	 * Render the SMS mass-sending page.
+	 *
+	 * Delegates to {@see Pages\MassSendPage} which renders the receiver-type
+	 * radio buttons, optional role selector, message, gdpr, and short-URL
+	 * fields submitted via fetch() to the `sendsms_dashboard_mass_send` AJAX
+	 * action.
 	 *
 	 * @return void
 	 */
 	public function render_mass_send(): void {
-		$this->coming_soon( __( 'SMS sending', 'sendsms-dashboard' ) );
+		( new Pages\MassSendPage() )->render();
 	}
 
 	/**
