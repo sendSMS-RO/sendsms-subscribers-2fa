@@ -11,6 +11,7 @@
 
 namespace SendSMS\Dashboard\Admin;
 
+use SendSMS\Dashboard\Admin\Pages;
 use SendSMS\Dashboard\Storage\Settings;
 
 defined( 'ABSPATH' ) || exit;
@@ -153,12 +154,15 @@ final class Menu {
 	}
 
 	/**
-	 * Render the Settings page placeholder.
+	 * Render the Settings page.
+	 *
+	 * Delegates to the SettingsPage class which handles three tabs
+	 * (General / User / Subscription) with per-tab merge-save.
 	 *
 	 * @return void
 	 */
 	public function render_settings(): void {
-		$this->coming_soon( __( 'Settings', 'sendsms-dashboard' ) );
+		( new Pages\SettingsPage( $this->settings ) )->render();
 	}
 
 	/**
