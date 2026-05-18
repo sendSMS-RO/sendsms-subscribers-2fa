@@ -61,6 +61,7 @@ final class Install {
 	private static function run_dbdelta(): void {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		dbDelta( \SendSMS\Dashboard\Storage\HistoryRepository::dbdelta_sql() );
+		dbDelta( \SendSMS\Dashboard\Storage\SubscriberRepository::dbdelta_sql() );
 	}
 
 	/**
