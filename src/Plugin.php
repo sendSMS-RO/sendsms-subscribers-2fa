@@ -10,6 +10,7 @@ namespace SendSMS\Dashboard;
 use SendSMS\Dashboard\Admin;
 use SendSMS\Dashboard\Ajax;
 use SendSMS\Dashboard\Api;
+use SendSMS\Dashboard\Auth;
 use SendSMS\Dashboard\Frontend;
 use SendSMS\Dashboard\Storage;
 use SendSMS\Dashboard\Support;
@@ -173,6 +174,18 @@ final class Plugin {
 		( new Frontend\SubscribeAjax( $this->settings, $this->subscribers, $this->ips, $codes, $this->api ) )->register();
 		( new Frontend\UnsubscribeAjax( $this->settings, $this->subscribers, $this->ips, $codes, $this->api ) )->register();
 		( new Frontend\VerifyCodeAjax( $this->settings, $this->subscribers, $this->ips, $codes, $this->api ) )->register();
+
+		// 2FA subsystem — registered outside is_admin() because the `authenticate`
+		// filter fires on wp-login.php POST, which is not an admin context.
+		// UserPhoneField hooks into profile screens (which are admin), but
+		// WordPress still fires those actions when is_admin() is true, so it is
+		// safe to register all three here unconditionally when the feature is on.
+		if ( (bool) $this->settings->get( 'add_phone_field', false ) ) {
+			$pending = new Auth\PendingLogin();
+			( new Auth\UserPhoneField( $this->settings ) )->register();
+			( new Auth\LoginForm( $pending ) )->register();
+			( new Auth\TwoFactor( $this->settings, $this->api, $codes, $this->ips, $pending ) )->register();
+		}
 
 		// Register widgets — must be outside is_admin() so they are available on
 		// the frontend. WordPress fires widgets_init on every request.

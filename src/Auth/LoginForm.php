@@ -103,8 +103,8 @@ final class LoginForm {
 			echo '<p><label for="sendsms_phone_number">' . esc_html__( 'Add your phone number for 2FA', 'sendsms-dashboard' ) . '<br />';
 			echo '<input type="tel" name="sendsms_phone_number" id="sendsms_phone_number" class="input" size="20" required /></label></p>';
 		} else {
-			echo '<p><label for="sendsms_2fa_code">' . esc_html__( 'Verification code', 'sendsms-dashboard' ) . '<br />';
-			echo '<input type="text" name="sendsms_2fa_code" id="sendsms_2fa_code" class="input" size="20" inputmode="text" autocomplete="one-time-code" required /></label></p>';
+			echo '<p><label for="code">' . esc_html__( 'Verification code', 'sendsms-dashboard' ) . '<br />';
+			echo '<input type="text" name="code" id="code" class="input" size="20" inputmode="text" autocomplete="one-time-code" required /></label></p>';
 
 			$resend_url = esc_url(
 				add_query_arg(
