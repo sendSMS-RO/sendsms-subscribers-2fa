@@ -7,6 +7,8 @@
 
 namespace SendSMS\Dashboard;
 
+use SendSMS\Dashboard\Storage;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -32,6 +34,13 @@ final class Plugin {
 	private $booted = false;
 
 	/**
+	 * Shared Settings service, available after {@see boot()} runs.
+	 *
+	 * @var Storage\Settings|null
+	 */
+	private $settings = null;
+
+	/**
 	 * Prevent direct construction.
 	 */
 	private function __construct() {}
@@ -46,6 +55,15 @@ final class Plugin {
 			self::$instance = new self();
 		}
 		return self::$instance;
+	}
+
+	/**
+	 * Returns the shared Settings service.
+	 *
+	 * @return Storage\Settings
+	 */
+	public function settings(): Storage\Settings {
+		return $this->settings;
 	}
 
 	/**
@@ -71,5 +89,7 @@ final class Plugin {
 		);
 
 		Install::maybe_upgrade();
+
+		$this->settings = new Storage\Settings();
 	}
 }
