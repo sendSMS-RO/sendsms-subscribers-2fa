@@ -187,12 +187,15 @@ final class Menu {
 	}
 
 	/**
-	 * Render the Subscribers page placeholder.
+	 * Render the Subscribers page.
+	 *
+	 * Delegates to {@see Pages\SubscribersPage} which owns the WP_List_Table
+	 * subclass, the Add Subscriber form, and the inline Edit Subscriber form.
 	 *
 	 * @return void
 	 */
 	public function render_subscribers(): void {
-		$this->coming_soon( __( 'Subscribers', 'sendsms-dashboard' ) );
+		( new Pages\SubscribersPage() )->render();
 	}
 
 	/**
