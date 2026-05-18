@@ -50,7 +50,7 @@ final class Settings {
 	 * @param mixed  $default Value returned when the key is not set.
 	 * @return mixed
 	 */
-	public function get( string $key, $default = null ) {
+	public function get( string $key, $default = null ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.defaultFound -- $default is the conventional name for this pattern; renaming would harm readability.
 		$all = $this->all();
 		return array_key_exists( $key, $all ) ? $all[ $key ] : $default;
 	}
@@ -62,7 +62,7 @@ final class Settings {
 	 * @param string $default Fallback when the stored value is not scalar.
 	 * @return string
 	 */
-	public function get_esc( string $key, string $default = '' ): string {
+	public function get_esc( string $key, string $default = '' ): string { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.defaultFound -- $default is the conventional name for this pattern; renaming would harm readability.
 		$value = $this->get( $key, $default );
 		return is_scalar( $value ) ? (string) $value : $default;
 	}

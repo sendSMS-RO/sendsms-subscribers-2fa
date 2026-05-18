@@ -22,6 +22,8 @@ defined( 'ABSPATH' ) || exit;
  */
 final class HistoryRepository {
 
+	// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,PluginCheck.Security.DirectDB.UnescapedDBParameter -- direct queries against the plugin's own custom tables; no transient caching because writes happen in the same request and stale reads are a larger concern than query overhead.
+
 	/**
 	 * Returns the fully-qualified table name including the wpdb prefix.
 	 *
@@ -80,6 +82,7 @@ final class HistoryRepository {
 		$wpdb->insert( $this->table(), array_merge( $defaults, $row ) );
 		return (int) $wpdb->insert_id;
 	}
+
 
 	/**
 	 * Returns a page of history rows matching the given arguments.
@@ -141,4 +144,6 @@ final class HistoryRepository {
 			)
 		);
 	}
+
+	// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,PluginCheck.Security.DirectDB.UnescapedDBParameter
 }

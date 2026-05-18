@@ -334,9 +334,10 @@ final class SubscribersListTable extends \WP_List_Table {
 	 */
 	public function prepare_items(): void {
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- read-only query-string navigation; no state mutation.
-		$page    = max( 1, (int) ( $_GET['paged'] ?? 1 ) );
-		$orderby = sanitize_key( (string) ( $_GET['orderby'] ?? 'date' ) );
-		$order   = ( isset( $_GET['order'] ) && 'asc' === strtolower( (string) $_GET['order'] ) ) ? 'ASC' : 'DESC';
+		$paged   = absint( wp_unslash( $_GET['paged'] ?? '0' ) );
+		$page    = max( 1, $paged > 0 ? $paged : 1 );
+		$orderby = sanitize_key( wp_unslash( (string) ( $_GET['orderby'] ?? 'date' ) ) );
+		$order   = ( isset( $_GET['order'] ) && 'asc' === strtolower( sanitize_key( wp_unslash( $_GET['order'] ) ) ) ) ? 'ASC' : 'DESC';
 		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		$args = array(

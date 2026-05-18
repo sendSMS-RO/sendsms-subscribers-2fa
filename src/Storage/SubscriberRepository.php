@@ -22,6 +22,8 @@ defined( 'ABSPATH' ) || exit;
  */
 final class SubscriberRepository {
 
+	// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,PluginCheck.Security.DirectDB.UnescapedDBParameter -- direct queries against the plugin's own custom tables; no transient caching because writes happen in the same request and stale reads are a larger concern than query overhead.
+
 	/**
 	 * Returns the fully-qualified table name including the wpdb prefix.
 	 *
@@ -104,8 +106,7 @@ final class SubscriberRepository {
 			return false;
 		}
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- parity with v1.x; caller is responsible.
-		$browser = isset( $data['browser'] ) ? $data['browser'] : ( isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : null );
+		$browser = isset( $data['browser'] ) ? $data['browser'] : ( isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : null );
 
 		$row = array(
 			'phone'      => $phone,
@@ -243,4 +244,6 @@ final class SubscriberRepository {
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name from $wpdb->prefix only.
 		return (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$this->table()}" );
 	}
+
+	// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,PluginCheck.Security.DirectDB.UnescapedDBParameter
 }

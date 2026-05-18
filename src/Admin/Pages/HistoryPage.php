@@ -177,9 +177,10 @@ final class HistoryListTable extends \WP_List_Table {
 	 */
 	public function prepare_items(): void {
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- read-only query-string navigation.
-		$page    = max( 1, (int) ( $_GET['paged'] ?? 1 ) );
-		$orderby = sanitize_key( (string) ( $_GET['orderby'] ?? 'sent_on' ) );
-		$order   = ( isset( $_GET['order'] ) && 'asc' === strtolower( (string) $_GET['order'] ) ) ? 'ASC' : 'DESC';
+		$paged   = absint( wp_unslash( $_GET['paged'] ?? '0' ) );
+		$page    = max( 1, $paged > 0 ? $paged : 1 );
+		$orderby = sanitize_key( wp_unslash( (string) ( $_GET['orderby'] ?? 'sent_on' ) ) );
+		$order   = ( isset( $_GET['order'] ) && 'asc' === strtolower( sanitize_key( wp_unslash( $_GET['order'] ) ) ) ) ? 'ASC' : 'DESC';
 		$search  = isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( (string) $_REQUEST['s'] ) ) : '';
 		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 

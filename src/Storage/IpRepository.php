@@ -24,6 +24,8 @@ defined( 'ABSPATH' ) || exit;
  */
 final class IpRepository {
 
+	// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- direct queries against the plugin's own custom tables; no transient caching because writes happen in the same request and stale reads are a larger concern than query overhead.
+
 	/**
 	 * Returns the fully-qualified table name including the wpdb prefix.
 	 *
@@ -163,4 +165,6 @@ final class IpRepository {
 		);
 		return false !== $result;
 	}
+
+	// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 }

@@ -247,7 +247,8 @@ final class SettingsPage {
 		}
 
 		// Only overwrite the stored password when the admin typed a new one.
-		$submitted_password = trim( wp_unslash( $_POST['sendsms_password'] ?? '' ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- wp_unslash applied; trim used intentionally.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.InputNotValidated -- passwords are stored as-is; sanitize_text_field would strip valid characters such as <>&"'.
+		$submitted_password = trim( isset( $_POST['sendsms_password'] ) ? (string) wp_unslash( $_POST['sendsms_password'] ) : '' );
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
 		if ( '' !== $submitted_password ) {
 			$patch['password'] = $submitted_password;
@@ -368,8 +369,8 @@ final class SettingsPage {
 		$add_phone = ! empty( $_POST['sendsms_add_phone_field'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- checkbox presence check.
 
 		// 2fa_roles — build role_key => '1' map to match v1.x shape.
-		$submitted_roles = isset( $_POST['sendsms_2fa_roles'] ) && is_array( $_POST['sendsms_2fa_roles'] ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- validated below.
-			? $_POST['sendsms_2fa_roles'] // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated,WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- array, sanitized in the foreach below.
+		$submitted_roles = isset( $_POST['sendsms_2fa_roles'] ) && is_array( $_POST['sendsms_2fa_roles'] )
+			? array_map( 'sanitize_key', wp_unslash( $_POST['sendsms_2fa_roles'] ) ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated -- validated by is_array check above.
 			: array();
 
 		$fa_roles  = array();

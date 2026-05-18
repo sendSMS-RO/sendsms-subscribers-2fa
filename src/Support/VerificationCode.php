@@ -94,11 +94,9 @@ final class VerificationCode {
 			return false;
 		}
 
-		$submitted = preg_replace(
-			'/[^A-Za-z0-9\-]/',
-			'',
-			(string) wp_unslash( $_POST['code'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce checked by caller
-		);
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.NonceVerification.Missing -- sanitized via preg_replace whitelist below; nonce checked by caller.
+		$raw_code  = isset( $_POST['code'] ) ? (string) wp_unslash( $_POST['code'] ) : '';
+		$submitted = preg_replace( '/[^A-Za-z0-9\-]/', '', $raw_code );
 
 		$expected = wp_hash( $submitted . $phone );
 
