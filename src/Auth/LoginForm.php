@@ -97,15 +97,24 @@ final class LoginForm {
 
 		$needs_phone = empty( $pending['phone_hash'] );
 
-		// Hide the standard username/password rows + the Lost Your Password link;
-		// the user is mid-2FA and shouldn't have to re-type their credentials.
+		// Hide the standard username/password rows + the "Remember Me" line and the
+		// default submit button. Restyle the WP error block as an info notice (blue)
+		// instead of error red — the "enter the verification code" prompt is
+		// instructional, not a failure. WP form markup varies between versions, so
+		// the JS targets inputs by id and walks up to the containing <p>.
 		echo '<style>'
-			. '.user-pass-wrap,.user-login-wrap,.forgetmenot,.submit{display:none!important;}'
-			. 'p#nav,p#backtoblog{margin-top:24px;}'
+			. 'p.forgetmenot,p.submit,p.user-login-wrap,p.user-pass-wrap{display:none!important;}'
+			. '#login_error{border-left-color:#2271b1!important;background:#f0f6fc!important;color:#1d2327!important;}'
+			. '#login_error::before,#login_error strong{color:#2271b1!important;}'
 			. '</style>';
 		echo '<script>document.addEventListener("DOMContentLoaded",function(){'
 			. 'var f=document.getElementById("loginform");if(!f)return;'
-			. 'f.querySelectorAll("p.user-login-wrap,p.user-pass-wrap,p.forgetmenot,p.submit").forEach(function(n){n.style.display="none";});'
+			. '["user_login","user_pass"].forEach(function(id){'
+				. 'var i=document.getElementById(id);if(i){var p=i.closest("p");if(p)p.style.display="none";}'
+				. 'var l=document.querySelector("label[for=\\""+id+"\\"]");'
+				. 'if(l){var lp=l.closest("p");if(lp)lp.style.display="none";else l.style.display="none";}'
+			. '});'
+			. 'f.querySelectorAll("p.forgetmenot,p.submit,p.user-login-wrap,p.user-pass-wrap").forEach(function(n){n.style.display="none";});'
 			. '});</script>';
 
 		echo '<input type="hidden" name="sendsms_2fa_token" value="' . esc_attr( $token ) . '" />';
