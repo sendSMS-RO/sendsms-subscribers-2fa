@@ -1,0 +1,10 @@
+.DS_Store
+.claude/
+CLAUDE.md
+/docs/
+/vendor/
+/node_modules/
+composer.lock
+.phpcs-cache
+*.zip
+/dist/
