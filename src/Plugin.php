@@ -10,6 +10,7 @@ namespace SendSMS\Dashboard;
 use SendSMS\Dashboard\Admin;
 use SendSMS\Dashboard\Ajax;
 use SendSMS\Dashboard\Api;
+use SendSMS\Dashboard\Frontend;
 use SendSMS\Dashboard\Storage;
 use SendSMS\Dashboard\Support;
 
@@ -165,6 +166,12 @@ final class Plugin {
 
 		$codes     = new Support\VerificationCode();
 		$this->api = new Api\Client( $this->history, $this->settings, $codes );
+
+		// Public AJAX handlers — registered outside is_admin() so they are reachable
+		// from wp-admin/admin-ajax.php for both logged-in and guest (nopriv) contexts.
+		( new Frontend\SubscribeAjax( $this->settings, $this->subscribers, $this->ips, $codes, $this->api ) )->register();
+		( new Frontend\UnsubscribeAjax( $this->settings, $this->subscribers, $this->ips, $codes, $this->api ) )->register();
+		( new Frontend\VerifyCodeAjax( $this->settings, $this->subscribers, $this->ips, $codes, $this->api ) )->register();
 
 		if ( is_admin() ) {
 			( new Admin\Notices() )->register();
