@@ -1,0 +1,570 @@
+# Copyright (C) 2026 sendSMS
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: SendSMS Dashboard 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sendsms-dashboard\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-05-18T20:05:12+03:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: sendsms-dashboard\n"
+
+#. Plugin Name of the plugin
+#: sendsms-dashboard.php
+#: src/Admin/Menu.php:83
+#: src/Admin/Menu.php:84
+#: src/Admin/Pages/SettingsPage.php:113
+#: src/Auth/UserPhoneField.php:84
+#: src/Auth/UserPhoneField.php:104
+msgid "SendSMS Dashboard"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: sendsms-dashboard.php
+msgid "https://www.sendsms.ro/en/"
+msgstr ""
+
+#. Description of the plugin
+#: sendsms-dashboard.php
+msgid "Manage SMS subscribers, send mass campaigns, and protect wp-admin with SMS-based 2FA through the sendsms.ro gateway."
+msgstr ""
+
+#. Author of the plugin
+#: sendsms-dashboard.php
+msgid "sendSMS"
+msgstr ""
+
+#. Author URI of the plugin
+#: sendsms-dashboard.php
+msgid "https://www.sendsms.ro/"
+msgstr ""
+
+#: src/Admin/Menu.php:96
+msgid "Settings"
+msgstr ""
+
+#: src/Admin/Menu.php:97
+#: src/Admin/Pages/TestSendPage.php:48
+msgid "Send a test SMS"
+msgstr ""
+
+#: src/Admin/Menu.php:98
+msgid "History"
+msgstr ""
+
+#: src/Admin/Menu.php:99
+msgid "Subscribers"
+msgstr ""
+
+#: src/Admin/Menu.php:100
+msgid "SMS sending"
+msgstr ""
+
+#: src/Admin/Menu.php:147
+#: src/Plugin.php:226
+msgid "Sending…"
+msgstr ""
+
+#: src/Admin/Menu.php:148
+msgid "Sent."
+msgstr ""
+
+#: src/Admin/Menu.php:149
+msgid "Failed."
+msgstr ""
+
+#: src/Admin/Menu.php:150
+msgid "Delete this subscriber?"
+msgstr ""
+
+#: src/Admin/Menu.php:232
+msgid "Coming soon."
+msgstr ""
+
+#: src/Admin/Pages/HistoryPage.php:64
+msgid "SMS History"
+msgstr ""
+
+#: src/Admin/Pages/HistoryPage.php:67
+#: src/Admin/Pages/SubscribersPage.php:89
+msgid "Search"
+msgstr ""
+
+#: src/Admin/Pages/HistoryPage.php:138
+#: src/Admin/Pages/SubscribersPage.php:286
+msgid "Date"
+msgstr ""
+
+#: src/Admin/Pages/HistoryPage.php:139
+msgid "Recipient"
+msgstr ""
+
+#: src/Admin/Pages/HistoryPage.php:140
+msgid "Content"
+msgstr ""
+
+#: src/Admin/Pages/HistoryPage.php:141
+msgid "Status"
+msgstr ""
+
+#: src/Admin/Pages/HistoryPage.php:142
+#: src/Admin/Pages/MassSendPage.php:155
+#: src/Admin/Pages/MassSendPage.php:164
+#: src/Admin/Pages/TestSendPage.php:119
+#: src/Admin/Pages/TestSendPage.php:128
+msgid "Message"
+msgstr ""
+
+#: src/Admin/Pages/HistoryPage.php:143
+msgid "Details"
+msgstr ""
+
+#: src/Admin/Pages/HistoryPage.php:144
+msgid "Type"
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:52
+msgid "Send mass SMS"
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:60
+#: src/Admin/Pages/MassSendPage.php:65
+msgid "Send to"
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:75
+msgid "All SMS subscribers"
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:85
+msgid "WordPress users with role&hellip;"
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:94
+msgid "Role"
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:99
+msgid "All roles"
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:107
+msgid "Choose the specific role you want to send the message to."
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:115
+#: src/Admin/Pages/TestSendPage.php:79
+msgid "Add unsubscribe link?"
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:127
+#: src/Admin/Pages/TestSendPage.php:91
+msgid "You must include {gdpr} in your message. It will be replaced with a unique confirmation link. If omitted, the link is appended at the end."
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:135
+#: src/Admin/Pages/TestSendPage.php:99
+msgid "Shrink URLs?"
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:147
+#: src/Admin/Pages/TestSendPage.php:111
+msgid "Searches for long URLs and replaces them with short URLs. Use only URLs that start with https:// or http://."
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:169
+#: src/Admin/Pages/TestSendPage.php:133
+msgid "The field is empty"
+msgstr ""
+
+#: src/Admin/Pages/MassSendPage.php:179
+#: src/Admin/Pages/TestSendPage.php:143
+msgid "Send Message"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:109
+msgid "Settings saved."
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:130
+msgid "Save Settings"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:146
+msgid "General"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:147
+msgid "User"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:148
+msgid "Subscription"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:186
+msgid "SendSMS Username"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:193
+msgid "SendSMS Password / API Key"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:196
+msgid "Leave blank to keep the current password."
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:202
+msgid "SendSMS Label (Sender ID)"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:209
+msgid "Country Code"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:211
+msgid "International"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:284
+msgid "Add phone number field / Enable 2FA"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:288
+msgid "Add a phone number field in the user editing form and activate the 2FA feature."
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:291
+msgid "This is designed only with the default wp-admin login form in mind. It may break if you have another login system. Test in a development environment first."
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:301
+msgid "Enable 2FA for the following roles"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:321
+msgid "Two-factor authentication verification message"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:327
+#: src/Admin/Pages/SettingsPage.php:445
+msgid "Use {code} as a placeholder for the verification code. If omitted, the code is appended at the end."
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:338
+msgid "Phone metadata list"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:344
+msgid "One user meta key per line. The plugin queries each key in order and uses the first valid phone number found. If empty, defaults to sendsms_phone_number."
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:427
+msgid "SMS verification?"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:431
+msgid "Send a verification code when someone subscribes or unsubscribes."
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:439
+msgid "Verification message"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:456
+msgid "IP limit"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:462
+msgid "Max subscriptions per IP in format maximum/minutes (e.g. 5/10 = 5 per 10 min). Use -1 for unlimited minutes (e.g. 5/-1). Leave blank for no restriction."
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:473
+msgid "Restricted IP addresses"
+msgstr ""
+
+#: src/Admin/Pages/SettingsPage.php:479
+msgid "One IP address per line. These IPs will be blocked from subscribing or unsubscribing."
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:77
+msgid "SendSMS – Subscribers"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:107
+#: src/Admin/Pages/SubscribersPage.php:134
+msgid "Add subscriber"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:116
+#: src/Admin/Pages/SubscribersPage.php:178
+#: src/Admin/Pages/TestSendPage.php:57
+#: src/Admin/Pages/TestSendPage.php:67
+#: src/Auth/UserPhoneField.php:86
+#: src/Auth/UserPhoneField.php:106
+#: src/Widgets/SubscribeWidget.php:93
+#: src/Widgets/UnsubscribeWidget.php:68
+msgid "Phone number"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:121
+#: src/Admin/Pages/SubscribersPage.php:185
+#: src/Admin/Pages/SubscribersPage.php:284
+#: src/Widgets/SubscribeWidget.php:69
+msgid "First name"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:126
+#: src/Admin/Pages/SubscribersPage.php:190
+#: src/Admin/Pages/SubscribersPage.php:285
+#: src/Widgets/SubscribeWidget.php:81
+msgid "Last name"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:164
+#: src/Ajax/SubscriberCrudHandler.php:238
+#: src/Ajax/SubscriberCrudHandler.php:306
+msgid "Subscriber not found."
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:169
+msgid "Edit subscriber"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:198
+msgid "Update subscriber"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:205
+msgid "Cancel"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:283
+msgid "Phone"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:287
+msgid "Synced"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:319
+#: src/Admin/Pages/SubscribersPage.php:411
+msgid "Delete"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:400
+msgid "Resync"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:400
+msgid "Sync"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:406
+msgid "Edit"
+msgstr ""
+
+#. translators: %d: remote contact ID from sendsms.ro
+#: src/Admin/Pages/SubscribersPage.php:438
+#, php-format
+msgid "Yes (id: %d)"
+msgstr ""
+
+#: src/Admin/Pages/SubscribersPage.php:443
+msgid "Not synced"
+msgstr ""
+
+#: src/Admin/Pages/TestSendPage.php:71
+msgid "We recommend a phone number in E.164 format but without the + sign."
+msgstr ""
+
+#: src/Ajax/MassSendHandler.php:100
+#: src/Ajax/SubscriberCrudHandler.php:97
+#: src/Ajax/TestSendHandler.php:71
+msgid "Security check failed."
+msgstr ""
+
+#: src/Ajax/MassSendHandler.php:111
+#: src/Ajax/SubscriberCrudHandler.php:106
+#: src/Ajax/TestSendHandler.php:81
+msgid "Forbidden."
+msgstr ""
+
+#: src/Ajax/MassSendHandler.php:124
+msgid "Message is required."
+msgstr ""
+
+#: src/Ajax/MassSendHandler.php:181
+msgid "No valid recipients."
+msgstr ""
+
+#: src/Ajax/SubscriberCrudHandler.php:132
+#: src/Auth/TwoFactor.php:318
+msgid "Invalid phone number."
+msgstr ""
+
+#: src/Ajax/SubscriberCrudHandler.php:162
+msgid "A subscriber with this phone already exists."
+msgstr ""
+
+#: src/Ajax/SubscriberCrudHandler.php:183
+msgid "Failed to add subscriber."
+msgstr ""
+
+#: src/Ajax/SubscriberCrudHandler.php:250
+msgid "A subscriber with the new phone already exists."
+msgstr ""
+
+#: src/Ajax/SubscriberCrudHandler.php:318
+msgid "Failed to delete subscriber."
+msgstr ""
+
+#: src/Ajax/TestSendHandler.php:94
+msgid "Phone and message are required."
+msgstr ""
+
+#: src/Api/Client.php:193
+msgid "Go to hub.sendsms.ro"
+msgstr ""
+
+#: src/Api/Client.php:197
+msgid "We created your campaign. Go and check the batch called: "
+msgstr ""
+
+#: src/Api/Client.php:198
+msgid "Batch Campaign"
+msgstr ""
+
+#: src/Api/Client.php:368
+msgid "Unparseable API response."
+msgstr ""
+
+#: src/Auth/LoginForm.php:103
+msgid "Add your phone number for 2FA"
+msgstr ""
+
+#: src/Auth/LoginForm.php:106
+#: src/Widgets/SubscribeWidget.php:132
+#: src/Widgets/UnsubscribeWidget.php:88
+msgid "Verification code"
+msgstr ""
+
+#: src/Auth/LoginForm.php:118
+msgid "Resend code"
+msgstr ""
+
+#: src/Auth/TwoFactor.php:216
+msgid "Add your phone number to complete sign-in."
+msgstr ""
+
+#: src/Auth/TwoFactor.php:226
+#: src/Auth/TwoFactor.php:283
+#: src/Auth/TwoFactor.php:328
+msgid "Your verification code: {code}"
+msgstr ""
+
+#: src/Auth/TwoFactor.php:231
+#: src/Auth/TwoFactor.php:338
+msgid "Check your phone and enter the verification code."
+msgstr ""
+
+#: src/Auth/TwoFactor.php:265
+msgid "Your login session expired. Please sign in again."
+msgstr ""
+
+#: src/Auth/TwoFactor.php:274
+msgid "User no longer exists."
+msgstr ""
+
+#: src/Auth/TwoFactor.php:292
+msgid "A new code has been sent."
+msgstr ""
+
+#: src/Auth/TwoFactor.php:304
+msgid "Too many attempts. Please wait a moment."
+msgstr ""
+
+#: src/Auth/TwoFactor.php:349
+msgid "Phone number not found."
+msgstr ""
+
+#: src/Auth/TwoFactor.php:360
+msgid "Too many wrong codes. Please sign in again."
+msgstr ""
+
+#: src/Auth/TwoFactor.php:366
+msgid "Invalid code."
+msgstr ""
+
+#: src/Auth/UserPhoneField.php:89
+msgid "Required for SMS 2FA."
+msgstr ""
+
+#: src/Plugin.php:227
+msgid "Thank you!"
+msgstr ""
+
+#: src/Plugin.php:228
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: src/Plugin.php:229
+msgid "Check your phone for the verification code."
+msgstr ""
+
+#: src/Widgets/SubscribeWidget.php:38
+msgid "SendSMS Subscribe"
+msgstr ""
+
+#: src/Widgets/SubscribeWidget.php:41
+msgid "Let visitors subscribe to your SMS newsletter. GDPR-compliant with optional two-step phone verification."
+msgstr ""
+
+#. translators: %s: URL to the privacy policy page
+#: src/Widgets/SubscribeWidget.php:111
+#, php-format
+msgid "I agree with the %s"
+msgstr ""
+
+#: src/Widgets/SubscribeWidget.php:113
+msgid "privacy policy"
+msgstr ""
+
+#: src/Widgets/SubscribeWidget.php:117
+msgid "I agree with the privacy policy"
+msgstr ""
+
+#: src/Widgets/SubscribeWidget.php:125
+msgid "Subscribe"
+msgstr ""
+
+#: src/Widgets/SubscribeWidget.php:144
+#: src/Widgets/UnsubscribeWidget.php:100
+msgid "Verify code"
+msgstr ""
+
+#: src/Widgets/SubscribeWidget.php:168
+#: src/Widgets/UnsubscribeWidget.php:123
+msgid "Title:"
+msgstr ""
+
+#: src/Widgets/SubscribeWidget.php:180
+msgid "GDPR / Privacy policy URL:"
+msgstr ""
+
+#: src/Widgets/UnsubscribeWidget.php:38
+msgid "SendSMS Unsubscribe"
+msgstr ""
+
+#: src/Widgets/UnsubscribeWidget.php:41
+msgid "Let visitors unsubscribe from your SMS newsletter."
+msgstr ""
+
+#: src/Widgets/UnsubscribeWidget.php:81
+msgid "Unsubscribe"
+msgstr ""
