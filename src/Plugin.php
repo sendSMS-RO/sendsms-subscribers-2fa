@@ -170,6 +170,7 @@ final class Plugin {
 			( new Admin\Notices() )->register();
 			( new Admin\Menu( $this->settings ) )->register();
 			( new Ajax\TestSendHandler( $this->api ) )->register();
+			( new Ajax\MassSendHandler( $this->settings, $this->subscribers, $this->api ) )->register();
 		}
 	}
 }
