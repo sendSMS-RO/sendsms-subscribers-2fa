@@ -87,27 +87,34 @@ final class Settings {
 	/**
 	 * Returns the list of user meta keys the plugin checks for a phone number.
 	 *
-	 * Reads the `user_phone_meta_keys` setting (one meta key per line). Falls
-	 * back to `['sendsms_phone_number']` when the setting is empty or produces
-	 * no valid keys after sanitisation.
+	 * Reads the `phone_meta` setting (one meta key per line) — the same key
+	 * v1.x uses — so existing installations carry their configuration over
+	 * transparently. 'sendsms_phone_number' is always appended as the final
+	 * fallback, matching v1.x behaviour where get_user_phone falls back to that
+	 * meta key unconditionally.
 	 *
 	 * @return string[]
 	 */
 	public function user_phone_meta_keys(): array {
-		$raw = (string) $this->get( 'user_phone_meta_keys', '' );
+		$raw = (string) $this->get( 'phone_meta', '' );
 		$raw = trim( $raw );
-		if ( '' === $raw ) {
-			return array( 'sendsms_phone_number' );
-		}
 
-		$lines = preg_split( '/\R+/', $raw );
-		$keys  = array();
-		foreach ( (array) $lines as $line ) {
-			$line = trim( $line );
-			if ( '' !== $line ) {
-				$keys[] = sanitize_key( $line );
+		$keys = array();
+		if ( '' !== $raw ) {
+			$lines = preg_split( '/\R+/', $raw );
+			foreach ( (array) $lines as $line ) {
+				$line = trim( $line );
+				if ( '' !== $line ) {
+					$keys[] = sanitize_key( $line );
+				}
 			}
 		}
-		return ! empty( $keys ) ? $keys : array( 'sendsms_phone_number' );
+
+		// Always include the v1.x default fallback at the end.
+		if ( ! in_array( 'sendsms_phone_number', $keys, true ) ) {
+			$keys[] = 'sendsms_phone_number';
+		}
+
+		return $keys;
 	}
 }
