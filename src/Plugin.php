@@ -167,6 +167,7 @@ final class Plugin {
 
 		if ( is_admin() ) {
 			( new Admin\Notices() )->register();
+			( new Admin\Menu( $this->settings ) )->register();
 		}
 	}
 }
