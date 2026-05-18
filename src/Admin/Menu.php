@@ -215,20 +215,4 @@ final class Menu {
 	public function render_mass_send(): void {
 		( new Pages\MassSendPage() )->render();
 	}
-
-	/**
-	 * Output a minimal "Coming soon" admin page.
-	 *
-	 * Performs a capability check before rendering so that direct URL
-	 * access by unprivileged users is harmless.
-	 *
-	 * @param string $title Page title shown in the <h1>.
-	 * @return void
-	 */
-	private function coming_soon( string $title ): void {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-		echo '<div class="wrap"><h1>' . esc_html( $title ) . '</h1><p>' . esc_html__( 'Coming soon.', 'sendsms-dashboard' ) . '</p></div>';
-	}
 }

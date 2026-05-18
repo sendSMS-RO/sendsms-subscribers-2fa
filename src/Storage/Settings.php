@@ -79,7 +79,9 @@ final class Settings {
 	 */
 	public function update_partial( array $patch ): bool {
 		$existing    = $this->all();
-		$merged      = array_replace_recursive( $existing, $patch );
+		// Top-level replace (NOT recursive) so empty sub-arrays in $patch clear the prior value.
+		// Example: unchecking every box in 2fa_roles must produce an empty array, not preserve the prior set.
+		$merged      = array_replace( $existing, $patch );
 		$this->cache = $merged;
 		return update_option( self::OPTION, $merged, false );
 	}
