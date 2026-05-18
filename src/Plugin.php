@@ -13,6 +13,7 @@ use SendSMS\Dashboard\Api;
 use SendSMS\Dashboard\Frontend;
 use SendSMS\Dashboard\Storage;
 use SendSMS\Dashboard\Support;
+use SendSMS\Dashboard\Widgets;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -172,6 +173,54 @@ final class Plugin {
 		( new Frontend\SubscribeAjax( $this->settings, $this->subscribers, $this->ips, $codes, $this->api ) )->register();
 		( new Frontend\UnsubscribeAjax( $this->settings, $this->subscribers, $this->ips, $codes, $this->api ) )->register();
 		( new Frontend\VerifyCodeAjax( $this->settings, $this->subscribers, $this->ips, $codes, $this->api ) )->register();
+
+		// Register widgets — must be outside is_admin() so they are available on
+		// the frontend. WordPress fires widgets_init on every request.
+		add_action(
+			'widgets_init',
+			static function () {
+				register_widget( Widgets\SubscribeWidget::class );
+				register_widget( Widgets\UnsubscribeWidget::class );
+			}
+		);
+
+		// Enqueue public stylesheet and script (front-end only).
+		add_action(
+			'wp_enqueue_scripts',
+			static function () {
+				wp_enqueue_style(
+					'sendsms-dashboard-public',
+					SENDSMS_DASHBOARD_URL . 'assets/css/public.css',
+					array(),
+					SENDSMS_DASHBOARD_VERSION
+				);
+
+				wp_register_script(
+					'sendsms-dashboard-public',
+					SENDSMS_DASHBOARD_URL . 'assets/js/public.js',
+					array(),
+					SENDSMS_DASHBOARD_VERSION,
+					true
+				);
+
+				wp_localize_script(
+					'sendsms-dashboard-public',
+					'sendsmsDashboardPublic',
+					array(
+						'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+						'nonce'   => wp_create_nonce( 'sendsms-security-nonce' ),
+						'i18n'    => array(
+							'sending'  => __( 'Sending…', 'sendsms-dashboard' ),
+							'success'  => __( 'Thank you!', 'sendsms-dashboard' ),
+							'fail'     => __( 'Something went wrong. Please try again.', 'sendsms-dashboard' ),
+							'codeSent' => __( 'Check your phone for the verification code.', 'sendsms-dashboard' ),
+						),
+					)
+				);
+
+				wp_enqueue_script( 'sendsms-dashboard-public' );
+			}
+		);
 
 		if ( is_admin() ) {
 			( new Admin\Notices() )->register();

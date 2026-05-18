@@ -1,0 +1,101 @@
+/**
+ * SendSMS Dashboard – public widget styles.
+ *
+ * Minimal structural CSS for the subscribe and unsubscribe widgets.
+ * Themes are expected to supply their own typography; these rules only
+ * handle layout and state visibility.
+ */
+
+/* -----------------------------------------------------------------------
+ * Widget form wrappers
+ * --------------------------------------------------------------------- */
+.sendsms-dashboard-subscribe,
+.sendsms-dashboard-unsubscribe {
+	margin: 0;
+	padding: 0;
+}
+
+/* -----------------------------------------------------------------------
+ * Field rows
+ * --------------------------------------------------------------------- */
+.sendsms-dashboard-subscribe .sendsms-dashboard-field,
+.sendsms-dashboard-unsubscribe .sendsms-dashboard-field {
+	margin-bottom: 0.75em;
+}
+
+.sendsms-dashboard-subscribe .sendsms-dashboard-field label,
+.sendsms-dashboard-unsubscribe .sendsms-dashboard-field label {
+	display: block;
+	margin-bottom: 0.25em;
+	font-weight: 600;
+}
+
+.sendsms-dashboard-subscribe .sendsms-dashboard-field input[type="text"],
+.sendsms-dashboard-subscribe .sendsms-dashboard-field input[type="tel"],
+.sendsms-dashboard-subscribe .sendsms-dashboard-field input[type="number"],
+.sendsms-dashboard-unsubscribe .sendsms-dashboard-field input[type="text"],
+.sendsms-dashboard-unsubscribe .sendsms-dashboard-field input[type="tel"],
+.sendsms-dashboard-unsubscribe .sendsms-dashboard-field input[type="number"] {
+	display: block;
+	width: 100%;
+	max-width: 20em;
+	box-sizing: border-box;
+}
+
+/* -----------------------------------------------------------------------
+ * GDPR consent row
+ * --------------------------------------------------------------------- */
+.sendsms-dashboard-gdpr label {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.4em;
+	font-weight: normal;
+}
+
+.sendsms-dashboard-gdpr input[type="checkbox"] {
+	margin-top: 0.15em;
+	flex-shrink: 0;
+}
+
+/* -----------------------------------------------------------------------
+ * Two-step verification reveal block
+ *
+ * The HTML `hidden` attribute hides this block in all modern browsers.
+ * This rule is a defensive belt-and-suspenders for old user-agents that
+ * do not honour the attribute.
+ * --------------------------------------------------------------------- */
+.sendsms-dashboard-verify[hidden] {
+	display: none;
+}
+
+.sendsms-dashboard-verify {
+	margin-top: 1em;
+	padding: 0.75em;
+	border-left: 3px solid #0073aa;
+	background: #f0f6fc;
+}
+
+/* -----------------------------------------------------------------------
+ * Status / feedback paragraph
+ * --------------------------------------------------------------------- */
+.sendsms-dashboard-feedback {
+	margin: 0.5em 0 0;
+	min-height: 1.4em;
+}
+
+.sendsms-dashboard-feedback:not(:empty) {
+	padding: 0.4em 0.6em;
+	border-radius: 3px;
+}
+
+.sendsms-dashboard-feedback[data-state="ok"] {
+	color: #155724;
+	background: #d4edda;
+	border: 1px solid #c3e6cb;
+}
+
+.sendsms-dashboard-feedback[data-state="error"] {
+	color: #721c24;
+	background: #f8d7da;
+	border: 1px solid #f5c6cb;
+}
