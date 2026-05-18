@@ -56,12 +56,11 @@ final class Install {
 	/**
 	 * Create / upgrade all plugin tables via dbDelta.
 	 *
-	 * Filled in by HistoryRepository / SubscriberRepository / IpRepository tasks.
-	 *
 	 * @return void
 	 */
 	private static function run_dbdelta(): void {
-		// Filled in by HistoryRepository / SubscriberRepository / IpRepository tasks below.
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		dbDelta( \SendSMS\Dashboard\Storage\HistoryRepository::dbdelta_sql() );
 	}
 
 	/**
