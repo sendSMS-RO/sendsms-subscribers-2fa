@@ -109,10 +109,13 @@ final class LoginForm {
 			. '</style>';
 		echo '<script>document.addEventListener("DOMContentLoaded",function(){'
 			. 'var f=document.getElementById("loginform");if(!f)return;'
+			// For each std field, walk up from the input (and from its label) until
+			// we hit a direct child of #loginform and hide that container. Robust
+			// across WP versions whether the wrapper is <p>, <div class="wp-pwd">, etc.
+			. 'function hideContainerOf(el){if(!el)return;var n=el;while(n&&n.parentElement&&n.parentElement!==f){n=n.parentElement;}if(n&&n!==f)n.style.display="none";}'
 			. '["user_login","user_pass"].forEach(function(id){'
-				. 'var i=document.getElementById(id);if(i){var p=i.closest("p");if(p)p.style.display="none";}'
-				. 'var l=document.querySelector("label[for=\\""+id+"\\"]");'
-				. 'if(l){var lp=l.closest("p");if(lp)lp.style.display="none";else l.style.display="none";}'
+				. 'hideContainerOf(document.getElementById(id));'
+				. 'hideContainerOf(document.querySelector("label[for=\\""+id+"\\"]"));'
 			. '});'
 			. 'f.querySelectorAll("p.forgetmenot,p.submit,p.user-login-wrap,p.user-pass-wrap").forEach(function(n){n.style.display="none";});'
 			. '});</script>';
