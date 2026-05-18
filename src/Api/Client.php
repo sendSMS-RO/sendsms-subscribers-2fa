@@ -194,7 +194,8 @@ final class Client {
 				'status'  => isset( $response->data()['status'] ) ? (string) $response->data()['status'] : '',
 				'message' => isset( $response->data()['message'] ) ? (string) $response->data()['message'] : '',
 				'details' => isset( $response->data()['details'] ) ? (string) $response->data()['details'] : '',
-				'content' => __( 'We created your campaign. Go and check the batch called: ', 'sendsms-dashboard' ) . $name,
+				/* translators: %s is the sendsms.ro batch campaign name. */
+				'content' => sprintf( __( 'We created your campaign. Go and check the batch called: %s', 'sendsms-dashboard' ), $name ),
 				'type'    => __( 'Batch Campaign', 'sendsms-dashboard' ),
 				'sent_on' => current_time( 'mysql' ),
 			)
@@ -360,7 +361,8 @@ final class Client {
 		$body   = (string) wp_remote_retrieve_body( $raw );
 
 		if ( $status < 200 || $status >= 300 ) {
-			return Response::failure( sprintf( 'HTTP %d', $status ), $status, $body );
+			/* translators: %d is an HTTP response status code. */
+			return Response::failure( sprintf( __( 'HTTP %d', 'sendsms-dashboard' ), $status ), $status, $body );
 		}
 
 		$json = json_decode( $body, true );
@@ -370,7 +372,7 @@ final class Client {
 
 		// sendsms.ro convention: numeric status < 0 indicates an error.
 		if ( isset( $json['status'] ) && is_numeric( $json['status'] ) && (int) $json['status'] < 0 ) {
-			$error = (string) ( $json['message'] ?? $json['details'] ?? 'API error' );
+			$error = (string) ( $json['message'] ?? $json['details'] ?? __( 'API error', 'sendsms-dashboard' ) );
 			return Response::failure( $error, $status, $body );
 		}
 

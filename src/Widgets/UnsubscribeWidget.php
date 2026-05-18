@@ -70,7 +70,7 @@ final class UnsubscribeWidget extends \WP_Widget {
 				<input
 					type="tel"
 					id="sendsms-unsubscribe-phone-<?php echo esc_attr( $this->id ); ?>"
-					name="phone"
+					name="phone_number"
 					autocomplete="tel"
 					required
 				/>

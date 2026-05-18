@@ -100,7 +100,7 @@ final class TestSendHandler {
 		$short = ! empty( $_POST['short'] ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$gdpr  = ! empty( $_POST['gdpr'] ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
-		$response = $this->api->message_send( $short, $gdpr, $phone, $body, 'test' );
+		$response = $this->api->message_send( $short, $gdpr, $phone, $body, 'TEST' );
 
 		if ( ! $response->is_success() ) {
 			wp_send_json_error(

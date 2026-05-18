@@ -114,6 +114,7 @@ final class SubscriberRepository {
 			'date'       => (string) ( $data['date'] ?? current_time( 'mysql' ) ),
 			'ip_address' => isset( $data['ip_address'] ) ? $data['ip_address'] : null,
 			'browser'    => $browser,
+			'synced'     => isset( $data['synced'] ) ? (int) $data['synced'] : null,
 		);
 
 		$result = $wpdb->insert( $this->table(), $row );
@@ -148,7 +149,8 @@ final class SubscriberRepository {
 			array( 'phone' => $phone )
 		);
 
-		return false !== $result && $result > 0;
+		// `update()` returns 0 when row exists but data is unchanged. Treat that as success.
+		return false !== $result;
 	}
 
 	/**

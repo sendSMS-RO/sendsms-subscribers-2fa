@@ -86,7 +86,7 @@
 			form.addEventListener( 'submit', function ( e ) {
 				e.preventDefault();
 
-				var phoneInput = form.querySelector( '[name="phone"]' );
+				var phoneInput = form.querySelector( '[name="phone_number"]' );
 				var phone      = phoneInput ? phoneInput.value.trim() : '';
 
 				if ( ! phone ) {
@@ -96,12 +96,18 @@
 
 				feedback( form, cfg.i18n.sending, true );
 
-				var payload = { phone: phone };
+				var payload = { phone_number: phone };
 
 				var fnInput = form.querySelector( '[name="first_name"]' );
 				var lnInput = form.querySelector( '[name="last_name"]' );
 				if ( fnInput ) { payload.first_name = fnInput.value; }
 				if ( lnInput ) { payload.last_name  = lnInput.value; }
+
+				// GDPR checkbox: PHP rejects when missing or === 'false'.
+				var gdprInput = form.querySelector( '[name="gdpr"]' );
+				if ( gdprInput ) {
+					payload.gdpr = gdprInput.checked ? 'true' : 'false';
+				}
 
 				ajaxPost( action, payload )
 					.then( function ( r ) {
@@ -136,7 +142,7 @@
 			var verifyBtn = form.querySelector( '[data-action="verify"]' );
 			if ( verifyBtn ) {
 				verifyBtn.addEventListener( 'click', function () {
-					var phoneInput = form.querySelector( '[name="phone"]' );
+					var phoneInput = form.querySelector( '[name="phone_number"]' );
 					var codeInput  = form.querySelector( '[name="code"]' );
 					var phone      = phoneInput ? phoneInput.value.trim() : '';
 					var code       = codeInput  ? codeInput.value.trim()  : '';
@@ -148,9 +154,9 @@
 					feedback( form, cfg.i18n.sending, true );
 
 					ajaxPost( 'sendsms_dashboard_verify_code', {
-						phone:   phone,
-						code:    code,
-						context: context,
+						phone_number: phone,
+						code:         code,
+						context:      context,
 					} )
 						.then( function ( r ) {
 							if ( ! r || ! r.success ) {

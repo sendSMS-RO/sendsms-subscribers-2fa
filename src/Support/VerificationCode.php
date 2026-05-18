@@ -53,7 +53,18 @@ final class VerificationCode {
 		$name   = self::COOKIE_PREFIX . $suffix;
 		$expiry = time() + self::TTL_SECONDS;
 
-		setcookie( $name, $hash, $expiry, COOKIEPATH, COOKIE_DOMAIN, is_ssl() );
+		setcookie(
+			$name,
+			$hash,
+			array(
+				'expires'  => $expiry,
+				'path'     => COOKIEPATH ? COOKIEPATH : '/',
+				'domain'   => COOKIE_DOMAIN,
+				'secure'   => is_ssl(),
+				'httponly' => true,
+				'samesite' => 'Lax',
+			)
+		);
 		return $code;
 	}
 
@@ -91,8 +102,19 @@ final class VerificationCode {
 
 		$expected = wp_hash( $submitted . $phone );
 
-		if ( hash_equals( (string) wp_unslash( $_COOKIE[ $name ] ), $expected ) ) {
-			setcookie( $name, '', time() - 1, COOKIEPATH, COOKIE_DOMAIN, is_ssl() );
+		if ( hash_equals( $expected, (string) wp_unslash( $_COOKIE[ $name ] ) ) ) {
+			setcookie(
+				$name,
+				'',
+				array(
+					'expires'  => time() - 1,
+					'path'     => COOKIEPATH ? COOKIEPATH : '/',
+					'domain'   => COOKIE_DOMAIN,
+					'secure'   => is_ssl(),
+					'httponly' => true,
+					'samesite' => 'Lax',
+				)
+			);
 			return true;
 		}
 

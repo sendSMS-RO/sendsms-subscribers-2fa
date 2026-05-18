@@ -136,7 +136,7 @@ final class IpRepository {
 				$ip
 			)
 		);
-		return false !== $result && $result > 0;
+		return false !== $result;
 	}
 
 	/**
@@ -161,6 +161,6 @@ final class IpRepository {
 			array( '%s', '%d' ),
 			array( '%s' )
 		);
-		return false !== $result && $result > 0;
+		return false !== $result;
 	}
 }

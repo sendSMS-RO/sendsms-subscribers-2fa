@@ -78,7 +78,7 @@ final class Settings {
 	 * @return bool True when the option was updated, false otherwise.
 	 */
 	public function update_partial( array $patch ): bool {
-		$existing    = $this->all();
+		$existing = $this->all();
 		// Top-level replace (NOT recursive) so empty sub-arrays in $patch clear the prior value.
 		// Example: unchecking every box in 2fa_roles must produce an empty array, not preserve the prior set.
 		$merged      = array_replace( $existing, $patch );

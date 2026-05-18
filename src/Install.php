@@ -75,7 +75,7 @@ final class Install {
 			add_option(
 				'sendsms_dashboard_plugin_settings',
 				array(
-					'cc' => 'RO',
+					'cc' => 'INT',
 				),
 				'',
 				false

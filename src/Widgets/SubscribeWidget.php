@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
  * SMS subscribe widget.
  *
  * Widget ID base: sendsms_dashboard_subscribe
- * Widget settings: title (text), gdpr_url (URL)
+ * Widget settings: title (text), gdpr_link (URL)
  */
 final class SubscribeWidget extends \WP_Widget {
 
@@ -34,10 +34,10 @@ final class SubscribeWidget extends \WP_Widget {
 	 */
 	public function __construct() {
 		parent::__construct(
-			'sendsms_dashboard_subscribe',
+			'sendsms_dashboard_subscriber',
 			__( 'SendSMS Subscribe', 'sendsms-dashboard' ),
 			array(
-				'classname'                   => 'sendsms_dashboard_subscribe',
+				'classname'                   => 'sendsms_dashboard_subscriber',
 				'description'                 => __( 'Let visitors subscribe to your SMS newsletter. GDPR-compliant with optional two-step phone verification.', 'sendsms-dashboard' ),
 				'customize_selective_refresh' => true,
 			)
@@ -52,8 +52,8 @@ final class SubscribeWidget extends \WP_Widget {
 	 * @return void
 	 */
 	public function widget( $args, $instance ): void {
-		$title    = ! empty( $instance['title'] ) ? apply_filters( 'widget_title', $instance['title'] ) : '';
-		$gdpr_url = ! empty( $instance['gdpr_url'] ) ? esc_url( $instance['gdpr_url'] ) : '';
+		$title     = ! empty( $instance['title'] ) ? apply_filters( 'widget_title', $instance['title'] ) : '';
+		$gdpr_link = ! empty( $instance['gdpr_link'] ) ? esc_url( $instance['gdpr_link'] ) : '';
 
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WP supplied
 		echo $args['before_widget'];
@@ -95,7 +95,7 @@ final class SubscribeWidget extends \WP_Widget {
 				<input
 					type="tel"
 					id="sendsms-subscribe-phone-<?php echo esc_attr( $this->id ); ?>"
-					name="phone"
+					name="phone_number"
 					autocomplete="tel"
 					required
 				/>
@@ -105,13 +105,23 @@ final class SubscribeWidget extends \WP_Widget {
 				<label>
 					<input type="checkbox" name="gdpr" value="1" required />
 					<?php
-					if ( $gdpr_url ) {
-						printf(
-							/* translators: %s: URL to the privacy policy page */
-							esc_html__( 'I agree with the %s', 'sendsms-dashboard' ),
-							'<a href="' . esc_url( $gdpr_url ) . '" target="_blank" rel="noopener">'
-								. esc_html__( 'privacy policy', 'sendsms-dashboard' )
-							. '</a>'
+					if ( $gdpr_link ) {
+						$link_open  = '<a href="' . esc_url( $gdpr_link ) . '" target="_blank" rel="noopener">';
+						$link_close = '</a>';
+						echo wp_kses(
+							sprintf(
+								/* translators: 1: opening <a> tag, 2: closing </a> tag. */
+								__( 'I agree with the %1$sprivacy policy%2$s', 'sendsms-dashboard' ),
+								$link_open,
+								$link_close
+							),
+							array(
+								'a' => array(
+									'href'   => true,
+									'target' => true,
+									'rel'    => true,
+								),
+							)
 						);
 					} else {
 						esc_html_e( 'I agree with the privacy policy', 'sendsms-dashboard' );
@@ -160,8 +170,8 @@ final class SubscribeWidget extends \WP_Widget {
 	 * @return void
 	 */
 	public function form( $instance ): void {
-		$title    = ! empty( $instance['title'] ) ? $instance['title'] : '';
-		$gdpr_url = ! empty( $instance['gdpr_url'] ) ? $instance['gdpr_url'] : '';
+		$title     = ! empty( $instance['title'] ) ? $instance['title'] : '';
+		$gdpr_link = ! empty( $instance['gdpr_link'] ) ? $instance['gdpr_link'] : '';
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
@@ -176,15 +186,15 @@ final class SubscribeWidget extends \WP_Widget {
 			/>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'gdpr_url' ) ); ?>">
+			<label for="<?php echo esc_attr( $this->get_field_id( 'gdpr_link' ) ); ?>">
 				<?php esc_html_e( 'GDPR / Privacy policy URL:', 'sendsms-dashboard' ); ?>
 			</label>
 			<input
 				class="widefat"
-				id="<?php echo esc_attr( $this->get_field_id( 'gdpr_url' ) ); ?>"
-				name="<?php echo esc_attr( $this->get_field_name( 'gdpr_url' ) ); ?>"
+				id="<?php echo esc_attr( $this->get_field_id( 'gdpr_link' ) ); ?>"
+				name="<?php echo esc_attr( $this->get_field_name( 'gdpr_link' ) ); ?>"
 				type="url"
-				value="<?php echo esc_url( $gdpr_url ); ?>"
+				value="<?php echo esc_url( $gdpr_link ); ?>"
 			/>
 		</p>
 		<?php
@@ -198,9 +208,9 @@ final class SubscribeWidget extends \WP_Widget {
 	 * @return array Sanitized settings array.
 	 */
 	public function update( $new_instance, $old_instance ): array {
-		$instance             = array();
-		$instance['title']    = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
-		$instance['gdpr_url'] = ! empty( $new_instance['gdpr_url'] ) ? esc_url_raw( $new_instance['gdpr_url'] ) : '';
+		$instance              = array();
+		$instance['title']     = ! empty( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
+		$instance['gdpr_link'] = ! empty( $new_instance['gdpr_link'] ) ? esc_url_raw( $new_instance['gdpr_link'] ) : '';
 
 		return $instance;
 	}
