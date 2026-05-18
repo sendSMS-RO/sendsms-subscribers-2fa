@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<ruleset name="SendSMS Dashboard">
+    <description>Coding standards for SendSMS Dashboard.</description>
+
+    <file>./src</file>
+    <file>./sendsms-dashboard.php</file>
+    <file>./uninstall.php</file>
+
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <config name="testVersion" value="7.4-"/>
+    <config name="minimum_supported_wp_version" value="4.0"/>
+    <config name="text_domain" value="sendsms-dashboard"/>
+
+    <rule ref="PHPCompatibilityWP"/>
+
+    <rule ref="WordPress-Core">
+        <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+    </rule>
+    <rule ref="WordPress-Extra"/>
+    <rule ref="WordPress-Docs"/>
+
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <property name="prefixes" type="array">
+                <element value="sendsms_dashboard"/>
+                <element value="SendSMS\Dashboard"/>
+            </property>
+        </properties>
+    </rule>
+</ruleset>
