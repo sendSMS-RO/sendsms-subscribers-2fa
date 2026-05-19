@@ -59,6 +59,24 @@ You have three options, depending on your situation:
 = Will my version 1.x settings and data carry over? =
 Yes. The subscriber table, the SMS history table, and the settings option all keep their v1.x names. No data migration is required; upgrading from 1.x to 2.0 is transparent.
 
+= How do I add the subscribe / unsubscribe form to a page? =
+Three ways, all produce the same HTML and behaviour:
+
+* **Classic widget** — Appearance → Widgets, drag *SendSMS Subscription* or *SendSMS Unsubscribe* into a sidebar. Requires a theme that registers widget areas (or the *Classic Widgets* plugin).
+* **Shortcode** — drop `[sendsms_subscribe]` or `[sendsms_unsubscribe]` into any post, page, or block. Attributes: `title="…"` (both) and `gdpr_link="…"` (subscribe only).
+* **Gutenberg block** — search for *SendSMS Subscribe* / *SendSMS Unsubscribe* in the block inserter (Widgets category). Title and GDPR URL are in the right-hand inspector.
+
+= Which CSS classes do the subscribe / unsubscribe forms use? =
+The same class names are emitted whether the form is rendered via the widget, the shortcode, or the Gutenberg block — so a single stylesheet covers all three. Use these to style the output from your theme or a custom CSS plugin.
+
+* `.sendsms-dashboard-shortcode` — outermost wrapper when rendered via shortcode or block. Adds `-subscribe` or `-unsubscribe` as a modifier (`.sendsms-dashboard-shortcode-subscribe`, `.sendsms-dashboard-shortcode-unsubscribe`). The classic widget uses the theme's `before_widget` instead.
+* `form.sendsms-dashboard-subscribe`, `form.sendsms-dashboard-unsubscribe` — the form element itself.
+* `.sendsms-dashboard-field` — wraps every input row (`<p>` element). Modifier `.sendsms-dashboard-gdpr` on the GDPR consent row of the subscribe form.
+* `.sendsms-dashboard-verify` — the hidden block containing the verification code input and "Verify" button. Revealed by JavaScript after the first AJAX response when phone verification is enabled. Use the `[hidden]` attribute selector if you want to override its initial state.
+* `.sendsms-dashboard-feedback` — the `[role="status"]` paragraph used for status messages. Carries `data-state="ok"` or `data-state="error"` while a request is in flight.
+
+The bundled `assets/css/public.css` styles every one of these classes; override or replace it from your theme's stylesheet as needed.
+
 == Screenshots ==
 1. Settings → General tab: API credentials (username, password, sender label) and country code selector.
 2. Settings → User tab: enable 2FA, select which roles require it, and customise the verification message.
