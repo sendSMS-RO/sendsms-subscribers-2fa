@@ -12,11 +12,13 @@
 		return;
 	}
 
+	var blockEditor       = wp.blockEditor || wp.editor;
 	var el                = wp.element.createElement;
 	var Fragment          = wp.element.Fragment;
 	var registerBlockType = wp.blocks.registerBlockType;
 	var ServerSideRender  = wp.serverSideRender || wp.editor.ServerSideRender;
-	var InspectorControls = ( wp.blockEditor || wp.editor ).InspectorControls;
+	var InspectorControls = blockEditor.InspectorControls;
+	var useBlockProps     = blockEditor.useBlockProps;
 	var PanelBody         = wp.components.PanelBody;
 	var TextControl       = wp.components.TextControl;
 	var Disabled          = wp.components.Disabled;
@@ -26,6 +28,7 @@
 		edit: function ( props ) {
 			var attributes    = props.attributes;
 			var setAttributes = props.setAttributes;
+			var blockProps    = useBlockProps ? useBlockProps() : {};
 
 			return el(
 				Fragment,
@@ -47,12 +50,16 @@
 					)
 				),
 				el(
-					Disabled,
-					{},
-					el( ServerSideRender, {
-						block:      'sendsms-dashboard/unsubscribe',
-						attributes: attributes,
-					} )
+					'div',
+					blockProps,
+					el(
+						Disabled,
+						{},
+						el( ServerSideRender, {
+							block:      'sendsms-dashboard/unsubscribe',
+							attributes: attributes,
+						} )
+					)
 				)
 			);
 		},
