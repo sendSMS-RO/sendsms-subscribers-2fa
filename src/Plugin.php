@@ -196,6 +196,11 @@ final class Plugin {
 			}
 		);
 
+		// Shortcodes [sendsms_subscribe] / [sendsms_unsubscribe] — for block
+		// themes (and any content) where the Legacy Widget block isn't
+		// available.
+		( new Frontend\Shortcodes() )->register();
+
 		// Enqueue public stylesheet and script (front-end only).
 		add_action(
 			'wp_enqueue_scripts',
