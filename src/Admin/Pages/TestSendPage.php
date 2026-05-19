@@ -146,8 +146,6 @@ final class TestSendPage {
 				);
 				?>
 			</form>
-
-			<div class="sendsms-dashboard-test-feedback" role="status"></div>
 		</div>
 		<?php
 	}

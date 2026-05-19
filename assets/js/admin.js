@@ -45,21 +45,42 @@
 	}
 
 	/**
-	 * Write a status message into a `.role="status"` feedback element.
+	 * Emit a WordPress-style admin notice at the top of the current `.wrap`.
 	 *
-	 * @param {string|Element} selectorOrEl  CSS selector string or DOM element.
-	 * @param {string}         message       Text to display.
-	 * @param {boolean}        isOk          Drives the data-state attribute.
+	 * Replaces any previously-emitted plugin notice so repeated submissions
+	 * don't pile up. Uses WP's standard markup so `wp-admin/js/common.js`
+	 * automatically wires up the dismiss button.
+	 *
+	 * @param {string}  message  Notice text (will be inserted via .textContent).
+	 * @param {string}  level    One of: success, error, warning, info.
 	 */
-	function setFeedback( selectorOrEl, message, isOk ) {
-		var el = ( typeof selectorOrEl === 'string' )
-			? document.querySelector( selectorOrEl )
-			: selectorOrEl;
-		if ( ! el ) {
+	function wpNotice( message, level ) {
+		level = level || 'success';
+		var wrap = document.querySelector( '.wrap' );
+		if ( ! wrap ) {
 			return;
 		}
-		el.textContent   = message;
-		el.dataset.state = isOk ? 'ok' : 'error';
+		// Remove any previous plugin notice.
+		var existing = wrap.querySelector( '.sendsms-dashboard-notice' );
+		if ( existing ) {
+			existing.parentNode.removeChild( existing );
+		}
+		var notice = document.createElement( 'div' );
+		notice.className = 'notice notice-' + level + ' is-dismissible sendsms-dashboard-notice';
+		var p = document.createElement( 'p' );
+		p.textContent = message;
+		notice.appendChild( p );
+		// Insert right after the first <h1> (WP's standard notice slot).
+		var h1 = wrap.querySelector( 'h1' );
+		if ( h1 && h1.nextSibling ) {
+			wrap.insertBefore( notice, h1.nextSibling );
+		} else {
+			wrap.insertBefore( notice, wrap.firstChild );
+		}
+		// Trigger WP's built-in dismiss-button injection (wp-admin/js/common.js).
+		if ( typeof $ === 'function' && $( document ).trigger ) {
+			$( document ).trigger( 'wp-updates-notice-added' );
+		}
 	}
 
 	/* -------------------------------------------------------------------------
@@ -104,12 +125,11 @@
 	$( document ).on( 'submit', 'form.sendsms-dashboard-test-form', function ( e ) {
 		e.preventDefault();
 
-		var $form   = $( this );
-		var $submit = $form.find( '[type="submit"]' );
-		var fbEl    = document.querySelector( '.sendsms-dashboard-test-feedback' );
+		var $form        = $( this );
+		var $submit      = $form.find( '[type="submit"]' );
+		var origLabel    = $submit.val() || $submit.text();
 
 		$submit.prop( 'disabled', true ).val( cfg.i18n ? cfg.i18n.sending : 'Sending…' );
-		setFeedback( fbEl, cfg.i18n ? cfg.i18n.sending : 'Sending…', true );
 
 		ajaxPost( 'sendsms_dashboard_test_send', {
 			phone_number: $form.find( '[name="phone_number"]' ).val(),
@@ -117,15 +137,18 @@
 			gdpr:         $form.find( '[name="gdpr"]' ).is( ':checked' ) ? 'gdpr' : '',
 			short:        $form.find( '[name="short"]' ).is( ':checked' ) ? 'short' : '',
 		} ).done( function ( response ) {
-			var ok  = response && response.success;
-			var msg = ok
-				? ( cfg.i18n ? cfg.i18n.sent : 'Sent.' )
-				: ( response && response.data && response.data.message ) || ( cfg.i18n ? cfg.i18n.failed : 'Failed.' );
-			setFeedback( fbEl, msg, ok );
+			if ( response && response.success ) {
+				wpNotice( cfg.i18n ? cfg.i18n.sent : 'Sent.', 'success' );
+			} else {
+				wpNotice(
+					( response && response.data && response.data.message ) || ( cfg.i18n ? cfg.i18n.failed : 'Failed.' ),
+					'error'
+				);
+			}
 		} ).fail( function () {
-			setFeedback( fbEl, cfg.i18n ? cfg.i18n.failed : 'Failed.', false );
+			wpNotice( cfg.i18n ? cfg.i18n.failed : 'Failed.', 'error' );
 		} ).always( function () {
-			$submit.prop( 'disabled', false ).val( cfg.i18n ? cfg.i18n.sent : 'Send Message' );
+			$submit.prop( 'disabled', false ).val( origLabel );
 		} );
 	} );
 
@@ -142,12 +165,11 @@
 	$( document ).on( 'submit', 'form.sendsms-dashboard-mass-form', function ( e ) {
 		e.preventDefault();
 
-		var $form   = $( this );
-		var $submit = $form.find( '[type="submit"]' );
-		var fbEl    = document.querySelector( '.sendsms-dashboard-mass-feedback' );
+		var $form     = $( this );
+		var $submit   = $form.find( '[type="submit"]' );
+		var origLabel = $submit.val() || $submit.text();
 
 		$submit.prop( 'disabled', true ).val( cfg.i18n ? cfg.i18n.sending : 'Sending…' );
-		setFeedback( fbEl, cfg.i18n ? cfg.i18n.sending : 'Sending…', true );
 
 		ajaxPost( 'sendsms_dashboard_mass_send', {
 			receiver_type: $form.find( '[name="receiver_type"]:checked' ).val(),
@@ -156,15 +178,18 @@
 			gdpr:          $form.find( '[name="gdpr"]' ).is( ':checked' ) ? 'gdpr' : '',
 			short:         $form.find( '[name="short"]' ).is( ':checked' ) ? 'short' : '',
 		} ).done( function ( response ) {
-			var ok  = response && response.success;
-			var msg = ok
-				? ( cfg.i18n ? cfg.i18n.sent : 'Sent.' )
-				: ( response && response.data && response.data.message ) || ( cfg.i18n ? cfg.i18n.failed : 'Failed.' );
-			setFeedback( fbEl, msg, ok );
+			if ( response && response.success ) {
+				wpNotice( cfg.i18n ? cfg.i18n.sent : 'Sent.', 'success' );
+			} else {
+				wpNotice(
+					( response && response.data && response.data.message ) || ( cfg.i18n ? cfg.i18n.failed : 'Failed.' ),
+					'error'
+				);
+			}
 		} ).fail( function () {
-			setFeedback( fbEl, cfg.i18n ? cfg.i18n.failed : 'Failed.', false );
+			wpNotice( cfg.i18n ? cfg.i18n.failed : 'Failed.', 'error' );
 		} ).always( function () {
-			$submit.prop( 'disabled', false ).val( cfg.i18n ? cfg.i18n.sent : 'Send Message' );
+			$submit.prop( 'disabled', false ).val( origLabel );
 		} );
 	} );
 

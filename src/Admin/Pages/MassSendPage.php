@@ -182,8 +182,6 @@ final class MassSendPage {
 				);
 				?>
 			</form>
-
-			<div class="sendsms-dashboard-mass-feedback" role="status"></div>
 		</div>
 		<?php
 	}
