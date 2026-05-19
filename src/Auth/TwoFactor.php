@@ -212,7 +212,8 @@ final class TwoFactor {
 
 		$error_message = '';
 
-		if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === strtoupper( (string) $_SERVER['REQUEST_METHOD'] ) ) {
+		$request_method = isset( $_SERVER['REQUEST_METHOD'] ) ? strtoupper( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) : '';
+		if ( 'POST' === $request_method ) {
 			check_admin_referer( self::NONCE_KEY, '_sendsms_nonce' );
 
 			// IP rate-limit (uses the same per-IP cycle counter as the public flow).
