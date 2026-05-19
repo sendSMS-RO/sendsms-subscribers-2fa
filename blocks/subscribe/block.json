@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "sendsms-dashboard/subscribe",
+	"version": "2.0.0",
+	"title": "SendSMS Subscribe",
+	"category": "widgets",
+	"icon": "email-alt",
+	"description": "Render the SendSMS subscribe form so visitors can opt in to your SMS list.",
+	"keywords": ["sms", "subscribe", "sendsms", "newsletter"],
+	"textdomain": "sendsms-dashboard",
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"gdpr_link": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "sendsms-dashboard-block-subscribe"
+}

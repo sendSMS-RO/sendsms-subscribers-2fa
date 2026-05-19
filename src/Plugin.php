@@ -199,7 +199,13 @@ final class Plugin {
 		// Shortcodes [sendsms_subscribe] / [sendsms_unsubscribe] — for block
 		// themes (and any content) where the Legacy Widget block isn't
 		// available.
-		( new Frontend\Shortcodes() )->register();
+		$shortcodes = new Frontend\Shortcodes();
+		$shortcodes->register();
+
+		// Gutenberg blocks sendsms-dashboard/subscribe + /unsubscribe — share
+		// the shortcode renderer so all three (widget, shortcode, block) emit
+		// identical markup.
+		( new Frontend\Blocks( $shortcodes ) )->register();
 
 		// Enqueue public stylesheet and script (front-end only).
 		add_action(
