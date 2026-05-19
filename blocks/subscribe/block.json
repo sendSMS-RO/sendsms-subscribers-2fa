@@ -5,7 +5,7 @@
 	"version": "2.0.0",
 	"title": "SendSMS Subscribe",
 	"category": "widgets",
-	"icon": "email-alt",
+	"icon": "smartphone",
 	"description": "Render the SendSMS subscribe form so visitors can opt in to your SMS list.",
 	"keywords": ["sms", "subscribe", "sendsms", "newsletter"],
 	"textdomain": "sendsms-dashboard",
