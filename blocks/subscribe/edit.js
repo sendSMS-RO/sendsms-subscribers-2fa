@@ -19,6 +19,7 @@
 	var InspectorControls = ( wp.blockEditor || wp.editor ).InspectorControls;
 	var PanelBody         = wp.components.PanelBody;
 	var TextControl       = wp.components.TextControl;
+	var Disabled          = wp.components.Disabled;
 	var __                = wp.i18n.__;
 
 	registerBlockType( 'sendsms-dashboard/subscribe', {
@@ -52,10 +53,14 @@
 						} )
 					)
 				),
-				el( ServerSideRender, {
-					block:      'sendsms-dashboard/subscribe',
-					attributes: attributes,
-				} )
+				el(
+					Disabled,
+					{},
+					el( ServerSideRender, {
+						block:      'sendsms-dashboard/subscribe',
+						attributes: attributes,
+					} )
+				)
 			);
 		},
 
