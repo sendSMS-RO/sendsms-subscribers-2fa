@@ -63,8 +63,27 @@ Yes. The subscriber table, the SMS history table, and the settings option all ke
 Three ways, all produce the same HTML and behaviour:
 
 * **Classic widget** — Appearance → Widgets, drag *SendSMS Subscription* or *SendSMS Unsubscribe* into a sidebar. Requires a theme that registers widget areas (or the *Classic Widgets* plugin).
-* **Shortcode** — drop `[sendsms_subscribe]` or `[sendsms_unsubscribe]` into any post, page, or block. Attributes: `title="…"` (both) and `gdpr_link="…"` (subscribe only).
+* **Shortcode** — drop `[sendsms_subscribe]` or `[sendsms_unsubscribe]` into any post, page, or block. See attributes below.
 * **Gutenberg block** — search for *SendSMS Subscribe* / *SendSMS Unsubscribe* in the block inserter (Widgets category). Title and GDPR URL are in the right-hand inspector.
+
+= What attributes do the shortcodes accept? =
+
+**`[sendsms_subscribe]`** — the subscribe form.
+
+* `title` (string, optional) — heading rendered above the form.
+* `gdpr_link` (URL, optional) — privacy-policy URL. When set, the GDPR consent label includes a "privacy policy" link pointing to it.
+
+Example:
+`[sendsms_subscribe title="Get SMS updates" gdpr_link="https://example.com/privacy"]`
+
+**`[sendsms_unsubscribe]`** — the unsubscribe form.
+
+* `title` (string, optional) — heading rendered above the form.
+
+Example:
+`[sendsms_unsubscribe title="Leave the SMS list"]`
+
+Both shortcodes are safe to use multiple times on the same page; each form is independent.
 
 = Which CSS classes do the subscribe / unsubscribe forms use? =
 The same class names are emitted whether the form is rendered via the widget, the shortcode, or the Gutenberg block — so a single stylesheet covers all three. Use these to style the output from your theme or a custom CSS plugin.
