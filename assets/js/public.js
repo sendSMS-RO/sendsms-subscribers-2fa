@@ -153,11 +153,19 @@
 
 					feedback( form, cfg.i18n.sending, true );
 
-					ajaxPost( 'sendsms_dashboard_verify_code', {
+					// Re-send first/last name on verify — the verify handler
+					// inserts the subscriber and needs them to populate the row.
+					var verifyPayload = {
 						phone_number: phone,
 						code:         code,
 						context:      context,
-					} )
+					};
+					var fn = form.querySelector( '[name="first_name"]' );
+					var ln = form.querySelector( '[name="last_name"]' );
+					if ( fn ) { verifyPayload.first_name = fn.value; }
+					if ( ln ) { verifyPayload.last_name  = ln.value; }
+
+					ajaxPost( 'sendsms_dashboard_verify_code', verifyPayload )
 						.then( function ( r ) {
 							if ( ! r || ! r.success ) {
 								feedback( form, ( r && r.data && r.data.message ) || cfg.i18n.fail, false );
