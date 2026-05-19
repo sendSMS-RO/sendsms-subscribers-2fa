@@ -16,6 +16,7 @@
 
 namespace SendSMS\Dashboard\Admin\Pages;
 
+use SendSMS\Dashboard\Api\Client;
 use SendSMS\Dashboard\Storage\Settings;
 use SendSMS\Dashboard\Support\CountryCodes;
 
@@ -57,6 +58,13 @@ final class SettingsPage {
 	private const NONCE_FIELD = '_sendsms_nonce';
 
 	/**
+	 * Transient key for the cached account balance.
+	 *
+	 * @var string
+	 */
+	private const BALANCE_TRANSIENT = 'sendsms_dashboard_balance';
+
+	/**
 	 * Plugin settings store.
 	 *
 	 * @var Settings
@@ -64,12 +72,21 @@ final class SettingsPage {
 	private $settings;
 
 	/**
+	 * SendSMS.ro API client.
+	 *
+	 * @var Client
+	 */
+	private $api;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param Settings $settings Shared plugin settings service.
+	 * @param Client   $api      sendsms.ro API client (for the balance banner).
 	 */
-	public function __construct( Settings $settings ) {
+	public function __construct( Settings $settings, Client $api ) {
 		$this->settings = $settings;
+		$this->api      = $api;
 	}
 
 	/**
@@ -111,6 +128,7 @@ final class SettingsPage {
 		}
 
 		echo '<div class="wrap"><h1>' . esc_html__( 'SendSMS Dashboard', 'sendsms-dashboard' ) . '</h1>';
+		$this->render_balance_banner();
 		$this->render_tabs( $active );
 
 		echo '<form method="post">';
@@ -129,6 +147,57 @@ final class SettingsPage {
 
 		submit_button( __( 'Save Settings', 'sendsms-dashboard' ) );
 		echo '</form></div>';
+	}
+
+	// -------------------------------------------------------------------------
+	// Balance banner
+	// -------------------------------------------------------------------------
+
+	/**
+	 * Render the "available balance" info bar at the top of the settings page.
+	 *
+	 * If API credentials are missing, prints a warning prompting the admin to
+	 * configure them. Otherwise queries the sendsms.ro `user_get_balance`
+	 * endpoint (cached for 5 minutes via transient) and prints the result. On
+	 * API failure prints a soft error notice — the settings form remains
+	 * accessible regardless.
+	 *
+	 * @return void
+	 */
+	private function render_balance_banner(): void {
+		$username = trim( $this->settings->get_esc( 'username', '' ) );
+		$password = trim( $this->settings->get_esc( 'password', '' ) );
+
+		if ( '' === $username || '' === $password ) {
+			printf(
+				'<div class="notice notice-warning inline"><p>%s</p></div>',
+				esc_html__( 'Enter your sendsms.ro username and password under the General tab to see your account balance.', 'sendsms-dashboard' )
+			);
+			return;
+		}
+
+		$balance = get_transient( self::BALANCE_TRANSIENT );
+
+		if ( false === $balance ) {
+			$response = $this->api->get_user_balance();
+			if ( ! $response->is_success() ) {
+				printf(
+					'<div class="notice notice-error inline"><p>%s</p></div>',
+					esc_html__( 'Could not contact sendsms.ro to retrieve your balance. Check your credentials.', 'sendsms-dashboard' )
+				);
+				return;
+			}
+			$data        = $response->data();
+			$balance_raw = isset( $data['details'] ) && is_scalar( $data['details'] ) ? (string) $data['details'] : '0';
+			$balance     = $balance_raw;
+			set_transient( self::BALANCE_TRANSIENT, $balance, 5 * MINUTE_IN_SECONDS );
+		}
+
+		printf(
+			'<div class="notice notice-info inline"><p>%s <strong>%s</strong> EUR</p></div>',
+			esc_html__( 'Available balance:', 'sendsms-dashboard' ),
+			esc_html( (string) $balance )
+		);
 	}
 
 	// -------------------------------------------------------------------------
@@ -255,6 +324,9 @@ final class SettingsPage {
 		}
 
 		$this->settings->update_partial( $patch );
+
+		// Bust the balance cache so the banner re-fetches with the new credentials.
+		delete_transient( self::BALANCE_TRANSIENT );
 	}
 
 	// -------------------------------------------------------------------------

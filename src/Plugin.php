@@ -247,7 +247,7 @@ final class Plugin {
 
 		if ( is_admin() ) {
 			( new Admin\Notices() )->register();
-			( new Admin\Menu( $this->settings ) )->register();
+			( new Admin\Menu( $this->settings, $this->api ) )->register();
 			( new Ajax\TestSendHandler( $this->api ) )->register();
 			( new Ajax\MassSendHandler( $this->settings, $this->subscribers, $this->api ) )->register();
 			( new Ajax\SubscriberCrudHandler( $this->settings, $this->subscribers ) )->register();

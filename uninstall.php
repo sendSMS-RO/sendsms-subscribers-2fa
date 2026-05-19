@@ -37,3 +37,4 @@ delete_option( 'sendsms_dashboard_plugin_settings' );
 delete_option( 'sendsms_dashboard_db_version' );
 delete_option( 'sendsms_dashboard_pending_notices' );
 delete_option( 'sendsms-dashboard-sync-group' );
+delete_transient( 'sendsms_dashboard_balance' );

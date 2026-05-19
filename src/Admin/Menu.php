@@ -40,6 +40,13 @@ final class Menu {
 	private $settings;
 
 	/**
+	 * SendSMS.ro API client (forwarded to SettingsPage for the balance banner).
+	 *
+	 * @var \SendSMS\Dashboard\Api\Client
+	 */
+	private $api;
+
+	/**
 	 * Captured screen IDs returned by add_menu_page / add_submenu_page.
 	 *
 	 * Used to restrict asset enqueuing to plugin-owned screens only.
@@ -51,10 +58,12 @@ final class Menu {
 	/**
 	 * Constructor.
 	 *
-	 * @param Settings $settings Shared plugin settings service.
+	 * @param Settings                      $settings Shared plugin settings service.
+	 * @param \SendSMS\Dashboard\Api\Client $api      sendsms.ro API client.
 	 */
-	public function __construct( Settings $settings ) {
+	public function __construct( Settings $settings, \SendSMS\Dashboard\Api\Client $api ) {
 		$this->settings = $settings;
+		$this->api      = $api;
 	}
 
 	/**
@@ -162,7 +171,7 @@ final class Menu {
 	 * @return void
 	 */
 	public function render_settings(): void {
-		( new Pages\SettingsPage( $this->settings ) )->render();
+		( new Pages\SettingsPage( $this->settings, $this->api ) )->render();
 	}
 
 	/**
