@@ -85,7 +85,7 @@ final class Menu {
 			$cap,
 			self::SLUG,
 			array( $this, 'render_settings' ),
-			'dashicons-email-alt',
+			'dashicons-smartphone',
 			55
 		);
 		if ( $top ) {
