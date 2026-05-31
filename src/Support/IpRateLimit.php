@@ -4,16 +4,16 @@
  *
  * Wraps the rate-limit algorithm from v1.x {@see SendSMSFunctions::too_many_requests()}
  * and exposes it as a typed service. Persistence is delegated to
- * {@see \SendSMS\Dashboard\Storage\IpRepository}; the `ip_limit` setting is
- * read from {@see \SendSMS\Dashboard\Storage\Settings}.
+ * {@see \Rosendsms\Dashboard\Storage\IpRepository}; the `ip_limit` setting is
+ * read from {@see \Rosendsms\Dashboard\Storage\Settings}.
  *
- * @package SendSMS\Dashboard\Support
+ * @package Rosendsms\Dashboard\Support
  */
 
-namespace SendSMS\Dashboard\Support;
+namespace Rosendsms\Dashboard\Support;
 
-use SendSMS\Dashboard\Storage\IpRepository;
-use SendSMS\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Storage\IpRepository;
+use Rosendsms\Dashboard\Storage\Settings;
 
 defined( 'ABSPATH' ) || exit;
 

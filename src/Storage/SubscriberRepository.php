@@ -2,15 +2,15 @@
 /**
  * Persistence layer for SMS subscriber rows.
  *
- * @package SendSMS\Dashboard\Storage
+ * @package Rosendsms\Dashboard\Storage
  */
 
-namespace SendSMS\Dashboard\Storage;
+namespace Rosendsms\Dashboard\Storage;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Reads and writes rows in the {prefix}sendsms_dashboard_subscribers table.
+ * Reads and writes rows in the {prefix}rosendsms_dash_subscribers table.
  *
  * This is the only path through which callers insert, update, or query SMS
  * subscribers. The table schema mirrors the v1.x activator verbatim so that
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * Primary key is `phone` (VARCHAR 50) — every public method that accepts a
  * phone number expects it to have already been normalised through
- * {@see \SendSMS\Dashboard\Functions::validate_phone()}.
+ * {@see \Rosendsms\Dashboard\Functions::validate_phone()}.
  */
 final class SubscriberRepository {
 
@@ -31,7 +31,7 @@ final class SubscriberRepository {
 	 */
 	public function table(): string {
 		global $wpdb;
-		return $wpdb->prefix . 'sendsms_dashboard_subscribers';
+		return $wpdb->prefix . 'rosendsms_dash_subscribers';
 	}
 
 	/**
@@ -46,7 +46,7 @@ final class SubscriberRepository {
 	 */
 	public static function dbdelta_sql(): string {
 		global $wpdb;
-		$table   = $wpdb->prefix . 'sendsms_dashboard_subscribers';
+		$table   = $wpdb->prefix . 'rosendsms_dash_subscribers';
 		$charset = $wpdb->get_charset_collate();
 
 		return "CREATE TABLE `{$table}` (

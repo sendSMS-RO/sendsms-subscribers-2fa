@@ -12,24 +12,24 @@
  * and is intentionally kept outside {@code is_admin()} so that it is reachable
  * through wp-admin/admin-ajax.php from both logged-in and guest contexts.
  *
- * @package SendSMS\Dashboard\Frontend
+ * @package Rosendsms\Dashboard\Frontend
  */
 
-namespace SendSMS\Dashboard\Frontend;
+namespace Rosendsms\Dashboard\Frontend;
 
-use SendSMS\Dashboard\Api\Client;
-use SendSMS\Dashboard\Storage\IpRepository;
-use SendSMS\Dashboard\Storage\Settings;
-use SendSMS\Dashboard\Storage\SubscriberRepository;
-use SendSMS\Dashboard\Support\Ip;
-use SendSMS\Dashboard\Support\IpRateLimit;
-use SendSMS\Dashboard\Support\PhoneNumber;
-use SendSMS\Dashboard\Support\VerificationCode;
+use Rosendsms\Dashboard\Api\Client;
+use Rosendsms\Dashboard\Storage\IpRepository;
+use Rosendsms\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Storage\SubscriberRepository;
+use Rosendsms\Dashboard\Support\Ip;
+use Rosendsms\Dashboard\Support\IpRateLimit;
+use Rosendsms\Dashboard\Support\PhoneNumber;
+use Rosendsms\Dashboard\Support\VerificationCode;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Handles the {@code sendsms_dashboard_subscribe} AJAX action.
+ * Handles the {@code rosendsms_dash_subscribe} AJAX action.
  *
  * The guard sequence (nonce → IP allow-list → rate limit) runs before any
  * business logic. Phone normalization happens after the guard so that a bad
@@ -105,8 +105,8 @@ final class SubscribeAjax {
 	 * @return void
 	 */
 	public function register(): void {
-		add_action( 'wp_ajax_sendsms_dashboard_subscribe', array( $this, 'handle' ) );
-		add_action( 'wp_ajax_nopriv_sendsms_dashboard_subscribe', array( $this, 'handle' ) );
+		add_action( 'wp_ajax_rosendsms_dash_subscribe', array( $this, 'handle' ) );
+		add_action( 'wp_ajax_nopriv_rosendsms_dash_subscribe', array( $this, 'handle' ) );
 	}
 
 	/**
@@ -125,7 +125,7 @@ final class SubscribeAjax {
 	 */
 	public function handle(): void {
 		// 1. Nonce.
-		if ( ! check_ajax_referer( 'sendsms-security-nonce', 'security', false ) ) {
+		if ( ! check_ajax_referer( 'rosendsms_dash_nonce', 'security', false ) ) {
 			wp_send_json_error( array( 'code' => 'sendsms_dashboard_bad_nonce' ), 403 );
 		}
 

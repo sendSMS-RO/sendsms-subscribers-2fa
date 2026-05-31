@@ -2,13 +2,13 @@
  * SendSMS Dashboard – public-side widget JS.
  *
  * Handles the subscribe and unsubscribe widget forms. Vanilla JS only;
- * no jQuery dependency. Reads configuration from the `sendsmsDashboardPublic`
+ * no jQuery dependency. Reads configuration from the `rosendsmsDashPublic`
  * object injected by wp_localize_script in Plugin::boot().
  *
  * Expected global object shape:
- *   window.sendsmsDashboardPublic = {
+ *   window.rosendsmsDashPublic = {
  *     ajaxUrl : String,   // wp-admin/admin-ajax.php URL
- *     nonce   : String,   // sendsms-security-nonce value
+ *     nonce   : String,   // rosendsms_dash_nonce value
  *     i18n    : {
  *       sending  : String,
  *       success  : String,
@@ -20,7 +20,7 @@
 ( function () {
 	'use strict';
 
-	var cfg = window.sendsmsDashboardPublic || {};
+	var cfg = window.rosendsmsDashPublic || {};
 
 	if ( ! cfg.ajaxUrl || ! cfg.nonce ) {
 		return;
@@ -165,7 +165,7 @@
 					if ( fn ) { verifyPayload.first_name = fn.value; }
 					if ( ln ) { verifyPayload.last_name  = ln.value; }
 
-					ajaxPost( 'sendsms_dashboard_verify_code', verifyPayload )
+					ajaxPost( 'rosendsms_dash_verify_code', verifyPayload )
 						.then( function ( r ) {
 							if ( ! r || ! r.success ) {
 								feedback( form, ( r && r.data && r.data.message ) || cfg.i18n.fail, false );
@@ -192,8 +192,8 @@
 	 * Bootstrap both widget form types once the DOM is ready.
 	 * ---------------------------------------------------------------------- */
 	document.addEventListener( 'DOMContentLoaded', function () {
-		bindForm( 'sendsms-dashboard-subscribe',   'sendsms_dashboard_subscribe',   'sub' );
-		bindForm( 'sendsms-dashboard-unsubscribe', 'sendsms_dashboard_unsubscribe', 'unsub' );
+		bindForm( 'sendsms-dashboard-subscribe',   'rosendsms_dash_subscribe',   'sub' );
+		bindForm( 'sendsms-dashboard-unsubscribe', 'rosendsms_dash_unsubscribe', 'unsub' );
 	} );
 
 }() );

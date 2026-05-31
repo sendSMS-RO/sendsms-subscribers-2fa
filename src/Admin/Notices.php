@@ -5,10 +5,10 @@
  * Accumulates pending admin notices in an option and renders them once on
  * the admin_notices hook, then clears the queue so notices don't repeat.
  *
- * @package SendSMS\Dashboard\Admin
+ * @package Rosendsms\Dashboard\Admin
  */
 
-namespace SendSMS\Dashboard\Admin;
+namespace Rosendsms\Dashboard\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -24,7 +24,7 @@ final class Notices {
 	 *
 	 * @var string
 	 */
-	private const OPTION = 'sendsms_dashboard_pending_notices';
+	private const OPTION = 'rosendsms_dash_pending_notices';
 
 	/**
 	 * Attach the renderer to admin_notices.

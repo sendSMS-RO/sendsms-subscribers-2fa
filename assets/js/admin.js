@@ -10,7 +10,7 @@
  *
  * Global object (injected by wp_localize_script in Admin\Menu::enqueue_assets()):
  *
- *   window.sendsmsDashboard = {
+ *   window.rosendsmsDash = {
  *     ajaxUrl : String,
  *     nonce   : String,
  *     i18n    : {
@@ -24,7 +24,7 @@
 ( function ( $ ) {
 	'use strict';
 
-	var cfg = window.sendsmsDashboard || {};
+	var cfg = window.rosendsmsDash || {};
 
 	/* -------------------------------------------------------------------------
 	 * Utility helpers
@@ -131,7 +131,7 @@
 
 		$submit.prop( 'disabled', true ).val( cfg.i18n ? cfg.i18n.sending : 'Sending…' );
 
-		ajaxPost( 'sendsms_dashboard_test_send', {
+		ajaxPost( 'rosendsms_dash_test_send', {
 			phone_number: $form.find( '[name="phone_number"]' ).val(),
 			message:      $form.find( '[name="message"]' ).val(),
 			gdpr:         $form.find( '[name="gdpr"]' ).is( ':checked' ) ? 'gdpr' : '',
@@ -171,7 +171,7 @@
 
 		$submit.prop( 'disabled', true ).val( cfg.i18n ? cfg.i18n.sending : 'Sending…' );
 
-		ajaxPost( 'sendsms_dashboard_mass_send', {
+		ajaxPost( 'rosendsms_dash_mass_send', {
 			receiver_type: $form.find( '[name="receiver_type"]:checked' ).val(),
 			role:          $form.find( '[name="role"]' ).val() || '',
 			message:       $form.find( '[name="message"]' ).val(),
@@ -209,12 +209,12 @@
 			msgEl.textContent   = '';
 		}
 
-		ajaxPost( 'sendsms_dashboard_subscriber_add', {
+		ajaxPost( 'rosendsms_dash_subscriber_add', {
 			phone:      $form.find( '[name="phone"]' ).val(),
 			first_name: $form.find( '[name="first_name"]' ).val(),
 			last_name:  $form.find( '[name="last_name"]' ).val(),
 			// The nonce field is in the form; re-use the global nonce that
-			// matches the one the handler checks (sendsms-security-nonce).
+			// matches the one the handler checks (rosendsms_dash_nonce).
 		} ).done( function ( response ) {
 			if ( response && response.success ) {
 				// Reload the page so the new subscriber appears in the table.
@@ -254,7 +254,7 @@
 			msgEl.textContent   = '';
 		}
 
-		ajaxPost( 'sendsms_dashboard_subscriber_update', {
+		ajaxPost( 'rosendsms_dash_subscriber_update', {
 			phone:      $form.find( '[name="phone"]' ).val(),
 			first_name: $form.find( '[name="first_name"]' ).val(),
 			last_name:  $form.find( '[name="last_name"]' ).val(),
@@ -296,7 +296,7 @@
 		var $link = $( this );
 		$link.css( 'opacity', '0.4' );
 
-		ajaxPost( 'sendsms_dashboard_subscriber_delete', { phone: phone } )
+		ajaxPost( 'rosendsms_dash_subscriber_delete', { phone: phone } )
 			.done( function ( response ) {
 				if ( response && response.success ) {
 					// Remove the table row that contains the delete link.
@@ -326,7 +326,7 @@
 
 		$link.css( 'opacity', '0.4' );
 
-		ajaxPost( 'sendsms_dashboard_sync_contact', { phone: phone } )
+		ajaxPost( 'rosendsms_dash_sync_contact', { phone: phone } )
 			.done( function ( response ) {
 				if ( response && response.success ) {
 					// Update the "Synced" cell in the same row to reflect the new state.

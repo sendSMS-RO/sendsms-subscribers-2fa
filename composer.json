@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SendSMS\\Dashboard\\": "src/"
+            "Rosendsms\\Dashboard\\": "src/"
         }
     },
     "scripts": {

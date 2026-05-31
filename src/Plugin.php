@@ -2,19 +2,19 @@
 /**
  * Top-level plugin loader.
  *
- * @package SendSMS\Dashboard
+ * @package Rosendsms\Dashboard
  */
 
-namespace SendSMS\Dashboard;
+namespace Rosendsms\Dashboard;
 
-use SendSMS\Dashboard\Admin;
-use SendSMS\Dashboard\Ajax;
-use SendSMS\Dashboard\Api;
-use SendSMS\Dashboard\Auth;
-use SendSMS\Dashboard\Frontend;
-use SendSMS\Dashboard\Storage;
-use SendSMS\Dashboard\Support;
-use SendSMS\Dashboard\Widgets;
+use Rosendsms\Dashboard\Admin;
+use Rosendsms\Dashboard\Ajax;
+use Rosendsms\Dashboard\Api;
+use Rosendsms\Dashboard\Auth;
+use Rosendsms\Dashboard\Frontend;
+use Rosendsms\Dashboard\Storage;
+use Rosendsms\Dashboard\Support;
+use Rosendsms\Dashboard\Widgets;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -148,17 +148,8 @@ final class Plugin {
 		}
 		$this->booted = true;
 
-		add_action(
-			'init',
-			static function () {
-				load_plugin_textdomain(
-					'sendsms-dashboard',
-					false,
-					dirname( SENDSMS_DASHBOARD_BASENAME ) . '/languages'
-				);
-			}
-		);
-
+		// Translations load just-in-time on WordPress 6.0+ (the plugin minimum);
+		// no manual load_plugin_textdomain() call is needed for a WordPress.org-hosted plugin.
 		Install::maybe_upgrade();
 
 		$this->settings    = new Storage\Settings();
@@ -212,26 +203,26 @@ final class Plugin {
 			'wp_enqueue_scripts',
 			static function () {
 				wp_enqueue_style(
-					'sendsms-dashboard-public',
-					SENDSMS_DASHBOARD_URL . 'assets/css/public.css',
+					'rosendsms-dash-public',
+					ROSENDSMS_DASH_URL . 'assets/css/public.css',
 					array(),
-					SENDSMS_DASHBOARD_VERSION
+					ROSENDSMS_DASH_VERSION
 				);
 
 				wp_register_script(
-					'sendsms-dashboard-public',
-					SENDSMS_DASHBOARD_URL . 'assets/js/public.js',
+					'rosendsms-dash-public',
+					ROSENDSMS_DASH_URL . 'assets/js/public.js',
 					array(),
-					SENDSMS_DASHBOARD_VERSION,
+					ROSENDSMS_DASH_VERSION,
 					true
 				);
 
 				wp_localize_script(
-					'sendsms-dashboard-public',
-					'sendsmsDashboardPublic',
+					'rosendsms-dash-public',
+					'rosendsmsDashPublic',
 					array(
 						'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-						'nonce'   => wp_create_nonce( 'sendsms-security-nonce' ),
+						'nonce'   => wp_create_nonce( 'rosendsms_dash_nonce' ),
 						'i18n'    => array(
 							'sending'  => __( 'Sending…', 'sendsms-dashboard' ),
 							'success'  => __( 'Thank you!', 'sendsms-dashboard' ),
@@ -241,7 +232,7 @@ final class Plugin {
 					)
 				);
 
-				wp_enqueue_script( 'sendsms-dashboard-public' );
+				wp_enqueue_script( 'rosendsms-dash-public' );
 			}
 		);
 

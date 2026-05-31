@@ -11,10 +11,10 @@
  * No build step is required: the edit-time scripts are plain JavaScript that
  * reads from the `window.wp.*` globals shipped by WordPress core.
  *
- * @package SendSMS\Dashboard\Frontend
+ * @package Rosendsms\Dashboard\Frontend
  */
 
-namespace SendSMS\Dashboard\Frontend;
+namespace Rosendsms\Dashboard\Frontend;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -71,30 +71,30 @@ final class Blocks {
 		);
 
 		wp_register_script(
-			'sendsms-dashboard-block-subscribe',
-			SENDSMS_DASHBOARD_URL . 'blocks/subscribe/edit.js',
+			'rosendsms-dash-block-subscribe',
+			ROSENDSMS_DASH_URL . 'blocks/subscribe/edit.js',
 			$deps,
-			SENDSMS_DASHBOARD_VERSION,
+			ROSENDSMS_DASH_VERSION,
 			true
 		);
 
 		wp_register_script(
-			'sendsms-dashboard-block-unsubscribe',
-			SENDSMS_DASHBOARD_URL . 'blocks/unsubscribe/edit.js',
+			'rosendsms-dash-block-unsubscribe',
+			ROSENDSMS_DASH_URL . 'blocks/unsubscribe/edit.js',
 			$deps,
-			SENDSMS_DASHBOARD_VERSION,
+			ROSENDSMS_DASH_VERSION,
 			true
 		);
 
 		register_block_type(
-			SENDSMS_DASHBOARD_DIR . 'blocks/subscribe',
+			ROSENDSMS_DASH_DIR . 'blocks/subscribe',
 			array(
 				'render_callback' => array( $this, 'render_subscribe' ),
 			)
 		);
 
 		register_block_type(
-			SENDSMS_DASHBOARD_DIR . 'blocks/unsubscribe',
+			ROSENDSMS_DASH_DIR . 'blocks/unsubscribe',
 			array(
 				'render_callback' => array( $this, 'render_unsubscribe' ),
 			)

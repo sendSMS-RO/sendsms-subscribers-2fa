@@ -8,15 +8,15 @@
  * WordPress's wp_remote_get / wp_remote_post so that the WP HTTP API's timeout,
  * proxy, and SSL settings apply uniformly.
  *
- * @package SendSMS\Dashboard\Api
+ * @package Rosendsms\Dashboard\Api
  */
 
-namespace SendSMS\Dashboard\Api;
+namespace Rosendsms\Dashboard\Api;
 
-use SendSMS\Dashboard\Storage\HistoryRepository;
-use SendSMS\Dashboard\Storage\Settings;
-use SendSMS\Dashboard\Support\PhoneNumber;
-use SendSMS\Dashboard\Support\VerificationCode;
+use Rosendsms\Dashboard\Storage\HistoryRepository;
+use Rosendsms\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Support\PhoneNumber;
+use Rosendsms\Dashboard\Support\VerificationCode;
 
 defined( 'ABSPATH' ) || exit;
 

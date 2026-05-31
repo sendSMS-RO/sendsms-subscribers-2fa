@@ -16,20 +16,20 @@
  * {@see VerificationCode::generate()}, identical to how subscribe/unsubscribe
  * flows verify codes.
  *
- * @package SendSMS\Dashboard\Auth
+ * @package Rosendsms\Dashboard\Auth
  * @since   2.0.0
  */
 
-namespace SendSMS\Dashboard\Auth;
+namespace Rosendsms\Dashboard\Auth;
 
-use SendSMS\Dashboard\Api\Client;
-use SendSMS\Dashboard\Storage\IpRepository;
-use SendSMS\Dashboard\Storage\Settings;
-use SendSMS\Dashboard\Support\Ip;
-use SendSMS\Dashboard\Support\IpRateLimit;
-use SendSMS\Dashboard\Support\PhoneNumber;
-use SendSMS\Dashboard\Support\UserPhone;
-use SendSMS\Dashboard\Support\VerificationCode;
+use Rosendsms\Dashboard\Api\Client;
+use Rosendsms\Dashboard\Storage\IpRepository;
+use Rosendsms\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Support\Ip;
+use Rosendsms\Dashboard\Support\IpRateLimit;
+use Rosendsms\Dashboard\Support\PhoneNumber;
+use Rosendsms\Dashboard\Support\UserPhone;
+use Rosendsms\Dashboard\Support\VerificationCode;
 
 defined( 'ABSPATH' ) || exit;
 

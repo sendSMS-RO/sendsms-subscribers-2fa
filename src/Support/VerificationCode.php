@@ -7,10 +7,10 @@
  * The cookie name is 'sendsms_subscribe_check' + $suffix, where $suffix carries
  * a leading underscore (e.g. '_sub', '_unsub', '_2fa'). An empty suffix is legal.
  *
- * @package SendSMS\Dashboard\Support
+ * @package Rosendsms\Dashboard\Support
  */
 
-namespace SendSMS\Dashboard\Support;
+namespace Rosendsms\Dashboard\Support;
 
 defined( 'ABSPATH' ) || exit;
 

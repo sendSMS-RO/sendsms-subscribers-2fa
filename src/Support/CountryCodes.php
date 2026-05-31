@@ -8,10 +8,10 @@
  * duplicate keys (DO × 3, PR × 2, VA × 2, XN × 3), which PHP resolves by
  * keeping the last value.
  *
- * @package SendSMS\Dashboard\Support
+ * @package Rosendsms\Dashboard\Support
  */
 
-namespace SendSMS\Dashboard\Support;
+namespace Rosendsms\Dashboard\Support;
 
 defined( 'ABSPATH' ) || exit;
 

@@ -2,19 +2,19 @@
 /**
  * AJAX handler for the Test Send form.
  *
- * Handles the `wp_ajax_sendsms_dashboard_test_send` action, which is
+ * Handles the `wp_ajax_rosendsms_dash_test_send` action, which is
  * triggered from the Test Send admin page. The handler validates the
  * request, delegates to {@see Api\Client::message_send()}, and returns
  * a JSON response indicating success or failure.
  *
  * Admin-only (no `wp_ajax_nopriv_*` counterpart).
  *
- * @package SendSMS\Dashboard\Ajax
+ * @package Rosendsms\Dashboard\Ajax
  */
 
-namespace SendSMS\Dashboard\Ajax;
+namespace Rosendsms\Dashboard\Ajax;
 
-use SendSMS\Dashboard\Api\Client;
+use Rosendsms\Dashboard\Api\Client;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -52,7 +52,7 @@ final class TestSendHandler {
 	 * @return void
 	 */
 	public function register(): void {
-		add_action( 'wp_ajax_sendsms_dashboard_test_send', array( $this, 'handle' ) );
+		add_action( 'wp_ajax_rosendsms_dash_test_send', array( $this, 'handle' ) );
 	}
 
 	/**
@@ -64,7 +64,7 @@ final class TestSendHandler {
 	 * @return void
 	 */
 	public function handle(): void {
-		if ( ! check_ajax_referer( 'sendsms-security-nonce', 'security', false ) ) {
+		if ( ! check_ajax_referer( 'rosendsms_dash_nonce', 'security', false ) ) {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_bad_nonce',

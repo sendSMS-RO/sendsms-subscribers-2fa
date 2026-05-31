@@ -5,7 +5,7 @@
  * Renders a simple form that lets an administrator send a one-off test
  * message to a single phone number. The form submission is handled via
  * fetch() in admin.js which posts to
- * `admin-ajax.php?action=sendsms_dashboard_test_send`.
+ * `admin-ajax.php?action=rosendsms_dash_test_send`.
  *
  * Fields preserved from v1.x:
  *  - phone_number  (tel input, E.164 without +)
@@ -13,13 +13,13 @@
  *  - short         (checkbox — shrinks URLs)
  *  - message       (textarea)
  *
- * The nonce is provided via the `sendsmsDashboard.nonce` JS object that
+ * The nonce is provided via the `rosendsmsDash.nonce` JS object that
  * Menu::enqueue_assets() localizes; no additional hidden field is required.
  *
- * @package SendSMS\Dashboard\Admin\Pages
+ * @package Rosendsms\Dashboard\Admin\Pages
  */
 
-namespace SendSMS\Dashboard\Admin\Pages;
+namespace Rosendsms\Dashboard\Admin\Pages;
 
 defined( 'ABSPATH' ) || exit;
 

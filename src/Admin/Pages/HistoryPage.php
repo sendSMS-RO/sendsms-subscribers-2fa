@@ -15,13 +15,13 @@
  * Sortable columns: sent_on (default DESC), phone, status.
  * Search matches against `phone` and `content` via HistoryRepository::paginate().
  *
- * @package SendSMS\Dashboard\Admin\Pages
+ * @package Rosendsms\Dashboard\Admin\Pages
  */
 
-namespace SendSMS\Dashboard\Admin\Pages;
+namespace Rosendsms\Dashboard\Admin\Pages;
 
-use SendSMS\Dashboard\Plugin;
-use SendSMS\Dashboard\Storage\HistoryRepository;
+use Rosendsms\Dashboard\Plugin;
+use Rosendsms\Dashboard\Storage\HistoryRepository;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -78,7 +78,7 @@ final class HistoryPage {
  * Delegates all data fetching to {@see HistoryRepository::paginate()} and
  * {@see HistoryRepository::count()} so this class contains zero SQL.
  *
- * Columns mirror the v1.x `sendsms_dashboard_history` table schema:
+ * Columns mirror the v1.x `rosendsms_dash_history` table schema:
  *   sent_on, phone, content, status, message, details, type.
  *
  * The `id` primary-key column is intentionally omitted from the display

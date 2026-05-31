@@ -7,12 +7,12 @@
  * by PhoneNumber::normalize. Falls back to 'sendsms_phone_number' (always
  * appended by Settings::user_phone_meta_keys).
  *
- * @package SendSMS\Dashboard\Support
+ * @package Rosendsms\Dashboard\Support
  */
 
-namespace SendSMS\Dashboard\Support;
+namespace Rosendsms\Dashboard\Support;
 
-use SendSMS\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Storage\Settings;
 
 defined( 'ABSPATH' ) || exit;
 

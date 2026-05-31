@@ -2,15 +2,15 @@
 /**
  * Persistence layer for SMS send history rows.
  *
- * @package SendSMS\Dashboard\Storage
+ * @package Rosendsms\Dashboard\Storage
  */
 
-namespace SendSMS\Dashboard\Storage;
+namespace Rosendsms\Dashboard\Storage;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Reads and writes rows in the {prefix}sendsms_dashboard_history table.
+ * Reads and writes rows in the {prefix}rosendsms_dash_history table.
  *
  * This is the only path through which callers insert or query SMS history.
  * Every API send writes a row via {@see HistoryRepository::insert()}; every
@@ -31,7 +31,7 @@ final class HistoryRepository {
 	 */
 	public function table(): string {
 		global $wpdb;
-		return $wpdb->prefix . 'sendsms_dashboard_history';
+		return $wpdb->prefix . 'rosendsms_dash_history';
 	}
 
 	/**
@@ -44,7 +44,7 @@ final class HistoryRepository {
 	 */
 	public static function dbdelta_sql(): string {
 		global $wpdb;
-		$table   = $wpdb->prefix . 'sendsms_dashboard_history';
+		$table   = $wpdb->prefix . 'rosendsms_dash_history';
 		$charset = $wpdb->get_charset_collate();
 
 		return "CREATE TABLE `{$table}` (

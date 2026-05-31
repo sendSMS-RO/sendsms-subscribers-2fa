@@ -24,13 +24,13 @@
  * The Add and Edit forms submit to AJAX actions wired in Task 23; the JS is
  * inert until that task is complete — the HTML is correct and ready.
  *
- * @package SendSMS\Dashboard\Admin\Pages
+ * @package Rosendsms\Dashboard\Admin\Pages
  */
 
-namespace SendSMS\Dashboard\Admin\Pages;
+namespace Rosendsms\Dashboard\Admin\Pages;
 
-use SendSMS\Dashboard\Plugin;
-use SendSMS\Dashboard\Storage\SubscriberRepository;
+use Rosendsms\Dashboard\Plugin;
+use Rosendsms\Dashboard\Storage\SubscriberRepository;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -95,9 +95,9 @@ final class SubscribersPage {
 	/**
 	 * Render the "Add subscriber" card form.
 	 *
-	 * The form targets the `sendsms_dashboard_subscriber_add` AJAX action
+	 * The form targets the `rosendsms_dash_subscriber_add` AJAX action
 	 * (wired in Task 23). Until that task is complete the submit will be
-	 * inert. The nonce field uses the shared `sendsms-security-nonce` so
+	 * inert. The nonce field uses the shared `rosendsms_dash_nonce` so
 	 * the AJAX handler's `check_ajax_referer()` call succeeds.
 	 *
 	 * @return void
@@ -106,8 +106,8 @@ final class SubscribersPage {
 		echo '<div class="wrap">';
 		echo '<h2>' . esc_html__( 'Add subscriber', 'sendsms-dashboard' ) . '</h2>';
 		echo '<form id="sendsms-subscriber-add-form" method="post">';
-		wp_nonce_field( 'sendsms-security-nonce', 'security' );
-		echo '<input type="hidden" name="action" value="sendsms_dashboard_subscriber_add" />';
+		wp_nonce_field( 'rosendsms_dash_nonce', 'security' );
+		echo '<input type="hidden" name="action" value="rosendsms_dash_subscriber_add" />';
 
 		echo '<table class="form-table" role="presentation">';
 		echo '<tbody>';
@@ -146,7 +146,7 @@ final class SubscribersPage {
 	 * looks up the subscriber, and if found renders a form with phone as a
 	 * read-only field and first_name / last_name as editable inputs.
 	 *
-	 * The form targets `sendsms_dashboard_subscriber_update` (Task 23).
+	 * The form targets `rosendsms_dash_subscriber_update` (Task 23).
 	 *
 	 * @param SubscriberRepository $repo Subscriber data source.
 	 * @return void
@@ -168,8 +168,8 @@ final class SubscribersPage {
 		echo '<div class="wrap">';
 		echo '<h2>' . esc_html__( 'Edit subscriber', 'sendsms-dashboard' ) . '</h2>';
 		echo '<form id="sendsms-subscriber-edit-form" method="post">';
-		wp_nonce_field( 'sendsms-security-nonce', 'security' );
-		echo '<input type="hidden" name="action" value="sendsms_dashboard_subscriber_update" />';
+		wp_nonce_field( 'rosendsms_dash_nonce', 'security' );
+		echo '<input type="hidden" name="action" value="rosendsms_dash_subscriber_update" />';
 
 		echo '<table class="form-table" role="presentation">';
 		echo '<tbody>';

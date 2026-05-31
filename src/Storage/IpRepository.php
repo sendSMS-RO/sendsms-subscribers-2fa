@@ -2,19 +2,19 @@
 /**
  * Persistence layer for IP address rate-limit rows.
  *
- * @package SendSMS\Dashboard\Storage
+ * @package Rosendsms\Dashboard\Storage
  */
 
-namespace SendSMS\Dashboard\Storage;
+namespace Rosendsms\Dashboard\Storage;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Reads and writes rows in the {prefix}sendsms_dashboard_ip_address table.
+ * Reads and writes rows in the {prefix}rosendsms_dash_ip_address table.
  *
  * This is the only path through which callers insert or update the single-row-
  * per-IP cycle counter used for request rate limiting. The rate-limit algorithm
- * itself lives in {@see \SendSMS\Dashboard\Support\IpRateLimit} — this class is
+ * itself lives in {@see \Rosendsms\Dashboard\Support\IpRateLimit} — this class is
  * pure CRUD.
  *
  * Primary key is `ip_address` (VARCHAR 20). Each row tracks the start of the
@@ -33,7 +33,7 @@ final class IpRepository {
 	 */
 	public function table(): string {
 		global $wpdb;
-		return $wpdb->prefix . 'sendsms_dashboard_ip_address';
+		return $wpdb->prefix . 'rosendsms_dash_ip_address';
 	}
 
 	/**
@@ -47,7 +47,7 @@ final class IpRepository {
 	 */
 	public static function dbdelta_sql(): string {
 		global $wpdb;
-		$table   = $wpdb->prefix . 'sendsms_dashboard_ip_address';
+		$table   = $wpdb->prefix . 'rosendsms_dash_ip_address';
 		$charset = $wpdb->get_charset_collate();
 
 		return "CREATE TABLE `{$table}` (

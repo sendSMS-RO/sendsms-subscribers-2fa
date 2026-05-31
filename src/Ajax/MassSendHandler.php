@@ -2,7 +2,7 @@
 /**
  * AJAX handler for the Mass Send form.
  *
- * Handles the `wp_ajax_sendsms_dashboard_mass_send` action, which is
+ * Handles the `wp_ajax_rosendsms_dash_mass_send` action, which is
  * triggered from the Mass Send admin page. The handler resolves phone
  * numbers from either the plugin's subscriber table or from WordPress
  * user accounts (optionally filtered by role), normalises and deduplicates
@@ -13,16 +13,16 @@
  *
  * Ported from v1.x `Sendsms_Dashboard_Admin::send_mass_sms()`.
  *
- * @package SendSMS\Dashboard\Ajax
+ * @package Rosendsms\Dashboard\Ajax
  */
 
-namespace SendSMS\Dashboard\Ajax;
+namespace Rosendsms\Dashboard\Ajax;
 
-use SendSMS\Dashboard\Api\Client;
-use SendSMS\Dashboard\Storage\Settings;
-use SendSMS\Dashboard\Storage\SubscriberRepository;
-use SendSMS\Dashboard\Support\PhoneNumber;
-use SendSMS\Dashboard\Support\UserPhone;
+use Rosendsms\Dashboard\Api\Client;
+use Rosendsms\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Storage\SubscriberRepository;
+use Rosendsms\Dashboard\Support\PhoneNumber;
+use Rosendsms\Dashboard\Support\UserPhone;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -79,7 +79,7 @@ final class MassSendHandler {
 	 * @return void
 	 */
 	public function register(): void {
-		add_action( 'wp_ajax_sendsms_dashboard_mass_send', array( $this, 'handle' ) );
+		add_action( 'wp_ajax_rosendsms_dash_mass_send', array( $this, 'handle' ) );
 	}
 
 	/**
@@ -93,7 +93,7 @@ final class MassSendHandler {
 	 */
 	public function handle(): void {
 		// 1. Nonce check.
-		if ( ! check_ajax_referer( 'sendsms-security-nonce', 'security', false ) ) {
+		if ( ! check_ajax_referer( 'rosendsms_dash_nonce', 'security', false ) ) {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_bad_nonce',

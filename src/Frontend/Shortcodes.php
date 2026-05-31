@@ -16,13 +16,13 @@
  *  - title     (string, default '')    Optional heading above the form.
  *  - gdpr_link (string, default '')    Privacy-policy URL for the subscribe form.
  *
- * @package SendSMS\Dashboard\Frontend
+ * @package Rosendsms\Dashboard\Frontend
  */
 
-namespace SendSMS\Dashboard\Frontend;
+namespace Rosendsms\Dashboard\Frontend;
 
-use SendSMS\Dashboard\Widgets\SubscribeWidget;
-use SendSMS\Dashboard\Widgets\UnsubscribeWidget;
+use Rosendsms\Dashboard\Widgets\SubscribeWidget;
+use Rosendsms\Dashboard\Widgets\UnsubscribeWidget;
 
 defined( 'ABSPATH' ) || exit;
 

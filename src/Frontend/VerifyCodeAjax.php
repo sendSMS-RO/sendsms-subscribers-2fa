@@ -16,27 +16,27 @@
  * Registered for both authenticated and unauthenticated requests so that guests
  * can complete verification from any public widget.
  *
- * @package SendSMS\Dashboard\Frontend
+ * @package Rosendsms\Dashboard\Frontend
  */
 
-namespace SendSMS\Dashboard\Frontend;
+namespace Rosendsms\Dashboard\Frontend;
 
-use SendSMS\Dashboard\Api\Client;
-use SendSMS\Dashboard\Storage\IpRepository;
-use SendSMS\Dashboard\Storage\Settings;
-use SendSMS\Dashboard\Storage\SubscriberRepository;
-use SendSMS\Dashboard\Support\Ip;
-use SendSMS\Dashboard\Support\IpRateLimit;
-use SendSMS\Dashboard\Support\PhoneNumber;
-use SendSMS\Dashboard\Support\VerificationCode;
+use Rosendsms\Dashboard\Api\Client;
+use Rosendsms\Dashboard\Storage\IpRepository;
+use Rosendsms\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Storage\SubscriberRepository;
+use Rosendsms\Dashboard\Support\Ip;
+use Rosendsms\Dashboard\Support\IpRateLimit;
+use Rosendsms\Dashboard\Support\PhoneNumber;
+use Rosendsms\Dashboard\Support\VerificationCode;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Handles the {@code sendsms_dashboard_verify_code} AJAX action.
+ * Handles the {@code rosendsms_dash_verify_code} AJAX action.
  *
  * Allowed POST parameters:
- * - {@code security}   WordPress nonce (key: 'sendsms-security-nonce').
+ * - {@code security}   WordPress nonce (key: 'rosendsms_dash_nonce').
  * - {@code context}    Either 'sub' (subscribe) or 'unsub' (unsubscribe).
  * - {@code phone_number} Raw phone number string.
  * - {@code code}       The 5-character OTP code the user received via SMS.
@@ -114,8 +114,8 @@ final class VerifyCodeAjax {
 	 * @return void
 	 */
 	public function register(): void {
-		add_action( 'wp_ajax_sendsms_dashboard_verify_code', array( $this, 'handle' ) );
-		add_action( 'wp_ajax_nopriv_sendsms_dashboard_verify_code', array( $this, 'handle' ) );
+		add_action( 'wp_ajax_rosendsms_dash_verify_code', array( $this, 'handle' ) );
+		add_action( 'wp_ajax_nopriv_rosendsms_dash_verify_code', array( $this, 'handle' ) );
 	}
 
 	/**
@@ -133,7 +133,7 @@ final class VerifyCodeAjax {
 	 */
 	public function handle(): void {
 		// 1. Nonce.
-		if ( ! check_ajax_referer( 'sendsms-security-nonce', 'security', false ) ) {
+		if ( ! check_ajax_referer( 'rosendsms_dash_nonce', 'security', false ) ) {
 			wp_send_json_error( array( 'code' => 'sendsms_dashboard_bad_nonce' ), 403 );
 		}
 

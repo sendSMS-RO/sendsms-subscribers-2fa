@@ -5,7 +5,7 @@
  * Renders a form that lets an administrator blast a message to all plugin
  * subscribers or to WordPress users filtered by role. The form submission
  * is handled via fetch() in admin.js which posts to
- * `admin-ajax.php?action=sendsms_dashboard_mass_send`.
+ * `admin-ajax.php?action=rosendsms_dash_mass_send`.
  *
  * Fields preserved from v1.x:
  *  - receiver_type  (radio: "subscribers" | "users")
@@ -15,13 +15,13 @@
  *  - short          (checkbox — shrinks URLs)
  *  - message        (textarea)
  *
- * The nonce is provided via the `sendsmsDashboard.nonce` JS object that
+ * The nonce is provided via the `rosendsmsDash.nonce` JS object that
  * Menu::enqueue_assets() localizes; no additional hidden field is required.
  *
- * @package SendSMS\Dashboard\Admin\Pages
+ * @package Rosendsms\Dashboard\Admin\Pages
  */
 
-namespace SendSMS\Dashboard\Admin\Pages;
+namespace Rosendsms\Dashboard\Admin\Pages;
 
 defined( 'ABSPATH' ) || exit;
 

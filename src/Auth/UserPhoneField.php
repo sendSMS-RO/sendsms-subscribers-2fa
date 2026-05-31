@@ -8,14 +8,14 @@
  * behaviour implemented via `add_new_user_field`, `user_register_metadata`, and
  * `add_new_user_field_to_edit_form`.
  *
- * @package SendSMS\Dashboard\Auth
+ * @package Rosendsms\Dashboard\Auth
  * @since   2.0.0
  */
 
-namespace SendSMS\Dashboard\Auth;
+namespace Rosendsms\Dashboard\Auth;
 
-use SendSMS\Dashboard\Storage\Settings;
-use SendSMS\Dashboard\Support\PhoneNumber;
+use Rosendsms\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Support\PhoneNumber;
 
 defined( 'ABSPATH' ) || exit;
 

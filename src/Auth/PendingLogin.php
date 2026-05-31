@@ -6,11 +6,11 @@
  * handed to the browser as a query-string parameter. The transient TTL matches
  * the five-minute window the user has to complete the 2FA challenge.
  *
- * @package SendSMS\Dashboard\Auth
+ * @package Rosendsms\Dashboard\Auth
  * @since   2.0.0
  */
 
-namespace SendSMS\Dashboard\Auth;
+namespace Rosendsms\Dashboard\Auth;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,7 +30,7 @@ final class PendingLogin {
 	 *
 	 * @var string
 	 */
-	private const PREFIX = 'sendsms_dashboard_2fa_pending_';
+	private const PREFIX = 'rosendsms_dash_2fa_pending_';
 
 	/**
 	 * Time-to-live for each pending-login transient, in seconds.

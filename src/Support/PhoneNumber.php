@@ -8,10 +8,10 @@
  * {@see SendSMSFunctions::clear_phone_number()} methods exactly so that
  * existing data and behaviour are preserved on upgrade.
  *
- * @package SendSMS\Dashboard\Support
+ * @package Rosendsms\Dashboard\Support
  */
 
-namespace SendSMS\Dashboard\Support;
+namespace Rosendsms\Dashboard\Support;
 
 defined( 'ABSPATH' ) || exit;
 

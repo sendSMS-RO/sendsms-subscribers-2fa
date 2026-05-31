@@ -1,10 +1,10 @@
 === SendSMS Dashboard ===
-Contributors: neamtua, catalinsendsms
+Contributors: sendsms, neamtua
 Tags: sms, sendsms, subscribers, 2fa, marketing
-Requires at least: 4.0
+Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,7 +47,7 @@ Yes. Sign up for free at https://www.sendsms.ro/en/ and top up your balance. SMS
 No. The 2FA feature is designed for the default wp-admin login form — the one WordPress ships at `/wp-login.php`. Custom login plugins or themes that replace the login form are not supported and may behave unpredictably. Always test in a development environment before enabling 2FA on a live site.
 
 = What PHP and WordPress versions are supported? =
-PHP 7.4 through PHP 8.3, WordPress 4.0 through 7.0. The plugin is verified on PHP 7.4 and PHP 8.3 against WordPress 7.0.
+PHP 7.4 through PHP 8.3, WordPress 6.0 through 7.0. The plugin is verified on PHP 7.4 and PHP 8.3 against WordPress 7.0.
 
 = A user is locked out because they lost their phone. How do I rescue them? =
 You have three options, depending on your situation:
@@ -96,6 +96,34 @@ The same class names are emitted whether the form is rendered via the widget, th
 
 The bundled `assets/css/public.css` styles every one of these classes; override or replace it from your theme's stylesheet as needed.
 
+== External services ==
+
+This plugin connects to the **sendsms.ro** SMS gateway — a third-party service operated by SC sendSMS Solutions SRL — to deliver text messages and manage your contact list. Using the plugin requires an active sendsms.ro account.
+
+What the service is used for:
+
+* Sending the subscribe/unsubscribe confirmation and one-time verification-code SMS to the phone numbers visitors enter in the frontend forms.
+* Sending the two-factor-authentication code SMS to wp-admin users when SMS 2FA is enabled for their role.
+* Sending the test SMS triggered from the **SendSMS Dashboard → Send a test SMS** page.
+* Sending bulk SMS triggered from the **SendSMS Dashboard → SMS sending** page (to all subscribers, or to WordPress users filtered by role).
+* Reading your account balance to display it on the **Settings** page.
+* Creating and updating contacts (and the contact group) in your sendsms.ro address book when you sync a subscriber from the **Subscribers** page.
+
+What data is sent, and when:
+
+* On every outbound SMS: your sendsms.ro **username** and **API key/password**, the configured **sender label**, the **recipient phone number** (a visitor/subscriber number, an admin-supplied number for tests, or a user's stored number for 2FA), and the **message body**. Bulk sends POST the recipient list and message together as a batch.
+* On a contact sync: your **username**, **API key/password**, and the subscriber's **phone number, first name, and last name**.
+* On a balance check: your **username** and **API key/password**.
+* No data is sent until you have entered credentials and either a visitor submits a form, a protected user logs in, or you press a send/sync button — or you open the Settings page, which checks the balance once per page load and caches it for 5 minutes.
+
+Service endpoint used: `https://api.sendsms.ro/json` (HTTPS).
+
+Third-party terms of service and privacy:
+
+* Terms and conditions: https://www.sendsms.ro/en/terms-and-conditions/
+* GDPR / privacy: https://www.sendsms.ro/en/gdpr/
+* ISO 27001 certification: https://www.sendsms.ro/en/iso-27001-certified/
+
 == Screenshots ==
 1. Settings → General tab: API credentials (username, password, sender label) and country code selector.
 2. Settings → User tab: enable 2FA, select which roles require it, and customise the verification message.
@@ -105,6 +133,15 @@ The bundled `assets/css/public.css` styles every one of these classes; override 
 6. Send a test SMS page: send a one-off message to any number to verify your sender label and content.
 
 == Changelog ==
+= 2.0.1 =
+Naming/compliance pass for WordPress.org. All internal identifiers now carry a distinct, collision-safe `rosendsms_dash_` prefix so the plugin coexists cleanly with other plugins (including *SendSMS for WooCommerce*). Your settings, SMS history, and subscriber list are migrated automatically on update.
+
+* Prefixed every plugin-defined name: constants (`ROSENDSMS_DASH_*`), the PSR-4 namespace (`Rosendsms\Dashboard\…`), option/transient keys, custom table names, AJAX actions, script handles, the localized JS objects, and nonces.
+* Added a one-shot, idempotent migration that renames the pre-2.0.1 `sendsms_dashboard_*` options and custom tables to the new `rosendsms_dash_*` names on activation/upgrade — no data loss.
+* Front-end shortcodes (`[sendsms_subscribe]`, `[sendsms_unsubscribe]`), block names, widget IDs, and the documented CSS class names are unchanged, so existing pages, widgets, and custom styling keep working.
+* Added an **External services** section to the readme disclosing the sendsms.ro gateway, the data sent, and links to its terms / privacy / ISO 27001 certification.
+* Replaced the admin-menu dashicon with the sendSMS brand icon.
+
 = 2.0.0 =
 Full architectural rewrite. The plugin now follows modern WordPress conventions while preserving every existing setting, the SMS history database table, and the subscriber list — upgrading from 1.x is transparent.
 
@@ -124,5 +161,8 @@ Full architectural rewrite. The plugin now follows modern WordPress conventions 
 * Initial release.
 
 == Upgrade Notice ==
+= 2.0.1 =
+Internal names are now prefixed `rosendsms_dash_`. Settings, SMS history, and subscribers migrate automatically; shortcodes, blocks, widgets, and CSS classes are unchanged.
+
 = 2.0.0 =
 Full rewrite under the SendSMS\Dashboard namespace. Settings, SMS history, and subscriber data carry over automatically.

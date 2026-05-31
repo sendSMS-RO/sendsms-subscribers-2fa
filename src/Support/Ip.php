@@ -7,10 +7,10 @@
  * exactly: HTTP_X_REAL_IP is preferred, then the first token of
  * HTTP_X_FORWARDED_FOR (validated via rest_is_ip_address), then REMOTE_ADDR.
  *
- * @package SendSMS\Dashboard\Support
+ * @package Rosendsms\Dashboard\Support
  */
 
-namespace SendSMS\Dashboard\Support;
+namespace Rosendsms\Dashboard\Support;
 
 defined( 'ABSPATH' ) || exit;
 

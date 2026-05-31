@@ -3,27 +3,27 @@
  * Handles the admin-only AJAX action that pushes a single subscriber to the
  * sendsms.ro address book.
  *
- * Action:  wp_ajax_sendsms_dashboard_sync_contact  (logged-in admin only)
- * Nonce:   sendsms-security-nonce / security
+ * Action:  wp_ajax_rosendsms_dash_sync_contact  (logged-in admin only)
+ * Nonce:   rosendsms_dash_nonce / security
  * POST:    phone  – raw phone string to look up and sync
  *
  * Group management mirrors v1.x exactly:
- *   - The remote group ID is cached in WP option `sendsms-dashboard-sync-group`.
+ *   - The remote group ID is cached in WP option `rosendsms_dash_sync_group`.
  *   - On every call the cached ID is verified against the live group list;
  *     if the group no longer exists a new one is created and the option updated.
  *   - Subscribers with synced = 0 are added fresh.
  *   - Subscribers already synced (synced > 0) have their remote contact deleted
  *     first, then re-added so that name/phone changes propagate (full refresh).
  *
- * @package SendSMS\Dashboard\Ajax
+ * @package Rosendsms\Dashboard\Ajax
  */
 
-namespace SendSMS\Dashboard\Ajax;
+namespace Rosendsms\Dashboard\Ajax;
 
-use SendSMS\Dashboard\Api\Client;
-use SendSMS\Dashboard\Storage\Settings;
-use SendSMS\Dashboard\Storage\SubscriberRepository;
-use SendSMS\Dashboard\Support\PhoneNumber;
+use Rosendsms\Dashboard\Api\Client;
+use Rosendsms\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Storage\SubscriberRepository;
+use Rosendsms\Dashboard\Support\PhoneNumber;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -62,7 +62,7 @@ final class ContactSyncHandler {
 	 *
 	 * @var string
 	 */
-	const GROUP_OPTION = 'sendsms-dashboard-sync-group';
+	const GROUP_OPTION = 'rosendsms_dash_sync_group';
 
 	/**
 	 * Constructor.
@@ -83,7 +83,7 @@ final class ContactSyncHandler {
 	 * @return void
 	 */
 	public function register(): void {
-		add_action( 'wp_ajax_sendsms_dashboard_sync_contact', array( $this, 'handle' ) );
+		add_action( 'wp_ajax_rosendsms_dash_sync_contact', array( $this, 'handle' ) );
 	}
 
 	/**
@@ -97,7 +97,7 @@ final class ContactSyncHandler {
 	 * @return void
 	 */
 	public function handle(): void {
-		if ( ! check_ajax_referer( 'sendsms-security-nonce', 'security', false ) ) {
+		if ( ! check_ajax_referer( 'rosendsms_dash_nonce', 'security', false ) ) {
 			wp_send_json_error( array( 'code' => 'sendsms_dashboard_bad_nonce' ), 403 );
 		}
 

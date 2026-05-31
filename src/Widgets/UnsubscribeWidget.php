@@ -8,16 +8,16 @@
  *
  * AJAX actions consumed (registered in Frontend\UnsubscribeAjax and
  * Frontend\VerifyCodeAjax via Plugin::boot()):
- *  - sendsms_dashboard_unsubscribe    — first step; triggers the SMS code
- *  - sendsms_dashboard_verify_code    — second step; validates the code
+ *  - rosendsms_dash_unsubscribe     — first step; triggers the SMS code
+ *  - rosendsms_dash_verify_code    — second step; validates the code
  *
  * The public JS and nonce are enqueued by Plugin::boot() via
  * wp_enqueue_scripts / wp_localize_script.
  *
- * @package SendSMS\Dashboard\Widgets
+ * @package Rosendsms\Dashboard\Widgets
  */
 
-namespace SendSMS\Dashboard\Widgets;
+namespace Rosendsms\Dashboard\Widgets;
 
 defined( 'ABSPATH' ) || exit;
 

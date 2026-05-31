@@ -11,7 +11,7 @@
     <arg value="sp"/>
 
     <config name="testVersion" value="7.4-"/>
-    <config name="minimum_supported_wp_version" value="4.0"/>
+    <config name="minimum_supported_wp_version" value="6.0"/>
     <config name="text_domain" value="sendsms-dashboard"/>
 
     <rule ref="PHPCompatibilityWP"/>
@@ -26,8 +26,8 @@
     <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
         <properties>
             <property name="prefixes" type="array">
-                <element value="sendsms_dashboard"/>
-                <element value="SendSMS\Dashboard"/>
+                <element value="rosendsms_dash"/>
+                <element value="Rosendsms\Dashboard"/>
             </property>
         </properties>
     </rule>

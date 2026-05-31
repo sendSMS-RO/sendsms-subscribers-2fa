@@ -6,13 +6,13 @@
  * captures their screen IDs, and enqueues the admin stylesheet and
  * script only on those screens.
  *
- * @package SendSMS\Dashboard\Admin
+ * @package Rosendsms\Dashboard\Admin
  */
 
-namespace SendSMS\Dashboard\Admin;
+namespace Rosendsms\Dashboard\Admin;
 
-use SendSMS\Dashboard\Admin\Pages;
-use SendSMS\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Admin\Pages;
+use Rosendsms\Dashboard\Storage\Settings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -42,7 +42,7 @@ final class Menu {
 	/**
 	 * SendSMS.ro API client (forwarded to SettingsPage for the balance banner).
 	 *
-	 * @var \SendSMS\Dashboard\Api\Client
+	 * @var \Rosendsms\Dashboard\Api\Client
 	 */
 	private $api;
 
@@ -58,10 +58,10 @@ final class Menu {
 	/**
 	 * Constructor.
 	 *
-	 * @param Settings                      $settings Shared plugin settings service.
-	 * @param \SendSMS\Dashboard\Api\Client $api      sendsms.ro API client.
+	 * @param Settings                        $settings Shared plugin settings service.
+	 * @param \Rosendsms\Dashboard\Api\Client $api      sendsms.ro API client.
 	 */
-	public function __construct( Settings $settings, \SendSMS\Dashboard\Api\Client $api ) {
+	public function __construct( Settings $settings, \Rosendsms\Dashboard\Api\Client $api ) {
 		$this->settings = $settings;
 		$this->api      = $api;
 	}
@@ -94,7 +94,7 @@ final class Menu {
 			$cap,
 			self::SLUG,
 			array( $this, 'render_settings' ),
-			'dashicons-smartphone',
+			ROSENDSMS_DASH_URL . 'assets/images/sendsms.png',
 			55
 		);
 		if ( $top ) {
@@ -132,26 +132,26 @@ final class Menu {
 		}
 
 		wp_enqueue_style(
-			'sendsms-dashboard-admin',
-			SENDSMS_DASHBOARD_URL . 'assets/css/admin.css',
+			'rosendsms-dash-admin',
+			ROSENDSMS_DASH_URL . 'assets/css/admin.css',
 			array(),
-			SENDSMS_DASHBOARD_VERSION
+			ROSENDSMS_DASH_VERSION
 		);
 
 		wp_enqueue_script(
-			'sendsms-dashboard-admin',
-			SENDSMS_DASHBOARD_URL . 'assets/js/admin.js',
+			'rosendsms-dash-admin',
+			ROSENDSMS_DASH_URL . 'assets/js/admin.js',
 			array( 'jquery' ),
-			SENDSMS_DASHBOARD_VERSION,
+			ROSENDSMS_DASH_VERSION,
 			true
 		);
 
 		wp_localize_script(
-			'sendsms-dashboard-admin',
-			'sendsmsDashboard',
+			'rosendsms-dash-admin',
+			'rosendsmsDash',
 			array(
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-				'nonce'   => wp_create_nonce( 'sendsms-security-nonce' ),
+				'nonce'   => wp_create_nonce( 'rosendsms_dash_nonce' ),
 				'i18n'    => array(
 					'sending'    => __( 'Sending…', 'sendsms-dashboard' ),
 					'sent'       => __( 'Sent.', 'sendsms-dashboard' ),
@@ -179,7 +179,7 @@ final class Menu {
 	 *
 	 * Delegates to {@see Pages\TestSendPage} which renders the phone number,
 	 * message, gdpr, and short-URL fields submitted via fetch() to the
-	 * `sendsms_dashboard_test_send` AJAX action.
+	 * `rosendsms_dash_test_send` AJAX action.
 	 *
 	 * @return void
 	 */
@@ -216,7 +216,7 @@ final class Menu {
 	 *
 	 * Delegates to {@see Pages\MassSendPage} which renders the receiver-type
 	 * radio buttons, optional role selector, message, gdpr, and short-URL
-	 * fields submitted via fetch() to the `sendsms_dashboard_mass_send` AJAX
+	 * fields submitted via fetch() to the `rosendsms_dash_mass_send` AJAX
 	 * action.
 	 *
 	 * @return void

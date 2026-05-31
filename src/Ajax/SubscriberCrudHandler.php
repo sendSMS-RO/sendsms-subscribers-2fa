@@ -10,19 +10,19 @@
  * Ported from v1.x {@see Sendsms_Dashboard_Admin::update_a_subscriber()}.
  *
  * Registered actions (all `wp_ajax_*` only — no `nopriv` variant):
- *  - wp_ajax_sendsms_dashboard_subscriber_add
- *  - wp_ajax_sendsms_dashboard_subscriber_update
- *  - wp_ajax_sendsms_dashboard_subscriber_delete
+ *  - wp_ajax_rosendsms_dash_subscriber_add
+ *  - wp_ajax_rosendsms_dash_subscriber_update
+ *  - wp_ajax_rosendsms_dash_subscriber_delete
  *
- * @package SendSMS\Dashboard\Ajax
+ * @package Rosendsms\Dashboard\Ajax
  */
 
-namespace SendSMS\Dashboard\Ajax;
+namespace Rosendsms\Dashboard\Ajax;
 
-use SendSMS\Dashboard\Storage\Settings;
-use SendSMS\Dashboard\Storage\SubscriberRepository;
-use SendSMS\Dashboard\Support\Ip;
-use SendSMS\Dashboard\Support\PhoneNumber;
+use Rosendsms\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Storage\SubscriberRepository;
+use Rosendsms\Dashboard\Support\Ip;
+use Rosendsms\Dashboard\Support\PhoneNumber;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
  * Handles add, update, and delete AJAX requests for SMS subscribers.
  *
  * All three public handler methods share a common guard sequence:
- *  1. Nonce check (`sendsms-security-nonce` / `security` field).
+ *  1. Nonce check (`rosendsms_dash_nonce` / `security` field).
  *  2. Capability check (`manage_options`).
  *  3. Phone normalisation via {@see PhoneNumber::normalize()}.
  *
@@ -74,9 +74,9 @@ final class SubscriberCrudHandler {
 	 * @return void
 	 */
 	public function register(): void {
-		add_action( 'wp_ajax_sendsms_dashboard_subscriber_add', array( $this, 'add' ) );
-		add_action( 'wp_ajax_sendsms_dashboard_subscriber_update', array( $this, 'update' ) );
-		add_action( 'wp_ajax_sendsms_dashboard_subscriber_delete', array( $this, 'delete' ) );
+		add_action( 'wp_ajax_rosendsms_dash_subscriber_add', array( $this, 'add' ) );
+		add_action( 'wp_ajax_rosendsms_dash_subscriber_update', array( $this, 'update' ) );
+		add_action( 'wp_ajax_rosendsms_dash_subscriber_delete', array( $this, 'delete' ) );
 	}
 
 	/**
@@ -90,7 +90,7 @@ final class SubscriberCrudHandler {
 	 * @return void
 	 */
 	private function guard(): void {
-		if ( ! check_ajax_referer( 'sendsms-security-nonce', 'security', false ) ) {
+		if ( ! check_ajax_referer( 'rosendsms_dash_nonce', 'security', false ) ) {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_bad_nonce',
@@ -138,7 +138,7 @@ final class SubscriberCrudHandler {
 	}
 
 	/**
-	 * Handles `wp_ajax_sendsms_dashboard_subscriber_add`.
+	 * Handles `wp_ajax_rosendsms_dash_subscriber_add`.
 	 *
 	 * Expects POST fields: `security`, `phone`, and optionally `first_name`
 	 * and `last_name`. Rejects with 409 when the phone already exists.
@@ -196,7 +196,7 @@ final class SubscriberCrudHandler {
 	}
 
 	/**
-	 * Handles `wp_ajax_sendsms_dashboard_subscriber_update`.
+	 * Handles `wp_ajax_rosendsms_dash_subscriber_update`.
 	 *
 	 * Expects POST fields: `security`, `phone` (new phone), and optionally
 	 * `old_phone`, `first_name`, and `last_name`. When `old_phone` is absent
@@ -286,7 +286,7 @@ final class SubscriberCrudHandler {
 	}
 
 	/**
-	 * Handles `wp_ajax_sendsms_dashboard_subscriber_delete`.
+	 * Handles `wp_ajax_rosendsms_dash_subscriber_delete`.
 	 *
 	 * Expects POST fields: `security` and `phone`. Returns 404 when the
 	 * subscriber does not exist, 500 on a DB failure, or a success envelope

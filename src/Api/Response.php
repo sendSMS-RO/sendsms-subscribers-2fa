@@ -2,10 +2,10 @@
 /**
  * Value object representing the result of a sendsms.ro API call.
  *
- * @package SendSMS\Dashboard\Api
+ * @package Rosendsms\Dashboard\Api
  */
 
-namespace SendSMS\Dashboard\Api;
+namespace Rosendsms\Dashboard\Api;
 
 defined( 'ABSPATH' ) || exit;
 

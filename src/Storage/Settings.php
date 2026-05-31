@@ -2,10 +2,10 @@
 /**
  * Plugin settings store backed by a single WP option.
  *
- * @package SendSMS\Dashboard\Storage
+ * @package Rosendsms\Dashboard\Storage
  */
 
-namespace SendSMS\Dashboard\Storage;
+namespace Rosendsms\Dashboard\Storage;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,7 +21,7 @@ final class Settings {
 	/**
 	 * WP option name that holds all plugin settings.
 	 */
-	private const OPTION = 'sendsms_dashboard_plugin_settings';
+	private const OPTION = 'rosendsms_dash_options';
 
 	/**
 	 * In-process cache of the full settings array.

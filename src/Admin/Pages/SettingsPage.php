@@ -4,21 +4,21 @@
  *
  * Renders the SendSMS Dashboard settings across three tabs — General, User,
  * and Subscription — and saves each tab independently via
- * {@see \SendSMS\Dashboard\Storage\Settings::update_partial()} so that saving
+ * {@see \Rosendsms\Dashboard\Storage\Settings::update_partial()} so that saving
  * one tab never overwrites values entered on another tab.
  *
  * This fixes the cross-tab-wipe bug present in v1.x, where a single
  * `options.php` form submission overwrote the entire option with only the
  * fields visible in the active tab.
  *
- * @package SendSMS\Dashboard\Admin\Pages
+ * @package Rosendsms\Dashboard\Admin\Pages
  */
 
-namespace SendSMS\Dashboard\Admin\Pages;
+namespace Rosendsms\Dashboard\Admin\Pages;
 
-use SendSMS\Dashboard\Api\Client;
-use SendSMS\Dashboard\Storage\Settings;
-use SendSMS\Dashboard\Support\CountryCodes;
+use Rosendsms\Dashboard\Api\Client;
+use Rosendsms\Dashboard\Storage\Settings;
+use Rosendsms\Dashboard\Support\CountryCodes;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
  * {@see Settings::update_partial()} with only the keys that belong to the
  * active tab, leaving the others untouched.
  *
- * Setting keys deliberately match v1.x `sendsms_dashboard_plugin_settings`
+ * Setting keys deliberately match v1.x `rosendsms_dash_options`
  * array keys so existing installations carry their configuration over without
  * any migration script.
  */
@@ -48,7 +48,7 @@ final class SettingsPage {
 	 *
 	 * @var string
 	 */
-	private const NONCE_ACTION = 'sendsms_dashboard_settings_save';
+	private const NONCE_ACTION = 'rosendsms_dash_settings_save';
 
 	/**
 	 * Nonce field name embedded in every tab form.
@@ -62,7 +62,7 @@ final class SettingsPage {
 	 *
 	 * @var string
 	 */
-	private const BALANCE_TRANSIENT = 'sendsms_dashboard_balance';
+	private const BALANCE_TRANSIENT = 'rosendsms_dash_balance';
 
 	/**
 	 * Plugin settings store.
@@ -108,9 +108,9 @@ final class SettingsPage {
 			$active = 'general';
 		}
 
-		if ( isset( $_POST['sendsms_dashboard_settings_save'] ) ) {
+		if ( isset( $_POST['rosendsms_dash_settings_save'] ) ) {
 			check_admin_referer( self::NONCE_ACTION, self::NONCE_FIELD );
-			$tab = sanitize_key( wp_unslash( $_POST['sendsms_dashboard_settings_save'] ) );
+			$tab = sanitize_key( wp_unslash( $_POST['rosendsms_dash_settings_save'] ) );
 
 			if ( 'general' === $tab ) {
 				$this->save_general();
@@ -133,7 +133,7 @@ final class SettingsPage {
 
 		echo '<form method="post">';
 		wp_nonce_field( self::NONCE_ACTION, self::NONCE_FIELD );
-		echo '<input type="hidden" name="sendsms_dashboard_settings_save" value="' . esc_attr( $active ) . '" />';
+		echo '<input type="hidden" name="rosendsms_dash_settings_save" value="' . esc_attr( $active ) . '" />';
 
 		if ( 'general' === $active ) {
 			$this->render_general();
