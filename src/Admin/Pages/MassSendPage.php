@@ -49,7 +49,7 @@ final class MassSendPage {
 		$roles = get_editable_roles();
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Send mass SMS', 'sendsms-dashboard' ); ?></h1>
+			<h1><?php esc_html_e( 'Send mass SMS', 'sendsms-subscribers-2fa' ); ?></h1>
 
 			<form class="sendsms-dashboard-mass-form" method="post">
 				<table class="form-table" role="presentation">
@@ -57,12 +57,12 @@ final class MassSendPage {
 
 						<tr>
 							<th scope="row">
-								<?php esc_html_e( 'Send to', 'sendsms-dashboard' ); ?>
+								<?php esc_html_e( 'Send to', 'sendsms-subscribers-2fa' ); ?>
 							</th>
 							<td>
 								<fieldset>
 									<legend class="screen-reader-text">
-										<span><?php esc_html_e( 'Send to', 'sendsms-dashboard' ); ?></span>
+										<span><?php esc_html_e( 'Send to', 'sendsms-subscribers-2fa' ); ?></span>
 									</legend>
 									<label>
 										<input
@@ -72,7 +72,7 @@ final class MassSendPage {
 											value="subscribers"
 											checked="checked"
 										>
-										<?php esc_html_e( 'All SMS subscribers', 'sendsms-dashboard' ); ?>
+										<?php esc_html_e( 'All SMS subscribers', 'sendsms-subscribers-2fa' ); ?>
 									</label>
 									<br>
 									<label>
@@ -82,7 +82,7 @@ final class MassSendPage {
 											id="receiver_type_users"
 											value="users"
 										>
-										<?php esc_html_e( 'WordPress users with role&hellip;', 'sendsms-dashboard' ); ?>
+										<?php esc_html_e( 'WordPress users with role&hellip;', 'sendsms-subscribers-2fa' ); ?>
 									</label>
 								</fieldset>
 							</td>
@@ -91,12 +91,12 @@ final class MassSendPage {
 						<tr id="sendsms-role-row" class="sendsms-hidden" style="display:none;">
 							<th scope="row">
 								<label for="role">
-									<?php esc_html_e( 'Role', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'Role', 'sendsms-subscribers-2fa' ); ?>
 								</label>
 							</th>
 							<td>
 								<select id="role" name="role" aria-describedby="role_help">
-									<option value="all"><?php esc_html_e( 'All roles', 'sendsms-dashboard' ); ?></option>
+									<option value="all"><?php esc_html_e( 'All roles', 'sendsms-subscribers-2fa' ); ?></option>
 									<?php foreach ( $roles as $key => $role_data ) : ?>
 										<option value="<?php echo esc_attr( $key ); ?>">
 											<?php echo esc_html( translate_user_role( $role_data['name'] ) ); ?>
@@ -104,7 +104,7 @@ final class MassSendPage {
 									<?php endforeach; ?>
 								</select>
 								<p class="description" id="role_help">
-									<?php esc_html_e( 'Choose the specific role you want to send the message to.', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'Choose the specific role you want to send the message to.', 'sendsms-subscribers-2fa' ); ?>
 								</p>
 							</td>
 						</tr>
@@ -112,7 +112,7 @@ final class MassSendPage {
 						<tr>
 							<th scope="row">
 								<label for="gdpr">
-									<?php esc_html_e( 'Add unsubscribe link?', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'Add unsubscribe link?', 'sendsms-subscribers-2fa' ); ?>
 								</label>
 							</th>
 							<td>
@@ -124,7 +124,7 @@ final class MassSendPage {
 									aria-describedby="gdpr_help"
 								>
 								<p class="description" id="gdpr_help">
-									<?php esc_html_e( 'You must include {gdpr} in your message. It will be replaced with a unique confirmation link. If omitted, the link is appended at the end.', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'You must include {gdpr} in your message. It will be replaced with a unique confirmation link. If omitted, the link is appended at the end.', 'sendsms-subscribers-2fa' ); ?>
 								</p>
 							</td>
 						</tr>
@@ -132,7 +132,7 @@ final class MassSendPage {
 						<tr>
 							<th scope="row">
 								<label for="short">
-									<?php esc_html_e( 'Shrink URLs?', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'Shrink URLs?', 'sendsms-subscribers-2fa' ); ?>
 								</label>
 							</th>
 							<td>
@@ -144,7 +144,7 @@ final class MassSendPage {
 									aria-describedby="short_help"
 								>
 								<p class="description" id="short_help">
-									<?php esc_html_e( 'Searches for long URLs and replaces them with short URLs. Use only URLs that start with https:// or http://.', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'Searches for long URLs and replaces them with short URLs. Use only URLs that start with https:// or http://.', 'sendsms-subscribers-2fa' ); ?>
 								</p>
 							</td>
 						</tr>
@@ -152,7 +152,7 @@ final class MassSendPage {
 						<tr>
 							<th scope="row">
 								<label for="message">
-									<?php esc_html_e( 'Message', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'Message', 'sendsms-subscribers-2fa' ); ?>
 								</label>
 							</th>
 							<td>
@@ -161,12 +161,12 @@ final class MassSendPage {
 									name="message"
 									rows="4"
 									class="large-text sendsms_dashboard_content"
-									aria-label="<?php esc_attr_e( 'Message', 'sendsms-dashboard' ); ?>"
+									aria-label="<?php esc_attr_e( 'Message', 'sendsms-subscribers-2fa' ); ?>"
 									aria-describedby="counterMessage"
 									data-sendsms-counter="counterMessage"
 								></textarea>
 								<p id="counterMessage" class="description">
-									<?php esc_html_e( 'The field is empty', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'The field is empty', 'sendsms-subscribers-2fa' ); ?>
 								</p>
 							</td>
 						</tr>
@@ -176,7 +176,7 @@ final class MassSendPage {
 
 				<?php
 				submit_button(
-					__( 'Send Message', 'sendsms-dashboard' ),
+					__( 'Send Message', 'sendsms-subscribers-2fa' ),
 					'primary',
 					'sendsms-dashboard-mass-submit'
 				);

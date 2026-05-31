@@ -74,7 +74,7 @@ final class SubscribersPage {
 		$action = isset( $_GET['action'] ) ? sanitize_key( (string) $_GET['action'] ) : '';
 
 		echo '<div class="wrap">';
-		echo '<h1 class="wp-heading-inline">' . esc_html__( 'SendSMS – Subscribers', 'sendsms-dashboard' ) . '</h1>';
+		echo '<h1 class="wp-heading-inline">' . esc_html__( 'SendSMS – Subscribers', 'sendsms-subscribers-2fa' ) . '</h1>';
 		echo '</div>';
 
 		$this->render_add_form();
@@ -86,7 +86,7 @@ final class SubscribersPage {
 		echo '<div class="wrap">';
 		echo '<form method="get">';
 		echo '<input type="hidden" name="page" value="sendsms-dashboard-subscribers" />';
-		$table->search_box( esc_html__( 'Search', 'sendsms-dashboard' ), 'sendsms-subscribers-search' );
+		$table->search_box( esc_html__( 'Search', 'sendsms-subscribers-2fa' ), 'sendsms-subscribers-search' );
 		$table->display();
 		echo '</form>';
 		echo '</div>';
@@ -104,7 +104,7 @@ final class SubscribersPage {
 	 */
 	private function render_add_form(): void {
 		echo '<div class="wrap">';
-		echo '<h2>' . esc_html__( 'Add subscriber', 'sendsms-dashboard' ) . '</h2>';
+		echo '<h2>' . esc_html__( 'Add subscriber', 'sendsms-subscribers-2fa' ) . '</h2>';
 		echo '<form id="sendsms-subscriber-add-form" method="post">';
 		wp_nonce_field( 'rosendsms_dash_nonce', 'security' );
 		echo '<input type="hidden" name="action" value="rosendsms_dash_subscriber_add" />';
@@ -113,17 +113,17 @@ final class SubscribersPage {
 		echo '<tbody>';
 
 		echo '<tr>';
-		echo '<th scope="row"><label for="sendsms-add-phone">' . esc_html__( 'Phone number', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th scope="row"><label for="sendsms-add-phone">' . esc_html__( 'Phone number', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td><input type="tel" id="sendsms-add-phone" name="phone" class="regular-text" required /></td>';
 		echo '</tr>';
 
 		echo '<tr>';
-		echo '<th scope="row"><label for="sendsms-add-first-name">' . esc_html__( 'First name', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th scope="row"><label for="sendsms-add-first-name">' . esc_html__( 'First name', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td><input type="text" id="sendsms-add-first-name" name="first_name" class="regular-text" /></td>';
 		echo '</tr>';
 
 		echo '<tr>';
-		echo '<th scope="row"><label for="sendsms-add-last-name">' . esc_html__( 'Last name', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th scope="row"><label for="sendsms-add-last-name">' . esc_html__( 'Last name', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td><input type="text" id="sendsms-add-last-name" name="last_name" class="regular-text" /></td>';
 		echo '</tr>';
 
@@ -131,7 +131,7 @@ final class SubscribersPage {
 		echo '</table>';
 
 		echo '<p class="submit">';
-		echo '<button type="submit" id="sendsms-subscriber-add-btn" class="button button-primary">' . esc_html__( 'Add subscriber', 'sendsms-dashboard' ) . '</button>';
+		echo '<button type="submit" id="sendsms-subscriber-add-btn" class="button button-primary">' . esc_html__( 'Add subscriber', 'sendsms-subscribers-2fa' ) . '</button>';
 		echo '</p>';
 
 		echo '<div id="sendsms-subscriber-add-message" style="display:none;"></div>';
@@ -161,12 +161,12 @@ final class SubscribersPage {
 
 		$subscriber = $repo->find( $raw_phone );
 		if ( null === $subscriber ) {
-			echo '<div class="wrap"><div class="notice notice-error"><p>' . esc_html__( 'Subscriber not found.', 'sendsms-dashboard' ) . '</p></div></div>';
+			echo '<div class="wrap"><div class="notice notice-error"><p>' . esc_html__( 'Subscriber not found.', 'sendsms-subscribers-2fa' ) . '</p></div></div>';
 			return;
 		}
 
 		echo '<div class="wrap">';
-		echo '<h2>' . esc_html__( 'Edit subscriber', 'sendsms-dashboard' ) . '</h2>';
+		echo '<h2>' . esc_html__( 'Edit subscriber', 'sendsms-subscribers-2fa' ) . '</h2>';
 		echo '<form id="sendsms-subscriber-edit-form" method="post">';
 		wp_nonce_field( 'rosendsms_dash_nonce', 'security' );
 		echo '<input type="hidden" name="action" value="rosendsms_dash_subscriber_update" />';
@@ -175,19 +175,19 @@ final class SubscribersPage {
 		echo '<tbody>';
 
 		echo '<tr>';
-		echo '<th scope="row"><label for="sendsms-edit-phone">' . esc_html__( 'Phone number', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th scope="row"><label for="sendsms-edit-phone">' . esc_html__( 'Phone number', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td>';
 		echo '<input type="tel" id="sendsms-edit-phone" name="phone" class="regular-text" value="' . esc_attr( $subscriber['phone'] ) . '" readonly />';
 		echo '</td>';
 		echo '</tr>';
 
 		echo '<tr>';
-		echo '<th scope="row"><label for="sendsms-edit-first-name">' . esc_html__( 'First name', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th scope="row"><label for="sendsms-edit-first-name">' . esc_html__( 'First name', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td><input type="text" id="sendsms-edit-first-name" name="first_name" class="regular-text" value="' . esc_attr( $subscriber['first_name'] ) . '" /></td>';
 		echo '</tr>';
 
 		echo '<tr>';
-		echo '<th scope="row"><label for="sendsms-edit-last-name">' . esc_html__( 'Last name', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th scope="row"><label for="sendsms-edit-last-name">' . esc_html__( 'Last name', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td><input type="text" id="sendsms-edit-last-name" name="last_name" class="regular-text" value="' . esc_attr( $subscriber['last_name'] ) . '" /></td>';
 		echo '</tr>';
 
@@ -195,14 +195,14 @@ final class SubscribersPage {
 		echo '</table>';
 
 		echo '<p class="submit">';
-		echo '<button type="submit" id="sendsms-subscriber-edit-btn" class="button button-primary">' . esc_html__( 'Update subscriber', 'sendsms-dashboard' ) . '</button>';
+		echo '<button type="submit" id="sendsms-subscriber-edit-btn" class="button button-primary">' . esc_html__( 'Update subscriber', 'sendsms-subscribers-2fa' ) . '</button>';
 		$cancel_url = add_query_arg(
 			array(
 				'page' => 'sendsms-dashboard-subscribers',
 			),
 			admin_url( 'admin.php' )
 		);
-		echo '&nbsp;<a href="' . esc_url( $cancel_url ) . '" class="button">' . esc_html__( 'Cancel', 'sendsms-dashboard' ) . '</a>';
+		echo '&nbsp;<a href="' . esc_url( $cancel_url ) . '" class="button">' . esc_html__( 'Cancel', 'sendsms-subscribers-2fa' ) . '</a>';
 		echo '</p>';
 
 		echo '<div id="sendsms-subscriber-edit-message" style="display:none;"></div>';
@@ -280,11 +280,11 @@ final class SubscribersListTable extends \WP_List_Table {
 	public function get_columns(): array {
 		return array(
 			'cb'         => '<input type="checkbox" />',
-			'phone'      => __( 'Phone', 'sendsms-dashboard' ),
-			'first_name' => __( 'First name', 'sendsms-dashboard' ),
-			'last_name'  => __( 'Last name', 'sendsms-dashboard' ),
-			'date'       => __( 'Date', 'sendsms-dashboard' ),
-			'synced'     => __( 'Synced', 'sendsms-dashboard' ),
+			'phone'      => __( 'Phone', 'sendsms-subscribers-2fa' ),
+			'first_name' => __( 'First name', 'sendsms-subscribers-2fa' ),
+			'last_name'  => __( 'Last name', 'sendsms-subscribers-2fa' ),
+			'date'       => __( 'Date', 'sendsms-subscribers-2fa' ),
+			'synced'     => __( 'Synced', 'sendsms-subscribers-2fa' ),
 		);
 	}
 
@@ -316,7 +316,7 @@ final class SubscribersListTable extends \WP_List_Table {
 	 */
 	public function get_bulk_actions(): array {
 		return array(
-			'delete-bulk' => __( 'Delete', 'sendsms-dashboard' ),
+			'delete-bulk' => __( 'Delete', 'sendsms-subscribers-2fa' ),
 		);
 	}
 
@@ -398,18 +398,18 @@ final class SubscribersListTable extends \WP_List_Table {
 			admin_url( 'admin.php' )
 		);
 
-		$sync_label = $synced > 0 ? __( 'Resync', 'sendsms-dashboard' ) : __( 'Sync', 'sendsms-dashboard' );
+		$sync_label = $synced > 0 ? __( 'Resync', 'sendsms-subscribers-2fa' ) : __( 'Sync', 'sendsms-subscribers-2fa' );
 
 		$actions = array(
 			'edit'   => sprintf(
 				'<a href="%s">%s</a>',
 				esc_url( $edit_url ),
-				esc_html__( 'Edit', 'sendsms-dashboard' )
+				esc_html__( 'Edit', 'sendsms-subscribers-2fa' )
 			),
 			'delete' => sprintf(
 				'<a href="#" data-action="sendsms-subscriber-delete" data-phone="%s">%s</a>',
 				esc_attr( $phone ),
-				esc_html__( 'Delete', 'sendsms-dashboard' )
+				esc_html__( 'Delete', 'sendsms-subscribers-2fa' )
 			),
 			'sync'   => sprintf(
 				'<a href="#" data-action="sendsms-subscriber-sync" data-phone="%s">%s</a>',
@@ -436,12 +436,12 @@ final class SubscribersListTable extends \WP_List_Table {
 			return esc_html(
 				sprintf(
 					/* translators: %d: remote contact ID from sendsms.ro */
-					__( 'Yes (id: %d)', 'sendsms-dashboard' ),
+					__( 'Yes (id: %d)', 'sendsms-subscribers-2fa' ),
 					$synced
 				)
 			);
 		}
-		return esc_html__( 'Not synced', 'sendsms-dashboard' );
+		return esc_html__( 'Not synced', 'sendsms-subscribers-2fa' );
 	}
 
 	/**

@@ -35,10 +35,10 @@ final class UnsubscribeWidget extends \WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'sendsms_dashboard_unsubscribe',
-			__( 'SendSMS Unsubscribe', 'sendsms-dashboard' ),
+			__( 'SendSMS Unsubscribe', 'sendsms-subscribers-2fa' ),
 			array(
 				'classname'                   => 'sendsms_dashboard_unsubscribe',
-				'description'                 => __( 'Let visitors unsubscribe from your SMS newsletter.', 'sendsms-dashboard' ),
+				'description'                 => __( 'Let visitors unsubscribe from your SMS newsletter.', 'sendsms-subscribers-2fa' ),
 				'customize_selective_refresh' => true,
 			)
 		);
@@ -65,7 +65,7 @@ final class UnsubscribeWidget extends \WP_Widget {
 		<form class="sendsms-dashboard-unsubscribe" method="post" novalidate>
 			<p class="sendsms-dashboard-field">
 				<label for="sendsms-unsubscribe-phone-<?php echo esc_attr( $this->id ); ?>">
-					<?php esc_html_e( 'Phone number', 'sendsms-dashboard' ); ?>
+					<?php esc_html_e( 'Phone number', 'sendsms-subscribers-2fa' ); ?>
 				</label>
 				<input
 					type="tel"
@@ -78,14 +78,14 @@ final class UnsubscribeWidget extends \WP_Widget {
 
 			<p class="sendsms-dashboard-field">
 				<button type="submit" class="button">
-					<?php esc_html_e( 'Unsubscribe', 'sendsms-dashboard' ); ?>
+					<?php esc_html_e( 'Unsubscribe', 'sendsms-subscribers-2fa' ); ?>
 				</button>
 			</p>
 
 			<div class="sendsms-dashboard-verify" hidden>
 				<p class="sendsms-dashboard-field">
 					<label for="sendsms-unsubscribe-code-<?php echo esc_attr( $this->id ); ?>">
-						<?php esc_html_e( 'Verification code', 'sendsms-dashboard' ); ?>
+						<?php esc_html_e( 'Verification code', 'sendsms-subscribers-2fa' ); ?>
 					</label>
 					<input
 						type="text"
@@ -97,7 +97,7 @@ final class UnsubscribeWidget extends \WP_Widget {
 				</p>
 				<p class="sendsms-dashboard-field">
 					<button type="button" class="button" data-action="verify">
-						<?php esc_html_e( 'Verify code', 'sendsms-dashboard' ); ?>
+						<?php esc_html_e( 'Verify code', 'sendsms-subscribers-2fa' ); ?>
 					</button>
 				</p>
 			</div>
@@ -120,7 +120,7 @@ final class UnsubscribeWidget extends \WP_Widget {
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-				<?php esc_html_e( 'Title:', 'sendsms-dashboard' ); ?>
+				<?php esc_html_e( 'Title:', 'sendsms-subscribers-2fa' ); ?>
 			</label>
 			<input
 				class="widefat"

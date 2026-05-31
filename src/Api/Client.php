@@ -190,13 +190,13 @@ final class Client {
 
 		$this->history->insert(
 			array(
-				'phone'   => __( 'Go to hub.sendsms.ro', 'sendsms-dashboard' ),
+				'phone'   => __( 'Go to hub.sendsms.ro', 'sendsms-subscribers-2fa' ),
 				'status'  => isset( $response->data()['status'] ) ? (string) $response->data()['status'] : '',
 				'message' => isset( $response->data()['message'] ) ? (string) $response->data()['message'] : '',
 				'details' => isset( $response->data()['details'] ) ? (string) $response->data()['details'] : '',
 				/* translators: %s is the sendsms.ro batch campaign name. */
-				'content' => sprintf( __( 'We created your campaign. Go and check the batch called: %s', 'sendsms-dashboard' ), $name ),
-				'type'    => __( 'Batch Campaign', 'sendsms-dashboard' ),
+				'content' => sprintf( __( 'We created your campaign. Go and check the batch called: %s', 'sendsms-subscribers-2fa' ), $name ),
+				'type'    => __( 'Batch Campaign', 'sendsms-subscribers-2fa' ),
 				'sent_on' => current_time( 'mysql' ),
 			)
 		);
@@ -362,17 +362,17 @@ final class Client {
 
 		if ( $status < 200 || $status >= 300 ) {
 			/* translators: %d is an HTTP response status code. */
-			return Response::failure( sprintf( __( 'HTTP %d', 'sendsms-dashboard' ), $status ), $status, $body );
+			return Response::failure( sprintf( __( 'HTTP %d', 'sendsms-subscribers-2fa' ), $status ), $status, $body );
 		}
 
 		$json = json_decode( $body, true );
 		if ( ! is_array( $json ) ) {
-			return Response::failure( __( 'Unparseable API response.', 'sendsms-dashboard' ), $status, $body );
+			return Response::failure( __( 'Unparseable API response.', 'sendsms-subscribers-2fa' ), $status, $body );
 		}
 
 		// sendsms.ro convention: numeric status < 0 indicates an error.
 		if ( isset( $json['status'] ) && is_numeric( $json['status'] ) && (int) $json['status'] < 0 ) {
-			$error = (string) ( $json['message'] ?? $json['details'] ?? __( 'API error', 'sendsms-dashboard' ) );
+			$error = (string) ( $json['message'] ?? $json['details'] ?? __( 'API error', 'sendsms-subscribers-2fa' ) );
 			return Response::failure( $error, $status, $body );
 		}
 

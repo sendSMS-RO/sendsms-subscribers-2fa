@@ -123,11 +123,11 @@ final class SettingsPage {
 			}
 
 			echo '<div class="notice notice-success is-dismissible"><p>'
-				. esc_html__( 'Settings saved.', 'sendsms-dashboard' )
+				. esc_html__( 'Settings saved.', 'sendsms-subscribers-2fa' )
 				. '</p></div>';
 		}
 
-		echo '<div class="wrap"><h1>' . esc_html__( 'SendSMS Dashboard', 'sendsms-dashboard' ) . '</h1>';
+		echo '<div class="wrap"><h1>' . esc_html__( 'SendSMS Dashboard', 'sendsms-subscribers-2fa' ) . '</h1>';
 		$this->render_balance_banner();
 		$this->render_tabs( $active );
 
@@ -145,7 +145,7 @@ final class SettingsPage {
 			$this->render_subscription();
 		}
 
-		submit_button( __( 'Save Settings', 'sendsms-dashboard' ) );
+		submit_button( __( 'Save Settings', 'sendsms-subscribers-2fa' ) );
 		echo '</form></div>';
 	}
 
@@ -171,7 +171,7 @@ final class SettingsPage {
 		if ( '' === $username || '' === $password ) {
 			printf(
 				'<div class="notice notice-warning inline"><p>%s</p></div>',
-				esc_html__( 'Enter your sendsms.ro username and password under the General tab to see your account balance.', 'sendsms-dashboard' )
+				esc_html__( 'Enter your sendsms.ro username and password under the General tab to see your account balance.', 'sendsms-subscribers-2fa' )
 			);
 			return;
 		}
@@ -183,7 +183,7 @@ final class SettingsPage {
 			if ( ! $response->is_success() ) {
 				printf(
 					'<div class="notice notice-error inline"><p>%s</p></div>',
-					esc_html__( 'Could not contact sendsms.ro to retrieve your balance. Check your credentials.', 'sendsms-dashboard' )
+					esc_html__( 'Could not contact sendsms.ro to retrieve your balance. Check your credentials.', 'sendsms-subscribers-2fa' )
 				);
 				return;
 			}
@@ -195,7 +195,7 @@ final class SettingsPage {
 
 		printf(
 			'<div class="notice notice-info inline"><p>%s <strong>%s</strong> EUR</p></div>',
-			esc_html__( 'Available balance:', 'sendsms-dashboard' ),
+			esc_html__( 'Available balance:', 'sendsms-subscribers-2fa' ),
 			esc_html( (string) $balance )
 		);
 	}
@@ -212,9 +212,9 @@ final class SettingsPage {
 	 */
 	private function render_tabs( string $active ): void {
 		$tabs = array(
-			'general'      => __( 'General', 'sendsms-dashboard' ),
-			'user'         => __( 'User', 'sendsms-dashboard' ),
-			'subscription' => __( 'Subscription', 'sendsms-dashboard' ),
+			'general'      => __( 'General', 'sendsms-subscribers-2fa' ),
+			'user'         => __( 'User', 'sendsms-subscribers-2fa' ),
+			'subscription' => __( 'Subscription', 'sendsms-subscribers-2fa' ),
 		);
 
 		echo '<nav class="nav-tab-wrapper">';
@@ -252,32 +252,32 @@ final class SettingsPage {
 
 		// Username.
 		echo '<tr>';
-		echo '<th scope="row"><label for="sendsms_username">' . esc_html__( 'SendSMS Username', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th scope="row"><label for="sendsms_username">' . esc_html__( 'SendSMS Username', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td><input type="text" id="sendsms_username" name="sendsms_username" value="'
 			. esc_attr( $username ) . '" class="regular-text" /></td>';
 		echo '</tr>';
 
 		// Password — value is intentionally blank to avoid echoing the stored secret.
 		echo '<tr>';
-		echo '<th scope="row"><label for="sendsms_password">' . esc_html__( 'SendSMS Password / API Key', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th scope="row"><label for="sendsms_password">' . esc_html__( 'SendSMS Password / API Key', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td>';
 		echo '<input type="password" id="sendsms_password" name="sendsms_password" value="" class="regular-text" />';
-		echo '<p class="description">' . esc_html__( 'Leave blank to keep the current password.', 'sendsms-dashboard' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Leave blank to keep the current password.', 'sendsms-subscribers-2fa' ) . '</p>';
 		echo '</td>';
 		echo '</tr>';
 
 		// Label (sender ID).
 		echo '<tr>';
-		echo '<th scope="row"><label for="sendsms_label">' . esc_html__( 'SendSMS Label (Sender ID)', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th scope="row"><label for="sendsms_label">' . esc_html__( 'SendSMS Label (Sender ID)', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td><input type="text" id="sendsms_label" name="sendsms_label" value="'
 			. esc_attr( $label ) . '" class="regular-text" /></td>';
 		echo '</tr>';
 
 		// Country code dropdown.
 		echo '<tr>';
-		echo '<th scope="row"><label for="sendsms_cc">' . esc_html__( 'Country Code', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th scope="row"><label for="sendsms_cc">' . esc_html__( 'Country Code', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td><select id="sendsms_cc" name="sendsms_cc">';
-		echo '<option value="INT"' . selected( $cc, 'INT', false ) . '>' . esc_html__( 'International', 'sendsms-dashboard' ) . '</option>';
+		echo '<option value="INT"' . selected( $cc, 'INT', false ) . '>' . esc_html__( 'International', 'sendsms-subscribers-2fa' ) . '</option>';
 		foreach ( CountryCodes::map() as $code => $prefix ) {
 			printf(
 				'<option value="%s"%s>%s (+%s)</option>',
@@ -354,16 +354,16 @@ final class SettingsPage {
 
 		// add_phone_field checkbox.
 		echo '<tr>';
-		echo '<th scope="row">' . esc_html__( 'Add phone number field / Enable 2FA', 'sendsms-dashboard' ) . '</th>';
+		echo '<th scope="row">' . esc_html__( 'Add phone number field / Enable 2FA', 'sendsms-subscribers-2fa' ) . '</th>';
 		echo '<td>';
 		echo '<label><input type="checkbox" name="sendsms_add_phone_field" value="1"'
 			. checked( $add_phone, true, false ) . ' /> ';
-		echo esc_html__( 'Add a phone number field in the user editing form and activate the 2FA feature.', 'sendsms-dashboard' );
+		echo esc_html__( 'Add a phone number field in the user editing form and activate the 2FA feature.', 'sendsms-subscribers-2fa' );
 		echo '</label>';
 		echo '<p class="description">'
 			. esc_html__(
 				'This is designed only with the default wp-admin login form in mind. It may break if you have another login system. Test in a development environment first.',
-				'sendsms-dashboard'
+				'sendsms-subscribers-2fa'
 			)
 			. '</p>';
 		echo '</td>';
@@ -371,7 +371,7 @@ final class SettingsPage {
 
 		// 2fa_roles — one checkbox per role.
 		echo '<tr>';
-		echo '<th scope="row">' . esc_html__( 'Enable 2FA for the following roles', 'sendsms-dashboard' ) . '</th>';
+		echo '<th scope="row">' . esc_html__( 'Enable 2FA for the following roles', 'sendsms-subscribers-2fa' ) . '</th>';
 		echo '<td>';
 		$roles = wp_roles()->roles;
 		foreach ( $roles as $role_key => $role_data ) {
@@ -391,7 +391,7 @@ final class SettingsPage {
 		// 2fa_verification_message textarea.
 		echo '<tr>';
 		echo '<th scope="row"><label for="sendsms_2fa_msg">'
-			. esc_html__( 'Two-factor authentication verification message', 'sendsms-dashboard' )
+			. esc_html__( 'Two-factor authentication verification message', 'sendsms-subscribers-2fa' )
 			. '</label></th>';
 		echo '<td>';
 		echo '<textarea id="sendsms_2fa_msg" name="sendsms_2fa_verification_message" cols="50" rows="5">'
@@ -399,7 +399,7 @@ final class SettingsPage {
 		echo '<p class="description">'
 			. esc_html__(
 				'Use {code} as a placeholder for the verification code. If omitted, the code is appended at the end.',
-				'sendsms-dashboard'
+				'sendsms-subscribers-2fa'
 			)
 			. '</p>';
 		echo '</td>';
@@ -408,7 +408,7 @@ final class SettingsPage {
 		// phone_meta textarea.
 		echo '<tr>';
 		echo '<th scope="row"><label for="sendsms_phone_meta">'
-			. esc_html__( 'Phone metadata list', 'sendsms-dashboard' )
+			. esc_html__( 'Phone metadata list', 'sendsms-subscribers-2fa' )
 			. '</label></th>';
 		echo '<td>';
 		echo '<textarea id="sendsms_phone_meta" name="sendsms_phone_meta" cols="50" rows="5">'
@@ -416,7 +416,7 @@ final class SettingsPage {
 		echo '<p class="description">'
 			. esc_html__(
 				'One user meta key per line. The plugin queries each key in order and uses the first valid phone number found. If empty, defaults to sendsms_phone_number.',
-				'sendsms-dashboard'
+				'sendsms-subscribers-2fa'
 			)
 			. '</p>';
 		echo '</td>';
@@ -497,11 +497,11 @@ final class SettingsPage {
 
 		// subscribe_phone_verification checkbox.
 		echo '<tr>';
-		echo '<th scope="row">' . esc_html__( 'SMS verification?', 'sendsms-dashboard' ) . '</th>';
+		echo '<th scope="row">' . esc_html__( 'SMS verification?', 'sendsms-subscribers-2fa' ) . '</th>';
 		echo '<td>';
 		echo '<label><input type="checkbox" name="sendsms_subscribe_phone_verification" value="1"'
 			. checked( $verification_on, true, false ) . ' /> ';
-		echo esc_html__( 'Send a verification code when someone subscribes or unsubscribes.', 'sendsms-dashboard' );
+		echo esc_html__( 'Send a verification code when someone subscribes or unsubscribes.', 'sendsms-subscribers-2fa' );
 		echo '</label>';
 		echo '</td>';
 		echo '</tr>';
@@ -509,7 +509,7 @@ final class SettingsPage {
 		// subscribe_verification_message textarea.
 		echo '<tr>';
 		echo '<th scope="row"><label for="sendsms_sub_msg">'
-			. esc_html__( 'Verification message', 'sendsms-dashboard' )
+			. esc_html__( 'Verification message', 'sendsms-subscribers-2fa' )
 			. '</label></th>';
 		echo '<td>';
 		echo '<textarea id="sendsms_sub_msg" name="sendsms_subscribe_verification_message" cols="50" rows="5">'
@@ -517,7 +517,7 @@ final class SettingsPage {
 		echo '<p class="description">'
 			. esc_html__(
 				'Use {code} as a placeholder for the verification code. If omitted, the code is appended at the end.',
-				'sendsms-dashboard'
+				'sendsms-subscribers-2fa'
 			)
 			. '</p>';
 		echo '</td>';
@@ -526,7 +526,7 @@ final class SettingsPage {
 		// ip_limit text field.
 		echo '<tr>';
 		echo '<th scope="row"><label for="sendsms_ip_limit">'
-			. esc_html__( 'IP limit', 'sendsms-dashboard' )
+			. esc_html__( 'IP limit', 'sendsms-subscribers-2fa' )
 			. '</label></th>';
 		echo '<td>';
 		echo '<input type="text" id="sendsms_ip_limit" name="sendsms_ip_limit" value="'
@@ -534,7 +534,7 @@ final class SettingsPage {
 		echo '<p class="description">'
 			. esc_html__(
 				'Max subscriptions per IP in format maximum/minutes (e.g. 5/10 = 5 per 10 min). Use -1 for unlimited minutes (e.g. 5/-1). Leave blank for no restriction.',
-				'sendsms-dashboard'
+				'sendsms-subscribers-2fa'
 			)
 			. '</p>';
 		echo '</td>';
@@ -543,13 +543,13 @@ final class SettingsPage {
 		// restricted_ips textarea.
 		echo '<tr>';
 		echo '<th scope="row"><label for="sendsms_restricted_ips">'
-			. esc_html__( 'Restricted IP addresses', 'sendsms-dashboard' )
+			. esc_html__( 'Restricted IP addresses', 'sendsms-subscribers-2fa' )
 			. '</label></th>';
 		echo '<td>';
 		echo '<textarea id="sendsms_restricted_ips" name="sendsms_restricted_ips" cols="50" rows="5">'
 			. esc_textarea( $restricted_ips ) . '</textarea>';
 		echo '<p class="description">'
-			. esc_html__( 'One IP address per line. These IPs will be blocked from subscribing or unsubscribing.', 'sendsms-dashboard' )
+			. esc_html__( 'One IP address per line. These IPs will be blocked from subscribing or unsubscribing.', 'sendsms-subscribers-2fa' )
 			. '</p>';
 		echo '</td>';
 		echo '</tr>';

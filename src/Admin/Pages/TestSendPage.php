@@ -45,7 +45,7 @@ final class TestSendPage {
 		}
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Send a test SMS', 'sendsms-dashboard' ); ?></h1>
+			<h1><?php esc_html_e( 'Send a test SMS', 'sendsms-subscribers-2fa' ); ?></h1>
 
 			<form class="sendsms-dashboard-test-form" method="post">
 				<table class="form-table" role="presentation">
@@ -54,7 +54,7 @@ final class TestSendPage {
 						<tr>
 							<th scope="row">
 								<label for="phone_number">
-									<?php esc_html_e( 'Phone number', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'Phone number', 'sendsms-subscribers-2fa' ); ?>
 								</label>
 							</th>
 							<td>
@@ -64,11 +64,11 @@ final class TestSendPage {
 									type="tel"
 									class="regular-text"
 									placeholder="40727363767"
-									aria-label="<?php esc_attr_e( 'Phone number', 'sendsms-dashboard' ); ?>"
+									aria-label="<?php esc_attr_e( 'Phone number', 'sendsms-subscribers-2fa' ); ?>"
 									aria-describedby="phone_number_help"
 								>
 								<p class="description" id="phone_number_help">
-									<?php esc_html_e( 'We recommend a phone number in E.164 format but without the + sign.', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'We recommend a phone number in E.164 format but without the + sign.', 'sendsms-subscribers-2fa' ); ?>
 								</p>
 							</td>
 						</tr>
@@ -76,7 +76,7 @@ final class TestSendPage {
 						<tr>
 							<th scope="row">
 								<label for="gdpr">
-									<?php esc_html_e( 'Add unsubscribe link?', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'Add unsubscribe link?', 'sendsms-subscribers-2fa' ); ?>
 								</label>
 							</th>
 							<td>
@@ -88,7 +88,7 @@ final class TestSendPage {
 									aria-describedby="gdpr_help"
 								>
 								<p class="description" id="gdpr_help">
-									<?php esc_html_e( 'You must include {gdpr} in your message. It will be replaced with a unique confirmation link. If omitted, the link is appended at the end.', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'You must include {gdpr} in your message. It will be replaced with a unique confirmation link. If omitted, the link is appended at the end.', 'sendsms-subscribers-2fa' ); ?>
 								</p>
 							</td>
 						</tr>
@@ -96,7 +96,7 @@ final class TestSendPage {
 						<tr>
 							<th scope="row">
 								<label for="short">
-									<?php esc_html_e( 'Shrink URLs?', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'Shrink URLs?', 'sendsms-subscribers-2fa' ); ?>
 								</label>
 							</th>
 							<td>
@@ -108,7 +108,7 @@ final class TestSendPage {
 									aria-describedby="short_help"
 								>
 								<p class="description" id="short_help">
-									<?php esc_html_e( 'Searches for long URLs and replaces them with short URLs. Use only URLs that start with https:// or http://.', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'Searches for long URLs and replaces them with short URLs. Use only URLs that start with https:// or http://.', 'sendsms-subscribers-2fa' ); ?>
 								</p>
 							</td>
 						</tr>
@@ -116,7 +116,7 @@ final class TestSendPage {
 						<tr>
 							<th scope="row">
 								<label for="message">
-									<?php esc_html_e( 'Message', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'Message', 'sendsms-subscribers-2fa' ); ?>
 								</label>
 							</th>
 							<td>
@@ -125,12 +125,12 @@ final class TestSendPage {
 									name="message"
 									rows="4"
 									class="large-text sendsms_dashboard_content"
-									aria-label="<?php esc_attr_e( 'Message', 'sendsms-dashboard' ); ?>"
+									aria-label="<?php esc_attr_e( 'Message', 'sendsms-subscribers-2fa' ); ?>"
 									aria-describedby="counterMessage"
 									data-sendsms-counter="counterMessage"
 								></textarea>
 								<p id="counterMessage" class="description">
-									<?php esc_html_e( 'The field is empty', 'sendsms-dashboard' ); ?>
+									<?php esc_html_e( 'The field is empty', 'sendsms-subscribers-2fa' ); ?>
 								</p>
 							</td>
 						</tr>
@@ -140,7 +140,7 @@ final class TestSendPage {
 
 				<?php
 				submit_button(
-					__( 'Send Message', 'sendsms-dashboard' ),
+					__( 'Send Message', 'sendsms-subscribers-2fa' ),
 					'primary',
 					'sendsms-dashboard-test-submit'
 				);

@@ -35,10 +35,10 @@ final class SubscribeWidget extends \WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'sendsms_dashboard_subscriber',
-			__( 'SendSMS Subscribe', 'sendsms-dashboard' ),
+			__( 'SendSMS Subscribe', 'sendsms-subscribers-2fa' ),
 			array(
 				'classname'                   => 'sendsms_dashboard_subscriber',
-				'description'                 => __( 'Let visitors subscribe to your SMS newsletter. GDPR-compliant with optional two-step phone verification.', 'sendsms-dashboard' ),
+				'description'                 => __( 'Let visitors subscribe to your SMS newsletter. GDPR-compliant with optional two-step phone verification.', 'sendsms-subscribers-2fa' ),
 				'customize_selective_refresh' => true,
 			)
 		);
@@ -66,7 +66,7 @@ final class SubscribeWidget extends \WP_Widget {
 		<form class="sendsms-dashboard-subscribe" method="post" novalidate>
 			<p class="sendsms-dashboard-field">
 				<label for="sendsms-subscribe-first-name-<?php echo esc_attr( $this->id ); ?>">
-					<?php esc_html_e( 'First name', 'sendsms-dashboard' ); ?>
+					<?php esc_html_e( 'First name', 'sendsms-subscribers-2fa' ); ?>
 				</label>
 				<input
 					type="text"
@@ -78,7 +78,7 @@ final class SubscribeWidget extends \WP_Widget {
 
 			<p class="sendsms-dashboard-field">
 				<label for="sendsms-subscribe-last-name-<?php echo esc_attr( $this->id ); ?>">
-					<?php esc_html_e( 'Last name', 'sendsms-dashboard' ); ?>
+					<?php esc_html_e( 'Last name', 'sendsms-subscribers-2fa' ); ?>
 				</label>
 				<input
 					type="text"
@@ -90,7 +90,7 @@ final class SubscribeWidget extends \WP_Widget {
 
 			<p class="sendsms-dashboard-field">
 				<label for="sendsms-subscribe-phone-<?php echo esc_attr( $this->id ); ?>">
-					<?php esc_html_e( 'Phone number', 'sendsms-dashboard' ); ?>
+					<?php esc_html_e( 'Phone number', 'sendsms-subscribers-2fa' ); ?>
 				</label>
 				<input
 					type="tel"
@@ -111,7 +111,7 @@ final class SubscribeWidget extends \WP_Widget {
 						echo wp_kses(
 							sprintf(
 								/* translators: 1: opening <a> tag, 2: closing </a> tag. */
-								__( 'I agree with the %1$sprivacy policy%2$s', 'sendsms-dashboard' ),
+								__( 'I agree with the %1$sprivacy policy%2$s', 'sendsms-subscribers-2fa' ),
 								$link_open,
 								$link_close
 							),
@@ -124,7 +124,7 @@ final class SubscribeWidget extends \WP_Widget {
 							)
 						);
 					} else {
-						esc_html_e( 'I agree with the privacy policy', 'sendsms-dashboard' );
+						esc_html_e( 'I agree with the privacy policy', 'sendsms-subscribers-2fa' );
 					}
 					?>
 				</label>
@@ -132,14 +132,14 @@ final class SubscribeWidget extends \WP_Widget {
 
 			<p class="sendsms-dashboard-field">
 				<button type="submit" class="button">
-					<?php esc_html_e( 'Subscribe', 'sendsms-dashboard' ); ?>
+					<?php esc_html_e( 'Subscribe', 'sendsms-subscribers-2fa' ); ?>
 				</button>
 			</p>
 
 			<div class="sendsms-dashboard-verify" hidden>
 				<p class="sendsms-dashboard-field">
 					<label for="sendsms-subscribe-code-<?php echo esc_attr( $this->id ); ?>">
-						<?php esc_html_e( 'Verification code', 'sendsms-dashboard' ); ?>
+						<?php esc_html_e( 'Verification code', 'sendsms-subscribers-2fa' ); ?>
 					</label>
 					<input
 						type="text"
@@ -151,7 +151,7 @@ final class SubscribeWidget extends \WP_Widget {
 				</p>
 				<p class="sendsms-dashboard-field">
 					<button type="button" class="button" data-action="verify">
-						<?php esc_html_e( 'Verify code', 'sendsms-dashboard' ); ?>
+						<?php esc_html_e( 'Verify code', 'sendsms-subscribers-2fa' ); ?>
 					</button>
 				</p>
 			</div>
@@ -175,7 +175,7 @@ final class SubscribeWidget extends \WP_Widget {
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-				<?php esc_html_e( 'Title:', 'sendsms-dashboard' ); ?>
+				<?php esc_html_e( 'Title:', 'sendsms-subscribers-2fa' ); ?>
 			</label>
 			<input
 				class="widefat"
@@ -187,7 +187,7 @@ final class SubscribeWidget extends \WP_Widget {
 		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'gdpr_link' ) ); ?>">
-				<?php esc_html_e( 'GDPR / Privacy policy URL:', 'sendsms-dashboard' ); ?>
+				<?php esc_html_e( 'GDPR / Privacy policy URL:', 'sendsms-subscribers-2fa' ); ?>
 			</label>
 			<input
 				class="widefat"

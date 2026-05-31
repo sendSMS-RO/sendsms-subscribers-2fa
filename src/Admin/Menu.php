@@ -89,8 +89,8 @@ final class Menu {
 		$cap = 'manage_options';
 
 		$top = add_menu_page(
-			__( 'SendSMS Dashboard', 'sendsms-dashboard' ),
-			__( 'SendSMS Dashboard', 'sendsms-dashboard' ),
+			__( 'SendSMS Dashboard', 'sendsms-subscribers-2fa' ),
+			__( 'SendSMS Dashboard', 'sendsms-subscribers-2fa' ),
 			$cap,
 			self::SLUG,
 			array( $this, 'render_settings' ),
@@ -102,11 +102,11 @@ final class Menu {
 		}
 
 		$screens = array(
-			array( self::SLUG, __( 'Settings', 'sendsms-dashboard' ), __( 'Settings', 'sendsms-dashboard' ), array( $this, 'render_settings' ) ),
-			array( self::SLUG . '-test', __( 'Send a test SMS', 'sendsms-dashboard' ), __( 'Send a test SMS', 'sendsms-dashboard' ), array( $this, 'render_test' ) ),
-			array( self::SLUG . '-history', __( 'History', 'sendsms-dashboard' ), __( 'History', 'sendsms-dashboard' ), array( $this, 'render_history' ) ),
-			array( self::SLUG . '-subscribers', __( 'Subscribers', 'sendsms-dashboard' ), __( 'Subscribers', 'sendsms-dashboard' ), array( $this, 'render_subscribers' ) ),
-			array( self::SLUG . '-mass-send', __( 'SMS sending', 'sendsms-dashboard' ), __( 'SMS sending', 'sendsms-dashboard' ), array( $this, 'render_mass_send' ) ),
+			array( self::SLUG, __( 'Settings', 'sendsms-subscribers-2fa' ), __( 'Settings', 'sendsms-subscribers-2fa' ), array( $this, 'render_settings' ) ),
+			array( self::SLUG . '-test', __( 'Send a test SMS', 'sendsms-subscribers-2fa' ), __( 'Send a test SMS', 'sendsms-subscribers-2fa' ), array( $this, 'render_test' ) ),
+			array( self::SLUG . '-history', __( 'History', 'sendsms-subscribers-2fa' ), __( 'History', 'sendsms-subscribers-2fa' ), array( $this, 'render_history' ) ),
+			array( self::SLUG . '-subscribers', __( 'Subscribers', 'sendsms-subscribers-2fa' ), __( 'Subscribers', 'sendsms-subscribers-2fa' ), array( $this, 'render_subscribers' ) ),
+			array( self::SLUG . '-mass-send', __( 'SMS sending', 'sendsms-subscribers-2fa' ), __( 'SMS sending', 'sendsms-subscribers-2fa' ), array( $this, 'render_mass_send' ) ),
 		);
 
 		foreach ( $screens as $row ) {
@@ -153,10 +153,10 @@ final class Menu {
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'nonce'   => wp_create_nonce( 'rosendsms_dash_nonce' ),
 				'i18n'    => array(
-					'sending'    => __( 'Sending…', 'sendsms-dashboard' ),
-					'sent'       => __( 'Sent.', 'sendsms-dashboard' ),
-					'failed'     => __( 'Failed.', 'sendsms-dashboard' ),
-					'confirmDel' => __( 'Delete this subscriber?', 'sendsms-dashboard' ),
+					'sending'    => __( 'Sending…', 'sendsms-subscribers-2fa' ),
+					'sent'       => __( 'Sent.', 'sendsms-subscribers-2fa' ),
+					'failed'     => __( 'Failed.', 'sendsms-subscribers-2fa' ),
+					'confirmDel' => __( 'Delete this subscriber?', 'sendsms-subscribers-2fa' ),
 				),
 			)
 		);

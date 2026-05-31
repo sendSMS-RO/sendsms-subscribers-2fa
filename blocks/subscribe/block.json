@@ -8,7 +8,7 @@
 	"icon": "smartphone",
 	"description": "Render the SendSMS subscribe form so visitors can opt in to your SMS list.",
 	"keywords": ["sms", "subscribe", "sendsms", "newsletter"],
-	"textdomain": "sendsms-dashboard",
+	"textdomain": "sendsms-subscribers-2fa",
 	"attributes": {
 		"title": {
 			"type": "string",

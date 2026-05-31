@@ -1,17 +1,17 @@
-=== SendSMS Dashboard ===
+=== SendSMS Subscribers & 2FA ===
 Contributors: sendsms, neamtua
 Tags: sms, sendsms, subscribers, 2fa, marketing
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Manage SMS subscribers, run campaigns, and protect wp-admin with SMS 2FA — all through the sendsms.ro gateway.
 
 == Description ==
-**SendSMS Dashboard** connects your WordPress site to the [sendsms.ro](https://www.sendsms.ro/en/) SMS gateway and gives you two independent capabilities: a full subscriber management and SMS marketing system, and an SMS-based two-factor authentication layer on the wp-admin login form.
+**SendSMS Subscribers & 2FA** connects your WordPress site to the [sendsms.ro](https://www.sendsms.ro/en/) SMS gateway and gives you two independent capabilities: a full subscriber management and SMS marketing system, and an SMS-based two-factor authentication layer on the wp-admin login form.
 
 **Subscriber management and campaigns:**
 
@@ -133,6 +133,9 @@ Third-party terms of service and privacy:
 6. Send a test SMS page: send a one-off message to any number to verify your sender label and content.
 
 == Changelog ==
+= 2.0.2 =
+Renamed the plugin to **SendSMS Subscribers & 2FA** (text domain `sendsms-subscribers-2fa`) so it can be published in the WordPress.org directory. No functional or data changes — your settings, subscribers, SMS history, shortcodes, blocks, widgets, and CSS classes are all unchanged.
+
 = 2.0.1 =
 Naming/compliance pass for WordPress.org. All internal identifiers now carry a distinct, collision-safe `rosendsms_dash_` prefix so the plugin coexists cleanly with other plugins (including *SendSMS for WooCommerce*). Your settings, SMS history, and subscriber list are migrated automatically on update.
 
@@ -161,6 +164,9 @@ Full architectural rewrite. The plugin now follows modern WordPress conventions 
 * Initial release.
 
 == Upgrade Notice ==
+= 2.0.2 =
+Plugin renamed to "SendSMS Subscribers & 2FA" for the WordPress.org directory. No functional or data changes.
+
 = 2.0.1 =
 Internal names are now prefixed `rosendsms_dash_`. Settings, SMS history, and subscribers migrate automatically; shortcodes, blocks, widgets, and CSS classes are unchanged.
 

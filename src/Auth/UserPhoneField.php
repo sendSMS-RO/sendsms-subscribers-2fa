@@ -81,12 +81,12 @@ final class UserPhoneField {
 		$primary = $keys[0];
 		$value   = (string) get_user_meta( $user->ID, $primary, true );
 
-		echo '<h2>' . esc_html__( 'SendSMS Dashboard', 'sendsms-dashboard' ) . '</h2>';
+		echo '<h2>' . esc_html__( 'SendSMS Dashboard', 'sendsms-subscribers-2fa' ) . '</h2>';
 		echo '<table class="form-table"><tr>';
-		echo '<th><label for="sendsms_phone_number">' . esc_html__( 'Phone number', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th><label for="sendsms_phone_number">' . esc_html__( 'Phone number', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td>';
 		echo '<input type="tel" name="sendsms_phone_number" id="sendsms_phone_number" value="' . esc_attr( $value ) . '" class="regular-text" />';
-		echo '<p class="description">' . esc_html__( 'Required for SMS 2FA.', 'sendsms-dashboard' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Required for SMS 2FA.', 'sendsms-subscribers-2fa' ) . '</p>';
 		echo '</td>';
 		echo '</tr></table>';
 	}
@@ -101,9 +101,9 @@ final class UserPhoneField {
 	 * @return void
 	 */
 	public function render_new(): void {
-		echo '<h2>' . esc_html__( 'SendSMS Dashboard', 'sendsms-dashboard' ) . '</h2>';
+		echo '<h2>' . esc_html__( 'SendSMS Dashboard', 'sendsms-subscribers-2fa' ) . '</h2>';
 		echo '<table class="form-table"><tr>';
-		echo '<th><label for="sendsms_phone_number">' . esc_html__( 'Phone number', 'sendsms-dashboard' ) . '</label></th>';
+		echo '<th><label for="sendsms_phone_number">' . esc_html__( 'Phone number', 'sendsms-subscribers-2fa' ) . '</label></th>';
 		echo '<td>';
 		echo '<input type="tel" name="sendsms_phone_number" id="sendsms_phone_number" value="" class="regular-text" />';
 		echo '</td>';

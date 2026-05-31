@@ -61,10 +61,10 @@ final class HistoryPage {
 		$table->prepare_items();
 
 		echo '<div class="wrap">';
-		echo '<h1>' . esc_html__( 'SMS History', 'sendsms-dashboard' ) . '</h1>';
+		echo '<h1>' . esc_html__( 'SMS History', 'sendsms-subscribers-2fa' ) . '</h1>';
 		echo '<form method="get">';
 		echo '<input type="hidden" name="page" value="sendsms-dashboard-history" />';
-		$table->search_box( esc_html__( 'Search', 'sendsms-dashboard' ), 'sendsms-history-search' );
+		$table->search_box( esc_html__( 'Search', 'sendsms-subscribers-2fa' ), 'sendsms-history-search' );
 		$table->display();
 		echo '</form>';
 		echo '</div>';
@@ -135,13 +135,13 @@ final class HistoryListTable extends \WP_List_Table {
 	 */
 	public function get_columns(): array {
 		return array(
-			'sent_on' => __( 'Date', 'sendsms-dashboard' ),
-			'phone'   => __( 'Recipient', 'sendsms-dashboard' ),
-			'content' => __( 'Content', 'sendsms-dashboard' ),
-			'status'  => __( 'Status', 'sendsms-dashboard' ),
-			'message' => __( 'Message', 'sendsms-dashboard' ),
-			'details' => __( 'Details', 'sendsms-dashboard' ),
-			'type'    => __( 'Type', 'sendsms-dashboard' ),
+			'sent_on' => __( 'Date', 'sendsms-subscribers-2fa' ),
+			'phone'   => __( 'Recipient', 'sendsms-subscribers-2fa' ),
+			'content' => __( 'Content', 'sendsms-subscribers-2fa' ),
+			'status'  => __( 'Status', 'sendsms-subscribers-2fa' ),
+			'message' => __( 'Message', 'sendsms-subscribers-2fa' ),
+			'details' => __( 'Details', 'sendsms-subscribers-2fa' ),
+			'type'    => __( 'Type', 'sendsms-subscribers-2fa' ),
 		);
 	}
 

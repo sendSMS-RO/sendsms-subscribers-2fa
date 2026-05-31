@@ -224,10 +224,10 @@ final class Plugin {
 						'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 						'nonce'   => wp_create_nonce( 'rosendsms_dash_nonce' ),
 						'i18n'    => array(
-							'sending'  => __( 'Sending…', 'sendsms-dashboard' ),
-							'success'  => __( 'Thank you!', 'sendsms-dashboard' ),
-							'fail'     => __( 'Something went wrong. Please try again.', 'sendsms-dashboard' ),
-							'codeSent' => __( 'Check your phone for the verification code.', 'sendsms-dashboard' ),
+							'sending'  => __( 'Sending…', 'sendsms-subscribers-2fa' ),
+							'success'  => __( 'Thank you!', 'sendsms-subscribers-2fa' ),
+							'fail'     => __( 'Something went wrong. Please try again.', 'sendsms-subscribers-2fa' ),
+							'codeSent' => __( 'Check your phone for the verification code.', 'sendsms-subscribers-2fa' ),
 						),
 					)
 				);

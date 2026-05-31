@@ -97,7 +97,7 @@ final class MassSendHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_bad_nonce',
-					'message' => __( 'Security check failed.', 'sendsms-dashboard' ),
+					'message' => __( 'Security check failed.', 'sendsms-subscribers-2fa' ),
 				),
 				403
 			);
@@ -108,7 +108,7 @@ final class MassSendHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_forbidden',
-					'message' => __( 'Forbidden.', 'sendsms-dashboard' ),
+					'message' => __( 'Forbidden.', 'sendsms-subscribers-2fa' ),
 				),
 				403
 			);
@@ -121,7 +121,7 @@ final class MassSendHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_missing_input',
-					'message' => __( 'Message is required.', 'sendsms-dashboard' ),
+					'message' => __( 'Message is required.', 'sendsms-subscribers-2fa' ),
 				),
 				400
 			);
@@ -178,7 +178,7 @@ final class MassSendHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_no_recipients',
-					'message' => __( 'No valid recipients.', 'sendsms-dashboard' ),
+					'message' => __( 'No valid recipients.', 'sendsms-subscribers-2fa' ),
 				),
 				400
 			);

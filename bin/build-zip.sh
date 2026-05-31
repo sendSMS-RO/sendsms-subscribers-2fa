@@ -18,7 +18,9 @@ REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 cd "${REPO_ROOT}"
 
 # ---- plugin metadata ------------------------------------------------------
-PLUGIN_SLUG="sendsms-dashboard"
+# Directory slug for the WordPress.org listing (the zip's top-level folder)
+# and the main plugin file. The git repository itself is not renamed.
+PLUGIN_SLUG="sendsms-subscribers-2fa"
 PLUGIN_FILE="${PLUGIN_SLUG}.php"
 README_FILE="readme.txt"
 

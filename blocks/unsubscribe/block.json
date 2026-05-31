@@ -8,7 +8,7 @@
 	"icon": "smartphone",
 	"description": "Render the SendSMS unsubscribe form so visitors can remove their phone from your SMS list.",
 	"keywords": ["sms", "unsubscribe", "sendsms"],
-	"textdomain": "sendsms-dashboard",
+	"textdomain": "sendsms-subscribers-2fa",
 	"attributes": {
 		"title": {
 			"type": "string",

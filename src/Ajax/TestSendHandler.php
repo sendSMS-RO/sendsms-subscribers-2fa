@@ -68,7 +68,7 @@ final class TestSendHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_bad_nonce',
-					'message' => __( 'Security check failed.', 'sendsms-dashboard' ),
+					'message' => __( 'Security check failed.', 'sendsms-subscribers-2fa' ),
 				),
 				403
 			);
@@ -78,7 +78,7 @@ final class TestSendHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_forbidden',
-					'message' => __( 'Forbidden.', 'sendsms-dashboard' ),
+					'message' => __( 'Forbidden.', 'sendsms-subscribers-2fa' ),
 				),
 				403
 			);
@@ -91,7 +91,7 @@ final class TestSendHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_missing_input',
-					'message' => __( 'Phone and message are required.', 'sendsms-dashboard' ),
+					'message' => __( 'Phone and message are required.', 'sendsms-subscribers-2fa' ),
 				),
 				400
 			);

@@ -94,7 +94,7 @@ final class SubscriberCrudHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_bad_nonce',
-					'message' => __( 'Security check failed.', 'sendsms-dashboard' ),
+					'message' => __( 'Security check failed.', 'sendsms-subscribers-2fa' ),
 				),
 				403
 			);
@@ -103,7 +103,7 @@ final class SubscriberCrudHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_forbidden',
-					'message' => __( 'Forbidden.', 'sendsms-dashboard' ),
+					'message' => __( 'Forbidden.', 'sendsms-subscribers-2fa' ),
 				),
 				403
 			);
@@ -129,7 +129,7 @@ final class SubscriberCrudHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_invalid_phone',
-					'message' => __( 'Invalid phone number.', 'sendsms-dashboard' ),
+					'message' => __( 'Invalid phone number.', 'sendsms-subscribers-2fa' ),
 				),
 				400
 			);
@@ -159,7 +159,7 @@ final class SubscriberCrudHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_duplicate_phone',
-					'message' => __( 'A subscriber with this phone already exists.', 'sendsms-dashboard' ),
+					'message' => __( 'A subscriber with this phone already exists.', 'sendsms-subscribers-2fa' ),
 				),
 				409
 			);
@@ -180,7 +180,7 @@ final class SubscriberCrudHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_insert_failed',
-					'message' => __( 'Failed to add subscriber.', 'sendsms-dashboard' ),
+					'message' => __( 'Failed to add subscriber.', 'sendsms-subscribers-2fa' ),
 				),
 				500
 			);
@@ -235,7 +235,7 @@ final class SubscriberCrudHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_not_found',
-					'message' => __( 'Subscriber not found.', 'sendsms-dashboard' ),
+					'message' => __( 'Subscriber not found.', 'sendsms-subscribers-2fa' ),
 				),
 				404
 			);
@@ -247,7 +247,7 @@ final class SubscriberCrudHandler {
 				wp_send_json_error(
 					array(
 						'code'    => 'sendsms_dashboard_duplicate_phone',
-						'message' => __( 'A subscriber with the new phone already exists.', 'sendsms-dashboard' ),
+						'message' => __( 'A subscriber with the new phone already exists.', 'sendsms-subscribers-2fa' ),
 					),
 					409
 				);
@@ -303,7 +303,7 @@ final class SubscriberCrudHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_not_found',
-					'message' => __( 'Subscriber not found.', 'sendsms-dashboard' ),
+					'message' => __( 'Subscriber not found.', 'sendsms-subscribers-2fa' ),
 				),
 				404
 			);
@@ -315,7 +315,7 @@ final class SubscriberCrudHandler {
 			wp_send_json_error(
 				array(
 					'code'    => 'sendsms_dashboard_delete_failed',
-					'message' => __( 'Failed to delete subscriber.', 'sendsms-dashboard' ),
+					'message' => __( 'Failed to delete subscriber.', 'sendsms-subscribers-2fa' ),
 				),
 				500
 			);

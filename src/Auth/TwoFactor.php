@@ -221,7 +221,7 @@ final class TwoFactor {
 			if ( '' !== $ip ) {
 				$limiter = new IpRateLimit( $this->settings, $this->ips );
 				if ( $limiter->is_too_many( $ip ) ) {
-					$error_message = __( 'Too many attempts. Please wait a moment and try again.', 'sendsms-dashboard' );
+					$error_message = __( 'Too many attempts. Please wait a moment and try again.', 'sendsms-subscribers-2fa' );
 				}
 			}
 
@@ -234,7 +234,7 @@ final class TwoFactor {
 					$cc   = $this->settings->get_esc( 'cc', 'INT' );
 					$norm = PhoneNumber::normalize( $raw, $cc );
 					if ( '' === $norm ) {
-						$error_message = __( 'Please enter a valid phone number.', 'sendsms-dashboard' );
+						$error_message = __( 'Please enter a valid phone number.', 'sendsms-subscribers-2fa' );
 					} else {
 						$keys = $this->settings->user_phone_meta_keys();
 						update_user_meta( $user->ID, $keys[0], $norm );
@@ -256,7 +256,7 @@ final class TwoFactor {
 						exit;
 					}
 					$this->pending->update( $token, $pending );
-					$error_message = __( 'Invalid code. Please try again.', 'sendsms-dashboard' );
+					$error_message = __( 'Invalid code. Please try again.', 'sendsms-subscribers-2fa' );
 				}
 			}
 		}
@@ -349,7 +349,7 @@ final class TwoFactor {
 	 * @return void
 	 */
 	private function render_form( string $token, bool $enroll, string $error_message ): void {
-		$title     = __( 'Two-factor authentication', 'sendsms-dashboard' );
+		$title     = __( 'Two-factor authentication', 'sendsms-subscribers-2fa' );
 		$wp_errors = null;
 		if ( '' !== $error_message ) {
 			$wp_errors = new \WP_Error( 'sendsms_dashboard_2fa', $error_message );
@@ -359,7 +359,7 @@ final class TwoFactor {
 		$top_message = '';
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only flash flag
 		if ( ! empty( $_GET['resent'] ) ) {
-			$top_message = '<p class="message">' . esc_html__( 'A new code has been sent to your phone.', 'sendsms-dashboard' ) . '</p>';
+			$top_message = '<p class="message">' . esc_html__( 'A new code has been sent to your phone.', 'sendsms-subscribers-2fa' ) . '</p>';
 		}
 
 		login_header( $title, $top_message, $wp_errors );
@@ -382,7 +382,7 @@ final class TwoFactor {
 
 			<?php if ( $enroll ) : ?>
 				<p>
-					<label for="sendsms_phone_number"><?php esc_html_e( 'Phone number', 'sendsms-dashboard' ); ?></label>
+					<label for="sendsms_phone_number"><?php esc_html_e( 'Phone number', 'sendsms-subscribers-2fa' ); ?></label>
 					<input
 						type="tel"
 						name="sendsms_phone_number"
@@ -396,12 +396,12 @@ final class TwoFactor {
 				</p>
 				<p class="submit">
 					<button type="submit" class="button button-primary button-large" style="float:right;">
-						<?php esc_html_e( 'Send code', 'sendsms-dashboard' ); ?>
+						<?php esc_html_e( 'Send code', 'sendsms-subscribers-2fa' ); ?>
 					</button>
 				</p>
 			<?php else : ?>
 				<p>
-					<label for="sendsms_2fa_code"><?php esc_html_e( 'Verification code', 'sendsms-dashboard' ); ?></label>
+					<label for="sendsms_2fa_code"><?php esc_html_e( 'Verification code', 'sendsms-subscribers-2fa' ); ?></label>
 					<input
 						type="text"
 						name="code"
@@ -415,11 +415,11 @@ final class TwoFactor {
 					/>
 				</p>
 				<p>
-					<a href="<?php echo esc_attr( $resend_url ); ?>"><?php esc_html_e( 'Resend code', 'sendsms-dashboard' ); ?></a>
+					<a href="<?php echo esc_attr( $resend_url ); ?>"><?php esc_html_e( 'Resend code', 'sendsms-subscribers-2fa' ); ?></a>
 				</p>
 				<p class="submit">
 					<button type="submit" class="button button-primary button-large" style="float:right;">
-						<?php esc_html_e( 'Verify', 'sendsms-dashboard' ); ?>
+						<?php esc_html_e( 'Verify', 'sendsms-subscribers-2fa' ); ?>
 					</button>
 				</p>
 			<?php endif; ?>
@@ -443,7 +443,7 @@ final class TwoFactor {
 	private function send_code( string $phone ): void {
 		$body = $this->settings->get_esc(
 			'2fa_verification_message',
-			__( 'Your verification code: {code}', 'sendsms-dashboard' )
+			__( 'Your verification code: {code}', 'sendsms-subscribers-2fa' )
 		);
 		$this->api->message_send( false, false, $phone, $body, 'code', '_2fa' );
 	}
