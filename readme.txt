@@ -4,7 +4,7 @@ Tags: sms, sendsms, subscribers, 2fa, marketing
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,12 +29,12 @@ Manage SMS subscribers, run campaigns, and protect wp-admin with SMS 2FA — all
 * A one-time code is sent to the user's phone; the wp-admin session is not opened until the code is validated.
 * Codes are time-limited and bound to a signed cookie so they cannot be replayed.
 
-**Compatibility:** PHP 7.4 through 8.3, WordPress 4.0 through 7.0. Verified on PHP 7.4 and PHP 8.3 against WordPress 7.0.
+**Compatibility:** PHP 7.4 through 8.3, WordPress 6.0 through 7.0. Verified on PHP 7.4 and PHP 8.3 against WordPress 7.0.
 
 This plugin requires a [sendsms.ro](https://www.sendsms.ro/en/) account. Sign-up is free; SMS pricing is per message and depends on the destination country.
 
 == Installation ==
-1. Upload the `sendsms-dashboard` folder to `/wp-content/plugins/`, or install the plugin from the WordPress.org directory.
+1. Upload the `sendsms-subscribers-2fa` folder to `/wp-content/plugins/`, or install the plugin from the WordPress.org directory.
 2. Activate the plugin under **Plugins → Installed Plugins**.
 3. Go to **SendSMS Dashboard → Settings** and enter your sendsms.ro username, password, and sender label.
 
@@ -74,7 +74,7 @@ Three ways, all produce the same HTML and behaviour:
 * `gdpr_link` (URL, optional) — privacy-policy URL. When set, the GDPR consent label includes a "privacy policy" link pointing to it.
 
 Example:
-`[sendsms_subscribe title="Get SMS updates" gdpr_link="https://example.com/privacy"]`
+`[sendsms_subscribe title="Get SMS updates" gdpr_link="https://www.sendsms.ro/en/gdpr/"]`
 
 **`[sendsms_unsubscribe]`** — the unsubscribe form.
 
@@ -133,6 +133,9 @@ Third-party terms of service and privacy:
 6. Send a test SMS page: send a one-off message to any number to verify your sender label and content.
 
 == Changelog ==
+= 2.0.3 =
+Documentation corrections for WordPress.org. The supported-versions statement in the description now reads WordPress 6.0 through 7.0 consistently with the header and FAQ, the installation step references the correct `sendsms-subscribers-2fa` folder, and the example URL in the shortcode documentation was replaced with a valid one. No functional or data changes.
+
 = 2.0.2 =
 Renamed the plugin to **SendSMS Subscribers & 2FA** (text domain `sendsms-subscribers-2fa`) so it can be published in the WordPress.org directory. No functional or data changes — your settings, subscribers, SMS history, shortcodes, blocks, widgets, and CSS classes are all unchanged.
 
@@ -164,6 +167,9 @@ Full architectural rewrite. The plugin now follows modern WordPress conventions 
 * Initial release.
 
 == Upgrade Notice ==
+= 2.0.3 =
+Documentation-only corrections (supported versions, install instructions, example URL). No functional or data changes.
+
 = 2.0.2 =
 Plugin renamed to "SendSMS Subscribers & 2FA" for the WordPress.org directory. No functional or data changes.
 

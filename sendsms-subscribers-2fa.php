@@ -3,7 +3,7 @@
  * Plugin Name:       SendSMS Subscribers & 2FA
  * Plugin URI:        https://www.sendsms.ro/en/
  * Description:       Manage SMS subscribers, send mass campaigns, and protect wp-admin with SMS-based 2FA through the sendsms.ro gateway.
- * Version:           2.0.2
+ * Version:           2.0.3
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            sendSMS
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ROSENDSMS_DASH_VERSION', '2.0.2' );
+define( 'ROSENDSMS_DASH_VERSION', '2.0.3' );
 define( 'ROSENDSMS_DASH_DB_VERSION', '1.1.0' );
 define( 'ROSENDSMS_DASH_FILE', __FILE__ );
 define( 'ROSENDSMS_DASH_DIR', plugin_dir_path( __FILE__ ) );
