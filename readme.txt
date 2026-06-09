@@ -125,9 +125,9 @@ Third-party terms of service and privacy:
 * ISO 27001 certification: https://www.sendsms.ro/en/iso-27001-certified/
 
 == Screenshots ==
-1. Settings → General tab: API credentials (username, password, sender label) and country code selector.
-2. Settings → User tab: enable 2FA, select which roles require it, and customise the verification message.
-3. Settings → Subscription tab: toggle phone verification on subscribe/unsubscribe, set the IP rate limit, and manage blocked IPs.
+1. Settings, General tab: API credentials (username, password, sender label) and country code selector.
+2. Settings, User tab: enable 2FA, select which roles require it, and customise the verification message.
+3. Settings, Subscription tab: toggle phone verification on subscribe/unsubscribe, set the IP rate limit, and manage blocked IPs.
 4. Subscribers admin page: searchable list table with add, edit, delete, and sendsms.ro contact-sync actions.
 5. History page: every SMS the plugin sent, with timestamp, recipient, message text, and delivery status.
 6. Send a test SMS page: send a one-off message to any number to verify your sender label and content.
