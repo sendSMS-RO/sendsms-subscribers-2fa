@@ -4,7 +4,7 @@ Tags: sms, sendsms, subscribers, 2fa, marketing
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -133,6 +133,9 @@ Third-party terms of service and privacy:
 6. Send a test SMS page: send a one-off message to any number to verify your sender label and content.
 
 == Changelog ==
+= 2.0.6 =
+* The subscribe, unsubscribe, and verification forms now tell the visitor what actually went wrong. Every failure previously showed the same "Something went wrong. Please try again." message, whether the phone number was malformed, the privacy-policy box was unticked, the number was already subscribed, or the verification code had expired.
+
 = 2.0.5 =
 * The block editor strings now use the `sendsms-subscribers-2fa` text domain — they still carried the pre-2.0.2 `sendsms-dashboard` domain — and the edit scripts are registered with `wp_set_script_translations()`, so those strings can actually be translated.
 
@@ -176,6 +179,9 @@ Full architectural rewrite. The plugin now follows modern WordPress conventions 
 * Initial release.
 
 == Upgrade Notice ==
+= 2.0.6 =
+The subscribe and unsubscribe forms now show a specific message for each error instead of one generic "Something went wrong".
+
 = 2.0.5 =
 Fixes the block editor strings, which used an outdated text domain and were never loaded for translation.
 
