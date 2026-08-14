@@ -4,7 +4,7 @@ Tags: sms, sendsms, subscribers, 2fa, marketing
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -133,11 +133,13 @@ Third-party terms of service and privacy:
 6. Send a test SMS page: send a one-off message to any number to verify your sender label and content.
 
 == Changelog ==
+= 2.0.5 =
+* The block editor strings now use the `sendsms-subscribers-2fa` text domain — they still carried the pre-2.0.2 `sendsms-dashboard` domain — and the edit scripts are registered with `wp_set_script_translations()`, so those strings can actually be translated.
+
 = 2.0.4 =
 Verified against WordPress 7.1 on PHP 7.4 and 8.3.
 
 * The subscribe and unsubscribe blocks now declare the plugin stylesheet as their block style, so the form is styled inside the editor canvas as well as on the front end. Previously the CSS was only enqueued for the front end, and the editor preview rendered as unstyled browser defaults.
-* The block editor strings now use the `sendsms-subscribers-2fa` text domain — they still carried the pre-2.0.2 `sendsms-dashboard` domain — and the edit scripts are registered with `wp_set_script_translations()`, so those strings can actually be translated.
 * No other changes: the plugin registers no image handling and does not use jQuery UI, so the WordPress 7.1 media and jQuery UI updates do not affect it.
 
 = 2.0.3 =
@@ -174,6 +176,9 @@ Full architectural rewrite. The plugin now follows modern WordPress conventions 
 * Initial release.
 
 == Upgrade Notice ==
+= 2.0.5 =
+Fixes the block editor strings, which used an outdated text domain and were never loaded for translation.
+
 = 2.0.4 =
 Compatibility release for WordPress 7.1. Fixes the subscribe/unsubscribe block preview rendering unstyled in the block editor.
 
