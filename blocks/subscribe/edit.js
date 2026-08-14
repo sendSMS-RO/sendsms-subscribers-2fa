@@ -39,17 +39,17 @@
 					el(
 						PanelBody,
 						{
-							title:       __( 'Settings', 'sendsms-dashboard' ),
+							title:       __( 'Settings', 'sendsms-subscribers-2fa' ),
 							initialOpen: true,
 						},
 						el( TextControl, {
-							label:    __( 'Title', 'sendsms-dashboard' ),
+							label:    __( 'Title', 'sendsms-subscribers-2fa' ),
 							value:    attributes.title || '',
 							onChange: function ( value ) { setAttributes( { title: value } ); },
 						} ),
 						el( TextControl, {
-							label:    __( 'Privacy policy URL', 'sendsms-dashboard' ),
-							help:     __( 'Optional. Linked from the GDPR consent label.', 'sendsms-dashboard' ),
+							label:    __( 'Privacy policy URL', 'sendsms-subscribers-2fa' ),
+							help:     __( 'Optional. Linked from the GDPR consent label.', 'sendsms-subscribers-2fa' ),
 							type:     'url',
 							value:    attributes.gdpr_link || '',
 							onChange: function ( value ) { setAttributes( { gdpr_link: value } ); },

@@ -98,6 +98,19 @@ final class Blocks {
 			true
 		);
 
+		// Without this the __() calls in the edit scripts always fall back to
+		// the English source string, whatever the site locale is.
+		wp_set_script_translations(
+			'rosendsms-dash-block-subscribe',
+			'sendsms-subscribers-2fa',
+			ROSENDSMS_DASH_DIR . 'languages'
+		);
+		wp_set_script_translations(
+			'rosendsms-dash-block-unsubscribe',
+			'sendsms-subscribers-2fa',
+			ROSENDSMS_DASH_DIR . 'languages'
+		);
+
 		register_block_type(
 			ROSENDSMS_DASH_DIR . 'blocks/subscribe',
 			array(

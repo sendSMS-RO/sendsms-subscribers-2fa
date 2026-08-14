@@ -137,6 +137,7 @@ Third-party terms of service and privacy:
 Verified against WordPress 7.1 on PHP 7.4 and 8.3.
 
 * The subscribe and unsubscribe blocks now declare the plugin stylesheet as their block style, so the form is styled inside the editor canvas as well as on the front end. Previously the CSS was only enqueued for the front end, and the editor preview rendered as unstyled browser defaults.
+* The block editor strings now use the `sendsms-subscribers-2fa` text domain — they still carried the pre-2.0.2 `sendsms-dashboard` domain — and the edit scripts are registered with `wp_set_script_translations()`, so those strings can actually be translated.
 * No other changes: the plugin registers no image handling and does not use jQuery UI, so the WordPress 7.1 media and jQuery UI updates do not affect it.
 
 = 2.0.3 =

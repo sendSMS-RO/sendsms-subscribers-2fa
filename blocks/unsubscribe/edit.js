@@ -39,11 +39,11 @@
 					el(
 						PanelBody,
 						{
-							title:       __( 'Settings', 'sendsms-dashboard' ),
+							title:       __( 'Settings', 'sendsms-subscribers-2fa' ),
 							initialOpen: true,
 						},
 						el( TextControl, {
-							label:    __( 'Title', 'sendsms-dashboard' ),
+							label:    __( 'Title', 'sendsms-subscribers-2fa' ),
 							value:    attributes.title || '',
 							onChange: function ( value ) { setAttributes( { title: value } ); },
 						} )
