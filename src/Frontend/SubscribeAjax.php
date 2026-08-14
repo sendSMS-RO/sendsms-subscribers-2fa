@@ -155,7 +155,16 @@ final class SubscribeAjax {
 
 		// 5. Duplicate check (mirrors v1.x — checked before IP guards).
 		if ( null !== $this->repo->find( $phone ) ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_already_subscribed' ), 409 );
+			// A message is sent alongside the code because the front-end script
+			// falls back to its generic "Something went wrong" string otherwise,
+			// which reads as a failure rather than "you are already on the list".
+			wp_send_json_error(
+				array(
+					'code'    => 'sendsms_dashboard_already_subscribed',
+					'message' => __( 'This phone number is already subscribed.', 'sendsms-subscribers-2fa' ),
+				),
+				409
+			);
 		}
 
 		// 6. IP allow-list + rate limit.
