@@ -57,6 +57,18 @@ final class Blocks {
 	 * @return void
 	 */
 	public function register_blocks(): void {
+		// Registered ahead of the guard below because both block.json files
+		// name this handle as their "style": a block stylesheet is the only
+		// way the form CSS reaches the editor canvas, which never inherits
+		// styles enqueued for the front end. Plugin::boot() enqueues the same
+		// handle for the shortcode and widget renderers.
+		wp_register_style(
+			'rosendsms-dash-public',
+			ROSENDSMS_DASH_URL . 'assets/css/public.css',
+			array(),
+			ROSENDSMS_DASH_VERSION
+		);
+
 		if ( ! function_exists( 'register_block_type' ) ) {
 			return;
 		}

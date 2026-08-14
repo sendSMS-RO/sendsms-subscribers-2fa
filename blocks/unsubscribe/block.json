@@ -23,5 +23,6 @@
 			"padding": true
 		}
 	},
-	"editorScript": "rosendsms-dash-block-unsubscribe"
+	"editorScript": "rosendsms-dash-block-unsubscribe",
+	"style": "rosendsms-dash-public"
 }

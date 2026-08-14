@@ -27,5 +27,6 @@
 			"padding": true
 		}
 	},
-	"editorScript": "rosendsms-dash-block-subscribe"
+	"editorScript": "rosendsms-dash-block-subscribe",
+	"style": "rosendsms-dash-public"
 }

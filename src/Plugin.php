@@ -202,12 +202,9 @@ final class Plugin {
 		add_action(
 			'wp_enqueue_scripts',
 			static function () {
-				wp_enqueue_style(
-					'rosendsms-dash-public',
-					ROSENDSMS_DASH_URL . 'assets/css/public.css',
-					array(),
-					ROSENDSMS_DASH_VERSION
-				);
+				// Handle registered on `init` by Frontend\Blocks so the two
+				// block.json files can reference it as their "style".
+				wp_enqueue_style( 'rosendsms-dash-public' );
 
 				wp_register_script(
 					'rosendsms-dash-public',

@@ -2,9 +2,9 @@
 Contributors: sendsms, neamtua
 Tags: sms, sendsms, subscribers, 2fa, marketing
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,7 +29,7 @@ Manage SMS subscribers, run campaigns, and protect wp-admin with SMS 2FA — all
 * A one-time code is sent to the user's phone; the wp-admin session is not opened until the code is validated.
 * Codes are time-limited and bound to a signed cookie so they cannot be replayed.
 
-**Compatibility:** PHP 7.4 through 8.3, WordPress 6.0 through 7.0. Verified on PHP 7.4 and PHP 8.3 against WordPress 7.0.
+**Compatibility:** PHP 7.4 through 8.3, WordPress 6.0 through 7.1. Verified on PHP 7.4 and PHP 8.3 against WordPress 7.1.
 
 This plugin requires a [sendsms.ro](https://www.sendsms.ro/en/) account. Sign-up is free; SMS pricing is per message and depends on the destination country.
 
@@ -47,7 +47,7 @@ Yes. Sign up for free at https://www.sendsms.ro/en/ and top up your balance. SMS
 No. The 2FA feature is designed for the default wp-admin login form — the one WordPress ships at `/wp-login.php`. Custom login plugins or themes that replace the login form are not supported and may behave unpredictably. Always test in a development environment before enabling 2FA on a live site.
 
 = What PHP and WordPress versions are supported? =
-PHP 7.4 through PHP 8.3, WordPress 6.0 through 7.0. The plugin is verified on PHP 7.4 and PHP 8.3 against WordPress 7.0.
+PHP 7.4 through PHP 8.3, WordPress 6.0 through 7.1. The plugin is verified on PHP 7.4 and PHP 8.3 against WordPress 7.1.
 
 = A user is locked out because they lost their phone. How do I rescue them? =
 You have three options, depending on your situation:
@@ -133,6 +133,12 @@ Third-party terms of service and privacy:
 6. Send a test SMS page: send a one-off message to any number to verify your sender label and content.
 
 == Changelog ==
+= 2.0.4 =
+Verified against WordPress 7.1 on PHP 7.4 and 8.3.
+
+* The subscribe and unsubscribe blocks now declare the plugin stylesheet as their block style, so the form is styled inside the editor canvas as well as on the front end. Previously the CSS was only enqueued for the front end, and the editor preview rendered as unstyled browser defaults.
+* No other changes: the plugin registers no image handling and does not use jQuery UI, so the WordPress 7.1 media and jQuery UI updates do not affect it.
+
 = 2.0.3 =
 Documentation corrections for WordPress.org. The supported-versions statement in the description now reads WordPress 6.0 through 7.0 consistently with the header and FAQ, the installation step references the correct `sendsms-subscribers-2fa` folder, and the example URL in the shortcode documentation was replaced with a valid one. No functional or data changes.
 
@@ -167,6 +173,9 @@ Full architectural rewrite. The plugin now follows modern WordPress conventions 
 * Initial release.
 
 == Upgrade Notice ==
+= 2.0.4 =
+Compatibility release for WordPress 7.1. Fixes the subscribe/unsubscribe block preview rendering unstyled in the block editor.
+
 = 2.0.3 =
 Documentation-only corrections (supported versions, install instructions, example URL). No functional or data changes.
 
