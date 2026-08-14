@@ -134,13 +134,13 @@ final class VerifyCodeAjax {
 	public function handle(): void {
 		// 1. Nonce.
 		if ( ! check_ajax_referer( 'rosendsms_dash_nonce', 'security', false ) ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_bad_nonce' ), 403 );
+			AjaxError::send( 'sendsms_dashboard_bad_nonce', 403 );
 		}
 
 		// 2. Context → suffix.
 		$context = isset( $_POST['context'] ) ? sanitize_key( wp_unslash( $_POST['context'] ) ) : '';
 		if ( ! in_array( $context, array( 'sub', 'unsub' ), true ) ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_invalid_context' ), 400 );
+			AjaxError::send( 'sendsms_dashboard_invalid_context', 400 );
 		}
 		$suffix = ( 'sub' === $context ) ? '_sub' : '_unsub';
 
@@ -149,7 +149,7 @@ final class VerifyCodeAjax {
 		$cc    = $this->settings->get_esc( 'cc', 'INT' );
 		$phone = PhoneNumber::normalize( $raw, $cc );
 		if ( '' === $phone ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_invalid_phone' ), 400 );
+			AjaxError::send( 'sendsms_dashboard_invalid_phone', 400 );
 		}
 
 		// 4. IP allow-list + rate limit.
@@ -158,12 +158,12 @@ final class VerifyCodeAjax {
 		// 5. Cookie presence check (mirrors v1.x explicit cookie check before verify).
 		$cookie_name = 'sendsms_subscribe_check' . $suffix;
 		if ( ! isset( $_COOKIE[ $cookie_name ] ) ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_cookie_expired' ), 400 );
+			AjaxError::send( 'sendsms_dashboard_cookie_expired', 400 );
 		}
 
 		// 6. OTP verification — reads $_POST['code'] internally.
 		if ( ! $this->codes->verify( $phone, $suffix ) ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_invalid_code' ), 400 );
+			AjaxError::send( 'sendsms_dashboard_invalid_code', 400 );
 		}
 
 		// 7. Perform the action that was deferred pending verification.
@@ -209,14 +209,14 @@ final class VerifyCodeAjax {
 			foreach ( preg_split( '/\R+/', $restricted ) as $needle ) {
 				$needle = trim( (string) $needle );
 				if ( '' !== $needle && $needle === $ip ) {
-					wp_send_json_error( array( 'code' => 'sendsms_dashboard_ip_restricted' ), 403 );
+					AjaxError::send( 'sendsms_dashboard_ip_restricted', 403 );
 				}
 			}
 		}
 
 		$limiter = new IpRateLimit( $this->settings, $this->ips );
 		if ( $limiter->is_too_many( $ip ) ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_rate_limited' ), 429 );
+			AjaxError::send( 'sendsms_dashboard_rate_limited', 429 );
 		}
 	}
 }

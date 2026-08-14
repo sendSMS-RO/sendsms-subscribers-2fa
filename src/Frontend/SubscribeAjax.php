@@ -126,23 +126,23 @@ final class SubscribeAjax {
 	public function handle(): void {
 		// 1. Nonce.
 		if ( ! check_ajax_referer( 'rosendsms_dash_nonce', 'security', false ) ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_bad_nonce' ), 403 );
+			AjaxError::send( 'sendsms_dashboard_bad_nonce', 403 );
 		}
 
 		// 2. GDPR.
 		$gdpr = isset( $_POST['gdpr'] ) ? sanitize_text_field( wp_unslash( $_POST['gdpr'] ) ) : 'false';
 		if ( 'false' === $gdpr ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_nogdpr' ), 400 );
+			AjaxError::send( 'sendsms_dashboard_nogdpr', 400 );
 		}
 
 		// 3. Required name fields (mirrors v1.x).
 		$first_name = isset( $_POST['first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['first_name'] ) ) : '';
 		if ( '' === $first_name ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_field_first_name' ), 400 );
+			AjaxError::send( 'sendsms_dashboard_field_first_name', 400 );
 		}
 		$last_name = isset( $_POST['last_name'] ) ? sanitize_text_field( wp_unslash( $_POST['last_name'] ) ) : '';
 		if ( '' === $last_name ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_field_last_name' ), 400 );
+			AjaxError::send( 'sendsms_dashboard_field_last_name', 400 );
 		}
 
 		// 4. Phone.
@@ -150,21 +150,12 @@ final class SubscribeAjax {
 		$cc    = $this->settings->get_esc( 'cc', 'INT' );
 		$phone = PhoneNumber::normalize( $raw, $cc );
 		if ( '' === $phone ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_invalid_phone' ), 400 );
+			AjaxError::send( 'sendsms_dashboard_invalid_phone', 400 );
 		}
 
 		// 5. Duplicate check (mirrors v1.x — checked before IP guards).
 		if ( null !== $this->repo->find( $phone ) ) {
-			// A message is sent alongside the code because the front-end script
-			// falls back to its generic "Something went wrong" string otherwise,
-			// which reads as a failure rather than "you are already on the list".
-			wp_send_json_error(
-				array(
-					'code'    => 'sendsms_dashboard_already_subscribed',
-					'message' => __( 'This phone number is already subscribed.', 'sendsms-subscribers-2fa' ),
-				),
-				409
-			);
+			AjaxError::send( 'sendsms_dashboard_already_subscribed', 409 );
 		}
 
 		// 6. IP allow-list + rate limit.
@@ -195,7 +186,7 @@ final class SubscribeAjax {
 			wp_send_json_success( array( 'verify' => true ) );
 		}
 
-		wp_send_json_error( array( 'code' => 'sendsms_dashboard_internal_error' ), 500 );
+		AjaxError::send( 'sendsms_dashboard_internal_error', 500 );
 	}
 
 	/**
@@ -212,14 +203,14 @@ final class SubscribeAjax {
 			foreach ( preg_split( '/\R+/', $restricted ) as $needle ) {
 				$needle = trim( (string) $needle );
 				if ( '' !== $needle && $needle === $ip ) {
-					wp_send_json_error( array( 'code' => 'sendsms_dashboard_ip_restricted' ), 403 );
+					AjaxError::send( 'sendsms_dashboard_ip_restricted', 403 );
 				}
 			}
 		}
 
 		$limiter = new IpRateLimit( $this->settings, $this->ips );
 		if ( $limiter->is_too_many( $ip ) ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_rate_limited' ), 429 );
+			AjaxError::send( 'sendsms_dashboard_rate_limited', 429 );
 		}
 	}
 }

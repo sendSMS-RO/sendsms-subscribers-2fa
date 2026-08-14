@@ -123,7 +123,7 @@ final class UnsubscribeAjax {
 	public function handle(): void {
 		// 1. Nonce.
 		if ( ! check_ajax_referer( 'rosendsms_dash_nonce', 'security', false ) ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_bad_nonce' ), 403 );
+			AjaxError::send( 'sendsms_dashboard_bad_nonce', 403 );
 		}
 
 		// 2. Phone.
@@ -131,13 +131,13 @@ final class UnsubscribeAjax {
 		$cc    = $this->settings->get_esc( 'cc', 'INT' );
 		$phone = PhoneNumber::normalize( $raw, $cc );
 		if ( '' === $phone ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_invalid_phone' ), 400 );
+			AjaxError::send( 'sendsms_dashboard_invalid_phone', 400 );
 		}
 
 		// 3. Must be a subscriber.
 		$row = $this->repo->find( $phone );
 		if ( null === $row ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_not_subscribed' ), 404 );
+			AjaxError::send( 'sendsms_dashboard_not_subscribed', 404 );
 		}
 
 		// 4. IP allow-list + rate limit.
@@ -164,7 +164,7 @@ final class UnsubscribeAjax {
 			wp_send_json_success( array( 'verify' => true ) );
 		}
 
-		wp_send_json_error( array( 'code' => 'sendsms_dashboard_internal_error' ), 500 );
+		AjaxError::send( 'sendsms_dashboard_internal_error', 500 );
 	}
 
 	/**
@@ -181,14 +181,14 @@ final class UnsubscribeAjax {
 			foreach ( preg_split( '/\R+/', $restricted ) as $needle ) {
 				$needle = trim( (string) $needle );
 				if ( '' !== $needle && $needle === $ip ) {
-					wp_send_json_error( array( 'code' => 'sendsms_dashboard_ip_restricted' ), 403 );
+					AjaxError::send( 'sendsms_dashboard_ip_restricted', 403 );
 				}
 			}
 		}
 
 		$limiter = new IpRateLimit( $this->settings, $this->ips );
 		if ( $limiter->is_too_many( $ip ) ) {
-			wp_send_json_error( array( 'code' => 'sendsms_dashboard_rate_limited' ), 429 );
+			AjaxError::send( 'sendsms_dashboard_rate_limited', 429 );
 		}
 	}
 }
